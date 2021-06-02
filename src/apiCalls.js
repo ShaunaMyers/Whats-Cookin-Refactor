@@ -14,7 +14,7 @@ const retrieveData = (path) => {
 //         body: JSON.stringify(data)
 //     })
 //         .then(response => checkForError(response))
-//         .catch(err => console.log(err))
+//         .catch(err => console.log(`User API Error: ${err.message}));
 // }
 
 const checkForError = (response) => {
@@ -25,7 +25,6 @@ const checkForError = (response) => {
     }
 }
 
-// Would promise.all end up wherever we're calling all these functions?
 
 const apiCalls = {
 
@@ -43,4 +42,13 @@ const apiCalls = {
 
 }
 
-export default apiCalls;
+// Is this the correct place for promise.all?
+// I'm guessing I'll have to do this for the POST requests as well?
+
+function getData() {
+    return Promise.all([apiCalls.getUserData(), apiCalls.getIngredientsData(), apiCalls.getRecipeData()])
+}
+
+// Does checkForError need to be exported?
+
+export default { apiCalls, getData, checkForError };
