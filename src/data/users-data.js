@@ -1,4 +1,4 @@
-let users = [
+export const users = [
   {
     "id": 1,
     "name": "Saige O'Kon",

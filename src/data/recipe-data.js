@@ -1,4 +1,4 @@
-let recipeData = [
+export const recipeData = [
   {
     "name": "Loaded Chocolate Chip Pudding Cookie Cups",
     "id": 595736,
