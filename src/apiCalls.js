@@ -5,33 +5,17 @@ const retrieveData = (path) => {
         .catch(err => console.log(`User API Error: ${err.message}`));
 }
 
-const updateData = (path, data) => {
-    return fetch(path, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => checkForError(response))
-        .catch(err => console.log(err))
-}
-
-
-
-// const retrieveUserData = () => fetch('http://localhost:3001/api/v1/users')
-//     .then(response => checkForError(response))
-//     .catch(error => console.log(`User API Error: ${error.message}`));
-
-//     retrieveIngredientsData: () => fetch('http://localhost:3001/api/v1/ingredients')
-//         .then(response => this.checkForError(response))
-//         .catch(error => console.log(`User API Error: ${error.message}`));
-
-//     const retrieveRecipeData = () => fetch('http://localhost:3001/api/v1/recipes')
-//         .then(response => this.checkForError(response))
-//         .catch(error => console.log(`User API Error: ${error.message}`));
-
-
+// const updateData = (path, data) => {
+//     return fetch(path, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(data)
+//     })
+//         .then(response => checkForError(response))
+//         .catch(err => console.log(err))
+// }
 
 const checkForError = (response) => {
     if (!response.ok) {
@@ -41,10 +25,22 @@ const checkForError = (response) => {
     }
 }
 
+// Would promise.all end up wherever we're calling all these functions?
 
-function getData() {
-    return Promise.all([retrieveUserData(), retrieveIngredientsData(), retrieveRecipeData()])
+const apiCalls = {
+
+    getUserData: () => {
+        return retrieveData('http://localhost:3001/api/v1/users');
+    },
+
+    getIngredientsData: () => {
+        return retrieveData('http://localhost:3001/api/v1/ingredients');
+    },
+
+    getRecipeData: () => {
+        return retrieveData('http://localhost:3001/api/v1/recipes');
+    },
+
 }
 
-
-export default { retrieveUserData, retrieveIngredientsData, retrieveRecipeData, checkForError, getData }
+export default apiCalls;
