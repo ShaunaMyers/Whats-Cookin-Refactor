@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import User from '../src/user';
+import User from '../src/User';
 import { users } from '../src/data/users-data';
 import { recipeData } from '../src/data/recipe-data';
 
@@ -95,7 +95,8 @@ describe('User', () => {
     });
 
     it('should be able to search favoriteRecipes by ingredient', () => {
-      expect(user.searchForRecipe('apples')).to.deep.equal([recipeData[1]]);
+      expect(user.searchForRecipe('apple slices'))
+        .to.deep.equal([recipeData[1]]);
     });
   });
 });
