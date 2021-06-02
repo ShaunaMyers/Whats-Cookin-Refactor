@@ -1,6 +1,7 @@
 import users from './data/users-data';
-import recipeData from  './data/recipe-data';
+import recipeData from './data/recipe-data';
 import ingredientData from './data/ingredient-data';
+import apiCalls from './apiCalls';
 
 import './css/base.scss';
 import './css/styles.scss';
@@ -36,6 +37,11 @@ savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchBtn.addEventListener("click", searchRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
+
+
+// Call function in our new apiCalls file to get the promise object and then instantiate data
+
+
 
 // GENERATE A USER ON LOAD
 function generateUser() {
@@ -307,7 +313,7 @@ function findPantryInfo() {
     if (itemInfo && originalIngredient) {
       originalIngredient.count += item.amount;
     } else if (itemInfo) {
-      pantryInfo.push({name: itemInfo.name, count: item.amount});
+      pantryInfo.push({ name: itemInfo.name, count: item.amount });
     }
   });
   displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
