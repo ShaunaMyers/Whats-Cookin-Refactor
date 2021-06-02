@@ -1,16 +1,15 @@
 import { expect } from 'chai';
-
 import Recipe from '../src/recipe';
-import data from '../src/data/recipe-data';
+import recipeData from '../src/data/recipe-data';
 
 describe('Recipe', function() {
   let recipe;
   let recipeInfo;
 
   beforeEach(function() {
-    recipeInfo = data.recipeData[0];
+    recipeInfo = recipeData[0];
     recipe = new Recipe(recipeInfo);
-  })
+  });
 
   it('is a function', function() {
     expect(Recipe).to.be.a('function');
@@ -32,6 +31,11 @@ describe('Recipe', function() {
     expect(recipe.image).to.eq('https://spoonacular.com/recipeImages/595736-556x370.jpg');
   });
 
+  it('should initialize with a set of tags', function() {
+    expect(recipe.tags.length).to.eql(6);
+    expect(recipe.tags[0]).to.eql('antipasti');
+  })
+
   it('should initialize with an array of ingredients', function() {
     const ingredient = {
       "id": 20081,
@@ -43,8 +47,15 @@ describe('Recipe', function() {
     }
     expect(recipe.ingredients[0]).to.deep.eq(ingredient);
   });
+  
+  it.skip('should initialize with a list of instructions', function() {
+    expect(recipe.instructions).to.be.an.an('array')
+  });
 
-  it('should calculate the total cost of all of the ingredients', function() {
+  it.skip('should calculate the total cost of all of the ingredients', function() {
     expect(recipe.calculateIngredientsCost()).to.eq();
   });
+
+  
+
 });

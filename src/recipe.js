@@ -7,10 +7,14 @@ class Recipe {
     this.ingredients = recipe.ingredients;
   }
   calculateIngredientsCost() {
-    // return this.ingredients.map(i => {
-    //   ingredientData.find(ingredient => ingredient === i);
-    // });
+    return this.ingredients.map(i => {
+      ingredientData.find(ingredient => ingredient === i);
+    });
+  }
+
+  returnInstructions() {
+    return this.instructions;
   }
 }
 
-module.exports = Recipe;
+export default Recipe;
