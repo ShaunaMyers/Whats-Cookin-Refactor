@@ -46,73 +46,49 @@ const sampleUsers = [
         "name": "Ephraim Goyette",
         "pantry": [
             {
-                "ingredient": 6150,
+                "ingredient": 20081,
                 "amount": 5
             },
             {
-                "ingredient": 1032009,
+                "ingredient": 18372,
                 "amount": 3
             },
             {
-                "ingredient": 11979,
+                "ingredient": 1123,
                 "amount": 5
             },
             {
-                "ingredient": 1082047,
-                "amount": 1
-            },
-            {
-                "ingredient": 1034053,
-                "amount": 4
-            },
-            {
-                "ingredient": 99009,
-                "amount": 4
-            },
-            {
-                "ingredient": 2050,
-                "amount": 1
-            },
-            {
                 "ingredient": 19335,
+                "amount": 1
+            },
+            {
+                "ingredient": 19206,
+                "amount": 4
+            },
+            {
+                "ingredient": 19334,
+                "amount": 4
+            },
+            {
+                "ingredient": 2047,
+                "amount": 1
+            },
+            {
+                "ingredient": 1012047,
                 "amount": 2
+            },
+            {
+                "ingredient": 10019903,
+                "amount": 1
             },
             {
                 "ingredient": 1145,
                 "amount": 1
             },
             {
-                "ingredient": 9206,
-                "amount": 1
-            },
-            {
-                "ingredient": 18371,
-                "amount": 3
-            },
-            {
-                "ingredient": 19336,
-                "amount": 4
-            },
-            {
-                "ingredient": 14003,
-                "amount": 4
-            },
-            {
                 "ingredient": 2050,
-                "amount": 1
-            },
-            {
-                "ingredient": 11215,
                 "amount": 3
             },
-            {
-                "ingredient": 9152,
-                "amount": 1
-            },
-            {
-                "ingredient": 11297,
-                "amount": 5
-            }
         ]
     }
 ]
