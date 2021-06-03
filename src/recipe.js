@@ -3,8 +3,9 @@ class Recipe {
     this.id = recipe.id;
     this.name = recipe.name;
     this.image = recipe.image;
-    this.tags = recipe.tags;
     this.ingredients = recipe.ingredients;
+    this.instructions = recipe.instructions;
+    this.tags = recipe.tags;
   }
   calculateIngredientsCost() {
     return this.ingredients.map(i => {

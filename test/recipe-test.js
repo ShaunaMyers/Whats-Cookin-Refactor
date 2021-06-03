@@ -1,14 +1,19 @@
 import { expect } from 'chai';
 import Recipe from '../src/recipe';
 import recipeData from '../src/data/recipe-data';
+// import ingredientsData from '..src/data/ingredient-data.js';
 
 describe('Recipe', function() {
   let recipe;
   let recipeInfo;
+  // let ingredient;
+  // let ingredientInfo;
 
   beforeEach(function() {
     recipeInfo = recipeData[0];
     recipe = new Recipe(recipeInfo);
+    // ingredientInfo = ingredientsData[0];
+    // ingredient = new Ingredient(ingredientInfo);
   });
 
   it('is a function', function() {
@@ -48,14 +53,18 @@ describe('Recipe', function() {
     expect(recipe.ingredients[0]).to.deep.eq(ingredient);
   });
   
-  it.skip('should initialize with a list of instructions', function() {
+  it('should initialize with a list of instructions', function() {
     expect(recipe.instructions).to.be.an.an('array')
   });
+
+  //test for method to list ingredient names
 
   it.skip('should calculate the total cost of all of the ingredients', function() {
     expect(recipe.calculateIngredientsCost()).to.eq();
   });
 
-  
+  it('should return its directions/instructions', function() {
+    expect(recipe.returnInstructions()).to.eq(recipe.instructions);
+  })
 
 });
