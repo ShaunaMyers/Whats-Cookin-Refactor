@@ -8,9 +8,11 @@ class Recipe {
     this.tags = recipe.tags;
   }
   calculateIngredientsCost() {
-    return this.ingredients.map(i => {
-      ingredientData.find(ingredient => ingredient === i);
-    });
+    // console.log(this.ingredients.map(i => {
+    //   ingredientsData.find(ingredient => ingredient === i));
+    // return this.ingredients.map(i => {
+    //   ingredientsData.find(ingredient => ingredient === i);
+    // });
   }
 
   returnInstructions() {
