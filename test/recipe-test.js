@@ -1,8 +1,8 @@
 import { expect } from 'chai';
-import Recipe from '../src/recipe';
-import { recipeData } from '../src/data/recipe-data';
-import Ingredient from '../src/ingredient';
-import { ingredientsData } from '../src/data/ingredient-data';
+import Recipe from '../src/Recipe';
+import { recipeData } from '../src/data/sample-recipe-data';
+import Ingredient from '../src/Ingredient';
+import { ingredientsData } from '../src/data/sample-ingredient-data';
 
 describe('Recipe', function() {
   let recipe;
@@ -12,7 +12,7 @@ describe('Recipe', function() {
 
   beforeEach(function() {
     recipeInfo = recipeData[0];
-    recipe = new Recipe(recipeInfo);
+    recipe = new Recipe(recipeInfo, ingredientsData);
     ingredientInfo = ingredientsData[0];
     ingredient = new Ingredient(ingredientInfo);
   });
