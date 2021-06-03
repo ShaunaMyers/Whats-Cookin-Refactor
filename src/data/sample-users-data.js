@@ -47,47 +47,47 @@ const sampleUsers = [
         "pantry": [
             {
                 "ingredient": 20081,
-                "amount": 5
+                "amount": 1.5
             },
             {
                 "ingredient": 18372,
-                "amount": 3
+                "amount": 0.5
             },
             {
                 "ingredient": 1123,
-                "amount": 5
+                "amount": 1
             },
             {
                 "ingredient": 19335,
-                "amount": 1
+                "amount": 0.5
             },
             {
                 "ingredient": 19206,
-                "amount": 4
+                "amount": 3
             },
             {
                 "ingredient": 19334,
-                "amount": 4
+                "amount": 0.5
             },
             {
                 "ingredient": 2047,
-                "amount": 1
+                "amount": 0.5
             },
             {
                 "ingredient": 1012047,
-                "amount": 2
+                "amount": 24
             },
             {
                 "ingredient": 10019903,
-                "amount": 1
+                "amount": 2
             },
             {
                 "ingredient": 1145,
-                "amount": 1
+                "amount": 0.5
             },
             {
                 "ingredient": 2050,
-                "amount": 3
+                "amount": 0.5
             },
         ]
     }
