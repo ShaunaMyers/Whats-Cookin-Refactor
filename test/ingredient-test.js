@@ -27,7 +27,7 @@ describe('Ingredient', () => {
 
     it('Should have a total cost in cents', () => {
         expect(ingredient.costInCents).to.equal(142);
-    })
+    });
 
 
-})
+});

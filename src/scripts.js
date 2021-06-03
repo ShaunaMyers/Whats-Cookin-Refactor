@@ -224,6 +224,8 @@ function generateIngredients(recipe) {
   }).join(", ");
 }
 
+
+// Recipe method returnInstructions
 function generateInstructions(recipe) {
   let instructionsList = "";
   let instructions = recipe.instructions.map(i => {

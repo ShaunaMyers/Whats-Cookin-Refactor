@@ -1,3 +1,6 @@
+import ingredientsData from "./data/ingredient-data";
+import recipeData from "./data/recipe-data";
+
 class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
@@ -7,17 +10,30 @@ class Recipe {
     this.instructions = recipe.instructions;
     this.tags = recipe.tags;
   }
+
+  
+  returnIngredientNames() {
+    return this.ingredients.map(ing => ing.name);
+  }
+
   calculateIngredientsCost() {
-    // console.log(this.ingredients.map(i => {
-    //   ingredientsData.find(ingredient => ingredient === i));
-    // return this.ingredients.map(i => {
-    //   ingredientsData.find(ingredient => ingredient === i);
-    // });
+    let ingCost = this.ingredients.forEach(ingredient => {
+      let match = ingredientsData.find(ingred => {
+        return ingred.id === ingredient.id;
+      });
+      return ingredient.cost = match.estimatedCostInCents
+    });
+    let total = this.ingredients.reduce((acc, curIng) => {
+      return (acc += curIng.cost)/100;
+    }, 0);
+    this.recipeTotal = Math.floor(total).toFixed(2);
+    return this.recipeTotal;
   }
 
   returnInstructions() {
-    return this.instructions;
+    return this.instructions.map(instruction => instruction.instruction);
   }
+
 }
 
 export default Recipe;
