@@ -35,11 +35,11 @@ describe('Cookbook', () => {
   });
 
   it('should allow the user to search recipes by name', () => {
-    expect(cookbook.searchForRecipe('cookie')).to.deep.equal([recipeData[0]]);
+    expect(cookbook.searchForRecipe('wing')).to.deep.equal([recipeData[2]]);
   });
 
   it('should allow the user to search recipes by ingredient', () => {
-    expect(cookbook.searchForRecipe('apple slices'))
+    expect(cookbook.searchForRecipe('apples'))
       .to.deep.equal([recipeData[1]]);
   });
 

@@ -21,13 +21,13 @@ class Cookbook {
   }
 
   searchForRecipe(searchText) {
-    const newSearchText = searchText.toLowerCase()
+    const newSearchText = searchText.toLowerCase();
     return this.recipes.filter(recipe => {
-      return recipe.ingredients.find(ingredient => {
-        return (ingredient.name.toLowerCase().includes(newSearchText)) ||
-       (recipe.name.toLowerCase().includes(newSearchText))
+      return recipe.name.includes(newSearchText)
+      || recipe.ingredients.find(ingredient => {
+        return ingredient.name.includes(newSearchText);
       });
-    })
+    });
   }
 }
 
