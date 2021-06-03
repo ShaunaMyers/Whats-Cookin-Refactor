@@ -1,4 +1,4 @@
-let ingredientsData = [
+export const ingredientsData = [
   {
     "id": 20081,
     "name": "wheat flour",
