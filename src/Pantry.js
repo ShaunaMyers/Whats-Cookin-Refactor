@@ -4,6 +4,7 @@ class Pantry {
         this.pantryIngredients = [];
         this.pantryAmounts = [];
         this.recipeIngredients = [];
+        this.ingredientsNeeded = [];
     }
 
 
@@ -11,32 +12,36 @@ class Pantry {
 
     // Determine whether a user’s pantry has enough ingredients to cook a given meal.
 
-    evaluateUsersPantry(recipe) {
-        // I need the recipe ingredient details for this then 
-        // Pass in args for recipe?
-        // evaluate recipe
-        // recipe holds an array of ingredients
-        // in this array, each object has an ingredient id
-        // In user data array
-        // each user has a pantry array 
-        // iterate over users pantry and push to this.pantryIngredients
+    evaluateUsersPantry() {
         this.pantryIngredients = this.contents.map(item => item.ingredient);
+        this.pantryAmounts = this.contents.map(item => item.amount);
+    }
+
+
+    evaluateUsersIngredients(recipe) {
         this.recipeIngredients = recipe.ingredients.map(ingredient => ingredient.id);
-        // Map would create an array of just the ingredients
-        // Iterate over this.pantryIngredients and see if each 
-
-        let userMessage;
-
-        console.log('Pantry INGRED', this.pantryIngredients);
-        console.log('recipe INGRED', this.recipeIngredients);
         this.pantryIngredients.forEach(ingredient => {
             if (!this.recipeIngredients.includes(ingredient)) {
-                userMessage = 'You do not have enough ingredients to cook this meal.'
+                this.ingredientsNeeded.push(ingredient);
             }
         })
-        // ingredient id is included in recipe ingredients
-        return userMessage;
+
+        if (this.ingredientsNeeded.length > 0) {
+            return 'You do not have enough ingredients to cook this meal. Time to go shopping!'
+        } else {
+            this.determineIngredientsNeeded();
+        }
     }
+    // Determine the amount of missing ingredients still needed to cook a given meal, based on what’s in the user’s pantry.
+
+    determineIngredientsNeeded() {
+        if (this.ingredientsNeeded.length > 0) {
+            return this.ingredientsNeeded;
+        } else {
+            return 'You have all the necessary ingredients for this recipe! Time to get cooking!'
+        }
+    }
+
 }
 
 // Determine the amount of missing ingredients still needed to cook a given meal, based on what’s in the user’s pantry.
