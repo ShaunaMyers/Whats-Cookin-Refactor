@@ -7,23 +7,51 @@ class User {
     this.recipesToCook = [];
   }
   saveRecipe(recipe) {
-    this.favoriteRecipes.push(recipe);
+    if (!this.favoriteRecipes.includes(recipe)) {
+      this.favoriteRecipes.push(recipe);
+    }
   }
 
   removeRecipe(recipe) {
-    let i = this.favoriteRecipes.indexOf(recipe);
-    this.favoriteRecipes.splice(i, 1);
+    this.favoriteRecipes = this.favoriteRecipes.filter(favRecipe => {
+      if (favRecipe.id !== recipe.id) {
+        return favRecipe;
+      }
+    });
   }
 
   decideToCook(recipe) {
-    this.recipesToCook.push(recipe);
+    if (!this.recipesToCook.includes(recipe)) {
+      this.recipesToCook.push(recipe);
+    }
   }
-  filterRecipes(type) {
-    return this.favoriteRecipes.filter(recipe => recipe.type.includes(type));
+
+  filterRecipes(tags) {
+    const newFilterTags = typeof tags === "string" ? [tags] : tags;
+    let filteredRecipes = [];
+    newFilterTags.forEach(tag => {
+      this.favoriteRecipes.forEach(recipe => {
+        if (recipe.tags.includes(tag)) {
+          filteredRecipes.push(recipe)
+        }
+      });
+    });
+
+    return [...new Set(filteredRecipes)];
   }
+
   searchForRecipe(keyword) {
-    return this.favoriteRecipes.filter(recipe => recipe.name.includes(keyword) || recipe.ingredients.includes(keyword));
+    const newSearchText = keyword.toLowerCase();
+    return this.favoriteRecipes.filter(recipe => {
+      const stringifiedInstructions = recipe.instructions.map(item => {
+        return item.instruction;
+      }).join(' ').toLowerCase();
+
+      return recipe.name.toLowerCase().includes(newSearchText) ||
+        stringifiedInstructions.includes(newSearchText)
+    });
   }
+  
 }
 
 module.exports = User;
