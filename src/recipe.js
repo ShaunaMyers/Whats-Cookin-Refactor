@@ -11,6 +11,7 @@ class Recipe {
 
   
   returnIngredientNames() {
+    this.calculateIngredientsCost()
     return this.ingredients.map(ing => ing.name);
   }
 
