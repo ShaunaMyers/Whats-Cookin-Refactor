@@ -4,6 +4,48 @@ import Recipe from './recipe';
 
 let domUpdates = {
 
+    // GENERATE A USER ON LOAD
+    generateUser() {
+        user = new User(users[Math.floor(Math.random() * users.length)]);
+        let firstName = user.name.split(" ")[0];
+        let welcomeMsg = `
+          <div class="welcome-msg">
+            <h1>Welcome ${firstName}!</h1>
+          </div>`;
+        document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
+            welcomeMsg);
+        this.findPantryInfo();
+    },
+
+    // CREATE RECIPE CARDS
+    createCards() {
+        recipeData.forEach(recipe => {
+            let recipeInfo = new Recipe(recipe);
+            let shortRecipeName = recipeInfo.name;
+            recipes.push(recipeInfo);
+            if (recipeInfo.name.length > 40) {
+                shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
+            }
+            this.addToDom(recipeInfo, shortRecipeName)
+        });
+    },
+
+    addToDom(recipeInfo, shortRecipeName) {
+        let cardHtml = `
+          <div class="recipe-card" id=${recipeInfo.id}>
+            <h3 maxlength="40">${shortRecipeName}</h3>
+            <div class="card-photo-container">
+              <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
+              <div class="text">
+                <div>Click for Instructions</div>
+              </div>
+            </div>
+            <h4>${recipeInfo.tags[0]}</h4>
+            <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
+          </div>`
+        main.insertAdjacentHTML("beforeend", cardHtml);
+    },
+
     showWelcomeBanner() {
         document.querySelector(".welcome-msg").style.display = "flex";
         document.querySelector(".my-recipes-banner").style.display = "none";
@@ -16,6 +58,25 @@ let domUpdates = {
             domRecipe.style.display = "block";
         });
         this.showWelcomeBanner();
+    },
+
+    findPantryInfo() {
+        user.pantry.forEach(item => {
+            let itemInfo = ingredientsData.find(ingredient => {
+                return ingredient.id === item.ingredient;
+            });
+            let originalIngredient = pantryInfo.find(ingredient => {
+                if (itemInfo) {
+                    return ingredient.name === itemInfo.name;
+                }
+            });
+            if (itemInfo && originalIngredient) {
+                originalIngredient.count += item.amount;
+            } else if (itemInfo) {
+                pantryInfo.push({ name: itemInfo.name, count: item.amount });
+            }
+        });
+        this.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
     },
 
 
