@@ -1,5 +1,8 @@
 import Recipe from './recipe';
-import User from './user';
+
+let main = document.querySelector("main");
+let tagList = document.querySelector(".tag-list");
+let fullRecipeInfo = document.querySelector(".recipe-instructions");
 
 
 
@@ -29,7 +32,7 @@ let domUpdates = {
         });
     },
 
-    addToDom(recipeInfo, shortRecipeName) {
+    addCardsToDom(recipeInfo, shortRecipeName) {
         let cardHtml = `
           <div class="recipe-card" id=${recipeInfo.id}>
             <h3 maxlength="40">${shortRecipeName}</h3>
@@ -115,7 +118,7 @@ let domUpdates = {
     },
 
     // FAVORITE RECIPE FUNCTIONALITY
-    addToMyRecipes() {
+    addToMyRecipes(event) {
         if (event.target.className === "card-apple-icon") {
             let cardId = parseInt(event.target.closest(".recipe-card").id)
             if (!user.favoriteRecipes.includes(cardId)) {

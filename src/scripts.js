@@ -11,8 +11,8 @@ import domUpdates from './domUpdates';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
-let fullRecipeInfo = document.querySelector(".recipe-instructions");
-let main = document.querySelector("main");
+// let fullRecipeInfo = document.querySelector(".recipe-instructions");
+// let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
 let pantryInfo = [];
@@ -22,7 +22,7 @@ let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
-let tagList = document.querySelector(".tag-list");
+// let tagList = document.querySelector(".tag-list");
 let user;
 
 
@@ -45,6 +45,7 @@ searchForm.addEventListener("submit", pressEnterSearch);
 // We can slowly erase them here, and any that are left that need to invoke a function in domUpdates, will just invoke like... e.g. domUpdates.generateUser()
 
 // GENERATE A USER ON LOAD
+  // will need to update sampleUsers to apiCall once connected
 function generateUser() {
   user = new User(sampleUsers[Math.floor(Math.random() * sampleUsers.length)]);
   domUpdates.displayUserGreeting(user);
@@ -60,26 +61,10 @@ function createCards() {
     if (recipeInfo.name.length > 40) {
       shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
     }
-    addCardsToDom(recipeInfo, shortRecipeName)
+    domUpdates.addCardsToDom(recipeInfo, shortRecipeName)
   });
 }
 
-//This works and needs to move to domUpdates ALSO renamed
-function addCardsToDom(recipeInfo, shortRecipeName) {
-  let cardHtml = `
-    <div class="recipe-card" id=${recipeInfo.id}>
-      <h3 maxlength="40">${shortRecipeName}</h3>
-      <div class="card-photo-container">
-        <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
-        <div class="text">
-          <div>Click for Instructions</div>
-        </div>
-      </div>
-      <h4>${recipeInfo.tags[0]}</h4>
-      <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
-    </div>`
-  main.insertAdjacentHTML("beforeend", cardHtml);
-}
 
 // FILTER BY RECIPE TAGS
 function findTags() {
@@ -352,3 +337,4 @@ function findRecipesWithCheckedIngredients(selected) {
     }
   })
 }
+
