@@ -1,7 +1,6 @@
-import users from './data/users-data';
-import recipeData from './data/recipe-data';
-import ingredientData from './data/ingredient-data';
-import apiCalls from './apiCalls';
+import users from './data/sample-users-data';
+import recipeData from './data/sample-recipe-data';
+import ingredientData from './data/sample-ingredient-data';
 
 import './css/base.scss';
 import './css/styles.scss';
@@ -39,9 +38,10 @@ showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
 
 
-// Call function in our new apiCalls file to get the promise object and then instantiate data
 
-
+// I went ahead and just moved all of these functions to domUpdates
+// Most of this needs to go in domUpdates anyway and I figured it would be easier to keep a few functions here, versus adding them ALL one by one to domUpdates
+// We can slowly erase them here, and any that are left that need to invoke a function in domUpdates, will just invoke like... e.g. domUpdates.generateUser()
 
 // GENERATE A USER ON LOAD
 function generateUser() {
@@ -224,8 +224,6 @@ function generateIngredients(recipe) {
   }).join(", ");
 }
 
-
-// Recipe method returnInstructions
 function generateInstructions(recipe) {
   let instructionsList = "";
   let instructions = recipe.instructions.map(i => {
