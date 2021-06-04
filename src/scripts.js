@@ -30,13 +30,13 @@ let user;
 window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
 window.addEventListener("load", generateUser);
-allRecipesBtn.addEventListener("click", showAllRecipes);
+allRecipesBtn.addEventListener("click", showAllRecipes); // need to invoke in domUpdates
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 pantryBtn.addEventListener("click", toggleMenu);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchBtn.addEventListener("click", searchRecipes);
-showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
+showPantryRecipes.addEventListener("click", findCheckedPantryBoxes); // need to invoke in domUpates
 searchForm.addEventListener("submit", pressEnterSearch);
 
 
@@ -294,6 +294,7 @@ function toggleMenu() {
   }
 }
 
+// moved to domUpdates
 function showAllRecipes() {
   recipes.forEach(recipe => {
     let domRecipe = document.getElementById(`${recipe.id}`);
@@ -319,17 +320,19 @@ function findPantryInfo() {
       pantryInfo.push({ name: itemInfo.name, count: item.amount });
     }
   });
-  displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
+  domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
-function displayPantryInfo(pantry) {
-  pantry.forEach(ingredient => {
-    let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
-      <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
-    document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
-      ingredientHtml);
-  });
-}
+// function displayPantryInfo(pantry) {
+//   pantry.forEach(ingredient => {
+//     let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
+//       <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
+//     document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
+//       ingredientHtml);
+//   });
+// }
+
+// Moved to domUpdates
 
 function findCheckedPantryBoxes() {
   let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
@@ -342,6 +345,8 @@ function findCheckedPantryBoxes() {
     findRecipesWithCheckedIngredients(selectedIngredients);
   }
 }
+
+// Moved to domUpdates
 
 function findRecipesWithCheckedIngredients(selected) {
   let recipeChecker = (arr, target) => target.every(v => arr.includes(v));
