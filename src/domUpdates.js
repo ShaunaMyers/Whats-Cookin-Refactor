@@ -8,7 +8,7 @@ let domUpdates = {
 
 
 
-    function displayPantryInfo(pantry) {
+    displayPantryInfo(pantry) {
         pantry.forEach(ingredient => {
             let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
             <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;

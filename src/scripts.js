@@ -1,7 +1,8 @@
-import users from './data/users-data';
-import recipeData from './data/recipe-data';
-import ingredientData from './data/ingredient-data';
+import users from './data/sample-users-data';
+import recipeData from './data/sample-recipe-data';
+import ingredientsData from './data/sample-ingredient-data';
 import apiCalls from './apiCalls';
+import domUpdates from './domUpdates'
 
 import './css/base.scss';
 import './css/styles.scss';
