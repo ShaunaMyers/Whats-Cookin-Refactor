@@ -1,12 +1,10 @@
-import ingredientsData from "./data/ingredient-data";
-import recipeData from "./data/recipe-data";
-
 class Recipe {
-  constructor(recipe) {
+  constructor(recipe, ingredientsData) {
     this.id = recipe.id;
     this.name = recipe.name;
     this.image = recipe.image;
     this.ingredients = recipe.ingredients;
+    this.ingredientsData = ingredientsData;
     this.instructions = recipe.instructions;
     this.tags = recipe.tags;
   }
@@ -18,7 +16,7 @@ class Recipe {
 
   calculateIngredientsCost() {
     let ingCost = this.ingredients.forEach(ingredient => {
-      let match = ingredientsData.find(ingred => {
+      let match = this.ingredientsData.find(ingred => {
         return ingred.id === ingredient.id;
       });
       return ingredient.cost = match.estimatedCostInCents

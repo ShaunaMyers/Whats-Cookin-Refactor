@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
 import User from '../src/User';
-import { users } from '../src/data/users-data';
-import { recipeData } from '../src/data/recipe-data';
+import  users  from '../src/data/sample-users-data';
+import { recipeData } from '../src/data/sample-recipe-data';
 
 let user;
 let userInfo;

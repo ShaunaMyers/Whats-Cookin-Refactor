@@ -1,5 +1,3 @@
-import ingredientsData from "./data/ingredient-data";
-
 class Cookbook {
   constructor(recipeData, ingredientData) {
     this.recipes = recipeData;
