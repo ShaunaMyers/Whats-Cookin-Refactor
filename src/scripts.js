@@ -1,8 +1,6 @@
 import users from './data/sample-users-data';
 import recipeData from './data/sample-recipe-data';
-import ingredientsData from './data/sample-ingredient-data';
-import apiCalls from './apiCalls';
-import domUpdates from './domUpdates'
+import ingredientData from './data/sample-ingredient-data';
 
 import './css/base.scss';
 import './css/styles.scss';
@@ -30,25 +28,22 @@ let user;
 window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
 window.addEventListener("load", generateUser);
-allRecipesBtn.addEventListener("click", showAllRecipes); // need to invoke in domUpdates when we erase these functions from this file...domUpdates.showAllRecipes...or move these eventlisteners elsewhere?
+allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 pantryBtn.addEventListener("click", toggleMenu);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchBtn.addEventListener("click", searchRecipes);
-showPantryRecipes.addEventListener("click", findCheckedPantryBoxes); // need to invoke in domUpates
+showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
 
 
 
+// I went ahead and just moved all of these functions to domUpdates
+// Most of this needs to go in domUpdates anyway and I figured it would be easier to keep a few functions here, versus adding them ALL one by one to domUpdates
+// We can slowly erase them here, and any that are left that need to invoke a function in domUpdates, will just invoke like... e.g. domUpdates.generateUser()
 
 // GENERATE A USER ON LOAD
-
-// moved to domUpdates but domUpdates is not connected to everything yet
-// Eventually we will want to erase all of these functions and make sure that any
-// call to these functions from inside scripts.js, begins with domUpdates... e.g. :
-// domUpdates.generateUser()
-
 function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   let firstName = user.name.split(" ")[0];
@@ -62,7 +57,6 @@ function generateUser() {
 }
 
 // CREATE RECIPE CARDS
-// moved to domUpdates but domUpdates is not connected to everything yet
 function createCards() {
   recipeData.forEach(recipe => {
     let recipeInfo = new Recipe(recipe);
@@ -75,7 +69,6 @@ function createCards() {
   });
 }
 
-// moved to domUpdates but domUpdates is not connected to everything yet
 function addToDom(recipeInfo, shortRecipeName) {
   let cardHtml = `
     <div class="recipe-card" id=${recipeInfo.id}>
@@ -231,9 +224,6 @@ function generateIngredients(recipe) {
   }).join(", ");
 }
 
-
-// Recipe method returnInstructions
-// 
 function generateInstructions(recipe) {
   let instructionsList = "";
   let instructions = recipe.instructions.map(i => {
@@ -259,7 +249,6 @@ function showMyRecipesBanner() {
   document.querySelector(".my-recipes-banner").style.display = "block";
 }
 
-// moved to domUpdates but domUpdates is not connected to everything yet
 function showWelcomeBanner() {
   document.querySelector(".welcome-msg").style.display = "flex";
   document.querySelector(".my-recipes-banner").style.display = "none";
@@ -302,7 +291,6 @@ function toggleMenu() {
   }
 }
 
-// moved to domUpdates but domUpdates is not connected to everything yet
 function showAllRecipes() {
   recipes.forEach(recipe => {
     let domRecipe = document.getElementById(`${recipe.id}`);
@@ -331,7 +319,6 @@ function findPantryInfo() {
   displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
-// moved to domUpdates but domUpdates is not connected to everything yet
 function displayPantryInfo(pantry) {
   pantry.forEach(ingredient => {
     let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
@@ -341,7 +328,6 @@ function displayPantryInfo(pantry) {
   });
 }
 
-// moved to domUpdates but domUpdates is not connected to everything yet
 function findCheckedPantryBoxes() {
   let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
   let pantryCheckboxInfo = Array.from(pantryCheckboxes)
@@ -354,7 +340,6 @@ function findCheckedPantryBoxes() {
   }
 }
 
-// moved to domUpdates but domUpdates is not connected to everything yet
 function findRecipesWithCheckedIngredients(selected) {
   let recipeChecker = (arr, target) => target.every(v => arr.includes(v));
   let ingredientNames = selected.map(item => {
