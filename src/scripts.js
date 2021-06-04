@@ -1,12 +1,13 @@
-import users from './data/sample-users-data';
+import sampleUsers from './data/sample-users-data';
 import recipeData from './data/sample-recipe-data';
-import ingredientData from './data/sample-ingredient-data';
+import ingredientsData from './data/sample-ingredient-data';
 
 import './css/base.scss';
 import './css/styles.scss';
 
 import User from './user';
 import Recipe from './recipe';
+import domUpdates from './domUpdates';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
@@ -45,18 +46,12 @@ searchForm.addEventListener("submit", pressEnterSearch);
 
 // GENERATE A USER ON LOAD
 function generateUser() {
-  user = new User(users[Math.floor(Math.random() * users.length)]);
-  let firstName = user.name.split(" ")[0];
-  let welcomeMsg = `
-    <div class="welcome-msg">
-      <h1>Welcome ${firstName}!</h1>
-    </div>`;
-  document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
-    welcomeMsg);
-  findPantryInfo();
+  user = new User(sampleUsers[Math.floor(Math.random() * sampleUsers.length)]);
+  domUpdates.displayUserGreeting(user);
 }
 
 // CREATE RECIPE CARDS
+//createCards maybe rename to createCardData, followed by addCardsToDom instead of addToDom...
 function createCards() {
   recipeData.forEach(recipe => {
     let recipeInfo = new Recipe(recipe);
@@ -65,11 +60,12 @@ function createCards() {
     if (recipeInfo.name.length > 40) {
       shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
     }
-    addToDom(recipeInfo, shortRecipeName)
+    addCardsToDom(recipeInfo, shortRecipeName)
   });
 }
 
-function addToDom(recipeInfo, shortRecipeName) {
+//This works and needs to move to domUpdates ALSO renamed
+function addCardsToDom(recipeInfo, shortRecipeName) {
   let cardHtml = `
     <div class="recipe-card" id=${recipeInfo.id}>
       <h3 maxlength="40">${shortRecipeName}</h3>
@@ -96,7 +92,7 @@ function findTags() {
     });
   });
   tags.sort();
-  listTags(tags);
+  console.log(listTags(tags));
 }
 
 function listTags(allTags) {

@@ -1,11 +1,11 @@
 import Recipe from './recipe';
+import User from './user';
 
 
 
 let domUpdates = {
 
-    generateUser() {
-        user = new User(users[Math.floor(Math.random() * users.length)]);
+    displayUserGreeting(user) {
         let firstName = user.name.split(" ")[0];
         let welcomeMsg = `
           <div class="welcome-msg">
@@ -13,7 +13,7 @@ let domUpdates = {
           </div>`;
         document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
             welcomeMsg);
-        findPantryInfo();
+        // findPantryInfo();
     },
 
     // CREATE RECIPE CARDS
@@ -172,7 +172,7 @@ let domUpdates = {
           <h4>Ingredients</h4>
           <p>${ingredients}</p>`
         fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
-    }
+    },
       
     addRecipeImage(recipe) {
         document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
