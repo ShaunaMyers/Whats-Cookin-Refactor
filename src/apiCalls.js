@@ -49,7 +49,7 @@ const fetchRequests = {
 // I'm guessing I'll have to do this for the POST requests as well?
 
 function getData() {
-    return Promise.all([apiCalls.getUserData(), apiCalls.getIngredientsData(), apiCalls.getRecipeData()])
+    return Promise.all([fetchRequests.getUserData(), fetchRequests.getIngredientsData(), fetchRequests.getRecipeData()])
 }
 
 // Does checkForError need to be exported?

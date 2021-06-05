@@ -8,7 +8,6 @@ let fullRecipeInfo = document.querySelector(".recipe-instructions");
 import tags from './scripts';
 
 
-
 let domUpdates = {
 
     displayUserGreeting(user) {
@@ -147,47 +146,47 @@ let domUpdates = {
     },
 
     // CREATE RECIPE INSTRUCTIONS
-      openRecipeInfo(event) {
+    openRecipeInfo(event) {
         fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
-      },
-      
-      generateRecipeTitle(recipe, ingredients) {
+    },
+
+    generateRecipeTitle(recipe, ingredients) {
         let recipeTitle = `
           <button id="exit-recipe-btn">X</button>
           <h3 id="recipe-title">${recipe.name}</h3>
           <h4>Ingredients</h4>
           <p>${ingredients}</p>`
         fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
-      },
-      
-      addRecipeImage(recipe) {
+    },
+
+    addRecipeImage(recipe) {
         document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
-      },
-      
-      generateIngredients(recipe) {
+    },
+
+    generateIngredients(recipe) {
         return recipe.ingredients.map(i => {
-          return `${i.name} (${i.quantity.amount} ${i.quantity.unit})`
+            return `${i.name} (${i.quantity.amount} ${i.quantity.unit})`
         }).join(", ");
-      },
-      
-      generateInstructions(recipe) {
+    },
+
+    generateInstructions(recipe) {
         let instructionsList = "";
         let instructions = recipe.instructions.map(i => {
-          return i.instruction
+            return i.instruction
         });
         instructions.forEach(i => {
-          instructionsList += `<li>${i}</li>`
+            instructionsList += `<li>${i}</li>`
         });
         fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
         fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
-      },
-      
-      exitRecipe() {
+    },
+
+    exitRecipe() {
         while (fullRecipeInfo.firstChild &&
-          fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
+            fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
         fullRecipeInfo.style.display = "none";
         document.getElementById("overlay").remove();
-      },
+    },
 
     // TOGGLE DISPLAYS
     showMyRecipesBanner() {
@@ -247,12 +246,12 @@ let domUpdates = {
     },
 
     // CREATE AND USE PANTRY
-    findPantryInfo() {
+    findPantryInfo(user, ingredientsData, pantryInfo) {
         user.pantry.forEach(item => {
             let itemInfo = ingredientsData.find(ingredient => {
                 return ingredient.id === item.ingredient;
             });
-            let originalIngredient = pantryInfo.find(ingredient => {
+            let originalIngredient = pantryInfo.pantryIngredients.find(ingredient => {
                 if (itemInfo) {
                     return ingredient.name === itemInfo.name;
                 }
@@ -260,7 +259,7 @@ let domUpdates = {
             if (itemInfo && originalIngredient) {
                 originalIngredient.count += item.amount;
             } else if (itemInfo) {
-                pantryInfo.push({ name: itemInfo.name, count: item.amount });
+                pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
             }
         });
         displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
