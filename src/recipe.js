@@ -10,13 +10,13 @@ class Recipe {
   }
 
   
-  returnIngredientNames() {
-    this.calculateIngredientsCost()
-    return this.ingredients.map(ing => ing.name);
+  returnIngredients() {
+    this.calculateIngredientsCost();
+    return this.ingredients;
   }
 
   calculateIngredientsCost() {
-    let ingCost = this.ingredients.forEach(ingredient => {
+    this.ingredients.forEach(ingredient => {
       let match = this.ingredientsData.find(ingred => {
         return ingred.id === ingredient.id;
       });
@@ -30,7 +30,7 @@ class Recipe {
   }
 
   returnInstructions() {
-    return this.instructions.map(instruction => instruction.instruction);
+    return this.instructions.map(inst => inst.instruction);
   }
 
 }
