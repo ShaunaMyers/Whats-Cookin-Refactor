@@ -1,8 +1,11 @@
 import Recipe from './recipe';
+import recipeData from './data/sample-recipe-data';
 
 let main = document.querySelector("main");
 let tagList = document.querySelector(".tag-list");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
+
+import tags from './scripts';
 
 
 
@@ -16,7 +19,6 @@ let domUpdates = {
           </div>`;
         document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
             welcomeMsg);
-        // findPantryInfo();
     },
 
     // CREATE RECIPE CARDS
@@ -49,32 +51,19 @@ let domUpdates = {
     },
 
     // FILTER BY RECIPE TAGS
-    findTags() {
-        let tags = [];
-        recipeData.forEach(recipe => {
-            recipe.tags.forEach(tag => {
-                if (!tags.includes(tag)) {
-                    tags.push(tag);
-                }
-            });
-        });
-        tags.sort();
-        listTags(tags);
-    },
-
-    listTags(allTags) {
-        allTags.forEach(tag => {
+    listTags() {
+        tags.forEach(tag => {
             let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
-            <label for="${tag}">${capitalize(tag)}</label></li>`;
+            <label for="${tag}">${tag}</label></li>`;
             tagList.insertAdjacentHTML("beforeend", tagHtml);
         });
     },
 
-    capitalize(words) {
-        return words.split(" ").map(word => {
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        }).join(" ");
-    },
+    // capitalize(words) {
+    //     return words.split(" ").map(word => {
+    //         return word.charAt(0).toUpperCase() + word.slice(1);
+    //     }).join(" ");
+    // },
 
     findCheckedBoxes() {
         let tagCheckboxes = document.querySelectorAll(".checked-tag");
@@ -158,56 +147,47 @@ let domUpdates = {
     },
 
     // CREATE RECIPE INSTRUCTIONS
-    openRecipeInfo(event) {
-        fullRecipeInfo.style.display = "inline";
-        let recipeId = event.path.find(e => e.id).id;
-        let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
-        generateRecipeTitle(recipe, generateIngredients(recipe));
-        addRecipeImage(recipe);
-        generateInstructions(recipe);
+      openRecipeInfo(event) {
         fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
-    },
-
-    generateRecipeTitle(recipe, ingredients) {
+      },
+      
+      generateRecipeTitle(recipe, ingredients) {
         let recipeTitle = `
           <button id="exit-recipe-btn">X</button>
           <h3 id="recipe-title">${recipe.name}</h3>
           <h4>Ingredients</h4>
           <p>${ingredients}</p>`
         fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
-    },
+      },
       
-    addRecipeImage(recipe) {
+      addRecipeImage(recipe) {
         document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
-    },
-
-    generateIngredients(recipe) {
-        return recipe && recipe.ingredients.map(i => {
-            return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
+      },
+      
+      generateIngredients(recipe) {
+        return recipe.ingredients.map(i => {
+          return `${i.name} (${i.quantity.amount} ${i.quantity.unit})`
         }).join(", ");
-    },
-
-
-    // Recipe method returnInstructions
-
-    generateInstructions(recipe) {
+      },
+      
+      generateInstructions(recipe) {
         let instructionsList = "";
         let instructions = recipe.instructions.map(i => {
-            return i.instruction
+          return i.instruction
         });
         instructions.forEach(i => {
-            instructionsList += `<li>${i}</li>`
+          instructionsList += `<li>${i}</li>`
         });
         fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
         fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
-    },
-
-    exitRecipe() {
+      },
+      
+      exitRecipe() {
         while (fullRecipeInfo.firstChild &&
-            fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
+          fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
         fullRecipeInfo.style.display = "none";
         document.getElementById("overlay").remove();
-    },
+      },
 
     // TOGGLE DISPLAYS
     showMyRecipesBanner() {

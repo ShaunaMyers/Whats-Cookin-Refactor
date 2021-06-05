@@ -52,9 +52,9 @@ describe('Recipe', function() {
   });
 
   it('should be able to return the names of the ingredients', function() {
-    const result = recipe.returnIngredientNames();
+    const result = recipe.returnIngredients();
     expect(result).to.be.an('array');
-    expect(result[1]).to.equal('baking soda');
+    expect(result[1].name).to.equal('baking soda');
   });
 
   it('should calculate the total cost of all of the ingredients', function() {

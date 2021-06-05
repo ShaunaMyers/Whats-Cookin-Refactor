@@ -11,12 +11,15 @@ import domUpdates from './domUpdates';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
-// let fullRecipeInfo = document.querySelector(".recipe-instructions");
-// let main = document.querySelector("main");
+let fullRecipeInfo = document.querySelector(".recipe-instructions");
+let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
 let pantryInfo = [];
 let recipes = [];
+let tags = [];
+export default tags;
+
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
@@ -24,6 +27,7 @@ let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 // let tagList = document.querySelector(".tag-list");
 let user;
+
 
 
 window.addEventListener("load", createCards);
@@ -44,15 +48,19 @@ searchForm.addEventListener("submit", pressEnterSearch);
 // Most of this needs to go in domUpdates anyway and I figured it would be easier to keep a few functions here, versus adding them ALL one by one to domUpdates
 // We can slowly erase them here, and any that are left that need to invoke a function in domUpdates, will just invoke like... e.g. domUpdates.generateUser()
 
+//Master
+// function
+
+
 // GENERATE A USER ON LOAD
   // will need to update sampleUsers to apiCall once connected
 function generateUser() {
   user = new User(sampleUsers[Math.floor(Math.random() * sampleUsers.length)]);
+  findPantryInfo();
   domUpdates.displayUserGreeting(user);
 }
 
 // CREATE RECIPE CARDS
-//createCards maybe rename to createCardData, followed by addCardsToDom instead of addToDom...
 function createCards() {
   recipeData.forEach(recipe => {
     let recipeInfo = new Recipe(recipe);
@@ -67,32 +75,23 @@ function createCards() {
 
 
 // FILTER BY RECIPE TAGS
-function findTags() {
-  let tags = [];
+function findTags(recipe) {
   recipeData.forEach(recipe => {
     recipe.tags.forEach(tag => {
       if (!tags.includes(tag)) {
         tags.push(tag);
       }
     });
+    return tags.sort();
   });
-  tags.sort();
-  console.log(listTags(tags));
+  domUpdates.listTags()
 }
 
-function listTags(allTags) {
-  allTags.forEach(tag => {
-    let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
-      <label for="${tag}">${capitalize(tag)}</label></li>`;
-    tagList.insertAdjacentHTML("beforeend", tagHtml);
-  });
-}
-
-function capitalize(words) {
-  return words.split(" ").map(word => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  }).join(" ");
-}
+// function capitalize(words) {
+//   return words.split(" ").map(word => {
+//     return word.charAt(0).toUpperCase() + word.slice(1);
+//   }).join(" ");
+// }
 
 function findCheckedBoxes() {
   let tagCheckboxes = document.querySelectorAll(".checked-tag");
@@ -136,7 +135,7 @@ function hideUnselectedRecipes(foundRecipes) {
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
-function addToMyRecipes() {
+function addToMyRecipes(event) {
   if (event.target.className === "card-apple-icon") {
     let cardId = parseInt(event.target.closest(".recipe-card").id)
     if (!user.favoriteRecipes.includes(cardId)) {
@@ -149,7 +148,7 @@ function addToMyRecipes() {
   } else if (event.target.id === "exit-recipe-btn") {
     exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
-    openRecipeInfo(event);
+    openRecipeModal(event);
   }
 }
 
@@ -176,53 +175,17 @@ function showSavedRecipes() {
 }
 
 // CREATE RECIPE INSTRUCTIONS
-function openRecipeInfo(event) {
+
+function openRecipeModal(event) {
   fullRecipeInfo.style.display = "inline";
   let recipeId = event.path.find(e => e.id).id;
   let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
-  generateRecipeTitle(recipe, generateIngredients(recipe));
-  addRecipeImage(recipe);
-  generateInstructions(recipe);
-  fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
+  domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
+  domUpdates.addRecipeImage(recipe);
+  domUpdates.generateInstructions(recipe);
+  domUpdates.openRecipeInfo();
 }
 
-function generateRecipeTitle(recipe, ingredients) {
-  let recipeTitle = `
-    <button id="exit-recipe-btn">X</button>
-    <h3 id="recipe-title">${recipe.name}</h3>
-    <h4>Ingredients</h4>
-    <p>${ingredients}</p>`
-  fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
-}
-
-function addRecipeImage(recipe) {
-  document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
-}
-
-function generateIngredients(recipe) {
-  return recipe && recipe.ingredients.map(i => {
-    return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
-  }).join(", ");
-}
-
-function generateInstructions(recipe) {
-  let instructionsList = "";
-  let instructions = recipe.instructions.map(i => {
-    return i.instruction
-  });
-  instructions.forEach(i => {
-    instructionsList += `<li>${i}</li>`
-  });
-  fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
-  fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
-}
-
-function exitRecipe() {
-  while (fullRecipeInfo.firstChild &&
-    fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
-  fullRecipeInfo.style.display = "none";
-  document.getElementById("overlay").remove();
-}
 
 // TOGGLE DISPLAYS
 function showMyRecipesBanner() {
