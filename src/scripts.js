@@ -7,6 +7,7 @@ import './css/styles.scss';
 
 import User from './user';
 import Recipe from './recipe';
+import Cookbook from './Cookbook'
 import domUpdates from './domUpdates';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
@@ -32,7 +33,7 @@ let user;
 
 window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
-window.addEventListener("load", generateUser);
+// window.addEventListener("load", generateUser);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
@@ -52,8 +53,21 @@ searchForm.addEventListener("submit", pressEnterSearch);
 // function
 
 
+window.onload.onStartUp()
+
+
+function onStartUp() {
+  apiCalls.getData()
+    .then((promise) => {
+      user = new User(promise[0]['usersData'][(Math.floor(Math.random() * promise[0]['usersData'].length) + 1)]);
+      globalIngredientsData = promise[1]['ingredientsData'];
+      recipeRepository = new RecipeRepository(promise[2]['recipeData']);
+      domUpdates.generateUser(user);
+      domUpdates.displayRecipeCards(recipeRepository, user, globalIngredientsData);
+    })
+}
 // GENERATE A USER ON LOAD
-  // will need to update sampleUsers to apiCall once connected
+// will need to update sampleUsers to apiCall once connected
 function generateUser() {
   user = new User(sampleUsers[Math.floor(Math.random() * sampleUsers.length)]);
   findPantryInfo();
