@@ -14,8 +14,16 @@ let fullRecipeInfo = document.querySelector(".recipe-instructions");
 
 import tags from './scripts';
 
+// let recipes = [];
+
 
 let domUpdates = {
+
+    generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
+        this.findPantryInfo(user, ingredientsData, pantryInfo);
+        this.displayUserGreeting(user);
+        this.createCards(cookbook);
+    },
 
     displayUserGreeting(user) {
         let firstName = user.name.split(" ")[0];
@@ -28,15 +36,17 @@ let domUpdates = {
     },
 
     // CREATE RECIPE CARDS
-    createCards() {
-        recipeData.forEach(recipe => {
+    createCards(cookbook) {
+        console.log('COOKBOOK', cookbook);
+        cookbook.recipes.forEach(recipe => {
+            let recipes = [];
             let recipeInfo = new Recipe(recipe);
             let shortRecipeName = recipeInfo.name;
             recipes.push(recipeInfo);
             if (recipeInfo.name.length > 40) {
                 shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
             }
-            addToDom(recipeInfo, shortRecipeName)
+            this.addCardsToDom(recipeInfo, shortRecipeName)
         });
     },
 

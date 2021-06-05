@@ -19,7 +19,6 @@ let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
 // let pantryInfo = [];
-let recipes = [];
 let tags = [];
 export default tags;
 
@@ -30,10 +29,11 @@ let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 // let tagList = document.querySelector(".tag-list");
 let user, cookbook, ingredientsData, pantryInfo;
+// let recipes = [];
 
 
 
-window.addEventListener("load", createCards);
+// window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
 // window.addEventListener("load", generateUser);
 allRecipesBtn.addEventListener("click", showAllRecipes);
@@ -66,30 +66,25 @@ function onStartUp() {
       ingredientsData = promise[1]['ingredientsData'];
       cookbook = new Cookbook(promise[2]['recipeData'], promise[1]['ingredientsData']);
       pantryInfo = new Pantry(user.pantry)
-      generateAllInfo();
+      domUpdates.generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
       // domUpdates.displayRecipeCards(recipeRepository, user, globalIngredientsData);
     })
 }
 // GENERATE A USER ON LOAD
 // will need to update sampleUsers to apiCall once connected
-function generateAllInfo() {
-  // user = new User(sampleUsers[Math.floor(Math.random() * sampleUsers.length)]);
-  domUpdates.findPantryInfo(user, ingredientsData, pantryInfo);
-  domUpdates.displayUserGreeting(user);
-}
 
 // CREATE RECIPE CARDS
-function createCards() {
-  recipeData.forEach(recipe => {
-    let recipeInfo = new Recipe(recipe);
-    let shortRecipeName = recipeInfo.name;
-    recipes.push(recipeInfo);
-    if (recipeInfo.name.length > 40) {
-      shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
-    }
-    domUpdates.addCardsToDom(recipeInfo, shortRecipeName)
-  });
-}
+// function createCards() {
+//   recipeData.forEach(recipe => {
+//     let recipeInfo = new Recipe(recipe);
+//     let shortRecipeName = recipeInfo.name;
+//     recipes.push(recipeInfo);
+//     if (recipeInfo.name.length > 40) {
+//       shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
+//     }
+//     domUpdates.addCardsToDom(recipeInfo, shortRecipeName)
+//   });
+// }
 
 
 // FILTER BY RECIPE TAGS
