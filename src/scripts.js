@@ -1,6 +1,3 @@
-import sampleUsers from './data/sample-users-data';
-import recipeData from './data/sample-recipe-data';
-// import ingredientsData from './data/sample-ingredient-data'; 
 import apiCalls from './apiCalls';
 
 import './css/base.scss';
@@ -18,7 +15,6 @@ let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
-// let pantryInfo = [];
 let tags = [];
 export default tags;
 
@@ -29,13 +25,9 @@ let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 // let tagList = document.querySelector(".tag-list");
 let user, cookbook, ingredientsData, pantryInfo;
-// let recipes = [];
 
 
-
-// window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
-// window.addEventListener("load", generateUser);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
@@ -47,16 +39,9 @@ searchForm.addEventListener("submit", pressEnterSearch);
 
 
 
-// I went ahead and just moved all of these functions to domUpdates
-// Most of this needs to go in domUpdates anyway and I figured it would be easier to keep a few functions here, versus adding them ALL one by one to domUpdates
-// We can slowly erase them here, and any that are left that need to invoke a function in domUpdates, will just invoke like... e.g. domUpdates.generateUser()
-
-//Master
-// function
-
+// GENERATE A USER ON LOAD
 
 window.onload = onStartUp()
-
 
 function onStartUp() {
   apiCalls.getData()
@@ -70,26 +55,10 @@ function onStartUp() {
       // domUpdates.displayRecipeCards(recipeRepository, user, globalIngredientsData);
     })
 }
-// GENERATE A USER ON LOAD
-// will need to update sampleUsers to apiCall once connected
-
-// CREATE RECIPE CARDS
-// function createCards() {
-//   recipeData.forEach(recipe => {
-//     let recipeInfo = new Recipe(recipe);
-//     let shortRecipeName = recipeInfo.name;
-//     recipes.push(recipeInfo);
-//     if (recipeInfo.name.length > 40) {
-//       shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
-//     }
-//     domUpdates.addCardsToDom(recipeInfo, shortRecipeName)
-//   });
-// }
-
 
 // FILTER BY RECIPE TAGS
 function findTags(recipe) {
-  recipeData.forEach(recipe => {
+  cookbook.recipes.forEach(recipe => {
     recipe.tags.forEach(tag => {
       if (!tags.includes(tag)) {
         tags.push(tag);
@@ -127,6 +96,7 @@ function findTaggedRecipes(selected) {
       }
     })
   });
+
   showAllRecipes();
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
@@ -192,7 +162,7 @@ function showSavedRecipes() {
 function openRecipeModal(event) {
   fullRecipeInfo.style.display = "inline";
   let recipeId = event.path.find(e => e.id).id;
-  let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
+  let recipe = cookbook.recipes.find(recipe => recipe.id === Number(recipeId));
   domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
   domUpdates.addRecipeImage(recipe);
   domUpdates.generateInstructions(recipe);
@@ -219,7 +189,7 @@ function pressEnterSearch(event) {
 
 function searchRecipes() {
   showAllRecipes();
-  let searchedRecipes = recipeData.filter(recipe => {
+  let searchedRecipes = cookbook.recipes.filter(recipe => {
     return recipe.name.toLowerCase().includes(searchInput.value.toLowerCase());
   });
   filterNonSearched(createRecipeObject(searchedRecipes));
