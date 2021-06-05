@@ -63,7 +63,6 @@ function onStartUp() {
     .then((promise) => {
       // console.log("Promise", promise);
       user = new User(promise[0]['usersData'][(Math.floor(Math.random() * promise[0]['usersData'].length) + 1)]);
-      console.log('USER', user);
       ingredientsData = promise[1]['ingredientsData'];
       cookbook = new Cookbook(promise[2]['recipeData'], promise[1]
       ['ingredientsData']);

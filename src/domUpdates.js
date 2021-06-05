@@ -262,7 +262,7 @@ let domUpdates = {
                 pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
             }
         });
-        displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
+        this.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
     },
 
     displayPantryInfo(pantry) {
