@@ -5,6 +5,12 @@
 import './css/base.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+// import './images/turing-logo.png'
+import './images/apple-logo.png'
+import './images/apple-logo-outline.png'
+import './images/cookbook.png';
+import './images/green-apples.jpg';
+import './images/search.png';
+import './images/seasoning.png';
 
 console.log('This is the JavaScript entry file - your code begins here.');

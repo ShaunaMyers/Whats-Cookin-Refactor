@@ -1,5 +1,12 @@
 import Recipe from './recipe';
 import recipeData from './data/sample-recipe-data';
+import './images/apple-logo.png';
+import './images/apple-logo-outline.png';
+import './images/cookbook.png';
+import './images/green-apples.jpg';
+import './images/search.png';
+import './images/seasoning.png';
+import './images/pancakes.jpg';
 
 let main = document.querySelector("main");
 let tagList = document.querySelector(".tag-list");
@@ -57,12 +64,6 @@ let domUpdates = {
             tagList.insertAdjacentHTML("beforeend", tagHtml);
         });
     },
-
-    // capitalize(words) {
-    //     return words.split(" ").map(word => {
-    //         return word.charAt(0).toUpperCase() + word.slice(1);
-    //     }).join(" ");
-    // },
 
     findCheckedBoxes() {
         let tagCheckboxes = document.querySelectorAll(".checked-tag");

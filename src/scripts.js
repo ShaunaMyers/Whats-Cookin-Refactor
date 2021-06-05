@@ -28,7 +28,10 @@ let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
+let user;
+
 // let tagList = document.querySelector(".tag-list");
+
 
 
 
@@ -37,7 +40,7 @@ window.addEventListener("load", findTags);
 // window.addEventListener("load", generateUser);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
-main.addEventListener("click", addToMyRecipes);
+main.addEventListener("click", addRemoveSaved);
 pantryBtn.addEventListener("click", toggleMenu);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchBtn.addEventListener("click", searchRecipes);
@@ -106,12 +109,6 @@ function findTags(recipe) {
   domUpdates.listTags()
 }
 
-// function capitalize(words) {
-//   return words.split(" ").map(word => {
-//     return word.charAt(0).toUpperCase() + word.slice(1);
-//   }).join(" ");
-// }
-
 function findCheckedBoxes() {
   let tagCheckboxes = document.querySelectorAll(".checked-tag");
   let checkboxInfo = Array.from(tagCheckboxes)
@@ -154,9 +151,9 @@ function hideUnselectedRecipes(foundRecipes) {
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
-function addToMyRecipes(event) {
+function addRemoveSaved(event) {
   if (event.target.className === "card-apple-icon") {
-    let cardId = parseInt(event.target.closest(".recipe-card").id)
+    let cardId = parseInt(event.target.closest(".recipe-card").id);
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
       user.saveRecipe(cardId);
@@ -165,7 +162,7 @@ function addToMyRecipes(event) {
       user.removeRecipe(cardId);
     }
   } else if (event.target.id === "exit-recipe-btn") {
-    exitRecipe();
+    domUpdates.exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeModal(event);
   }
