@@ -28,10 +28,8 @@ let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
-let user;
-
 // let tagList = document.querySelector(".tag-list");
-
+let user, cookbook, ingredientsData, pantryInfo;
 
 
 
@@ -40,7 +38,7 @@ window.addEventListener("load", findTags);
 // window.addEventListener("load", generateUser);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
-main.addEventListener("click", addRemoveSaved);
+main.addEventListener("click", addToMyRecipes);
 pantryBtn.addEventListener("click", toggleMenu);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchBtn.addEventListener("click", searchRecipes);
@@ -48,7 +46,6 @@ showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
 
 
-let user, cookbook, ingredientsData, pantryInfo;
 
 // I went ahead and just moved all of these functions to domUpdates
 // Most of this needs to go in domUpdates anyway and I figured it would be easier to keep a few functions here, versus adding them ALL one by one to domUpdates
@@ -64,19 +61,18 @@ window.onload = onStartUp()
 function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
-      // console.log("Promise", promise);
       user = new User(promise[0]['usersData'][(Math.floor(Math.random() * promise[0]['usersData'].length) + 1)]);
+      console.log('USER', user);
       ingredientsData = promise[1]['ingredientsData'];
-      cookbook = new Cookbook(promise[2]['recipeData'], promise[1]
-      ['ingredientsData']);
-      pantryInfo = new Pantry(user.pantry);
-      generateUserInfo(user);
+      cookbook = new Cookbook(promise[2]['recipeData'], promise[1]['ingredientsData']);
+      pantryInfo = new Pantry(user.pantry)
+      generateAllInfo();
       // domUpdates.displayRecipeCards(recipeRepository, user, globalIngredientsData);
     })
 }
 // GENERATE A USER ON LOAD
 // will need to update sampleUsers to apiCall once connected
-function generateUserInfo(user) {
+function generateAllInfo() {
   // user = new User(sampleUsers[Math.floor(Math.random() * sampleUsers.length)]);
   domUpdates.findPantryInfo(user, ingredientsData, pantryInfo);
   domUpdates.displayUserGreeting(user);
@@ -108,6 +104,12 @@ function findTags(recipe) {
   });
   domUpdates.listTags()
 }
+
+// function capitalize(words) {
+//   return words.split(" ").map(word => {
+//     return word.charAt(0).toUpperCase() + word.slice(1);
+//   }).join(" ");
+// }
 
 function findCheckedBoxes() {
   let tagCheckboxes = document.querySelectorAll(".checked-tag");
@@ -151,9 +153,9 @@ function hideUnselectedRecipes(foundRecipes) {
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
-function addRemoveSaved(event) {
+function addToMyRecipes(event) {
   if (event.target.className === "card-apple-icon") {
-    let cardId = parseInt(event.target.closest(".recipe-card").id);
+    let cardId = parseInt(event.target.closest(".recipe-card").id)
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
       user.saveRecipe(cardId);
@@ -162,7 +164,7 @@ function addRemoveSaved(event) {
       user.removeRecipe(cardId);
     }
   } else if (event.target.id === "exit-recipe-btn") {
-    domUpdates.exitRecipe();
+    exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeModal(event);
   }
@@ -257,35 +259,6 @@ function showAllRecipes() {
     domRecipe.style.display = "block";
   });
   showWelcomeBanner();
-}
-
-// CREATE AND USE PANTRY
-function findPantryInfo() {
-  user.pantry.forEach(item => {
-    let itemInfo = ingredientsData.find(ingredient => {
-      return ingredient.id === item.ingredient;
-    });
-    let originalIngredient = pantryInfo.find(ingredient => {
-      if (itemInfo) {
-        return ingredient.name === itemInfo.name;
-      }
-    });
-    if (itemInfo && originalIngredient) {
-      originalIngredient.count += item.amount;
-    } else if (itemInfo) {
-      pantryInfo.push({ name: itemInfo.name, count: item.amount });
-    }
-  });
-  displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
-}
-
-function displayPantryInfo(pantry) {
-  pantry.forEach(ingredient => {
-    let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
-      <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
-    document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
-      ingredientHtml);
-  });
 }
 
 function findCheckedPantryBoxes() {
