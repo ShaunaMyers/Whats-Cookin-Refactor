@@ -5,17 +5,17 @@ const retrieveData = (path) => {
         .catch(err => console.log(`User API Error: ${err.message}`));
 }
 
-// const updateData = (path, data) => {
-//     return fetch(path, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     })
-//         .then(response => checkForError(response))
-//         .catch(err => console.log(`User API Error: ${err.message}));
-// }
+const updateData = (path, data) => {
+    return fetch(path, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => checkForError(response))
+        .catch(err => console.log(`User API Error: ${err.message}`));
+}
 
 const checkForError = (response) => {
     if (!response.ok) {
@@ -26,7 +26,7 @@ const checkForError = (response) => {
 }
 
 
-const apiCalls = {
+const fetchRequests = {
 
     getUserData: () => {
         return retrieveData('http://localhost:3001/api/v1/users');
@@ -49,9 +49,9 @@ const apiCalls = {
 // I'm guessing I'll have to do this for the POST requests as well?
 
 function getData() {
-    return Promise.all([apiCalls.getUserData(), apiCalls.getIngredientsData(), apiCalls.getRecipeData()])
+    return Promise.all([fetchRequests.getUserData(), fetchRequests.getIngredientsData(), fetchRequests.getRecipeData()])
 }
 
 // Does checkForError need to be exported?
 
-export default { apiCalls, getData, checkForError };
+export default { retrieveData, updateData, checkForError, fetchRequests, getData };
