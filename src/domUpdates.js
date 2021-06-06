@@ -147,6 +147,7 @@ let domUpdates = {
 
     toggleMenu() {
         var menuDropdown = document.querySelector(".drop-menu");
+        console.log(this); // returns the button el - including this got the menuDropdown functioning
         this.menuOpen = !this.menuOpen;
         if (this.menuOpen) {
             menuDropdown.style.display = "block";
