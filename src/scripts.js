@@ -16,6 +16,7 @@ let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
 let tags = [];
+export default tags;
 
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
@@ -50,8 +51,48 @@ function onStartUp() {
       ingredientsData = promise[1];
       cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
-      domUpdates.generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
+      generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
     })  
+}
+
+function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
+  findPantryInfo(user, ingredientsData, pantryInfo);
+  domUpdates.displayUserGreeting(user);
+  createCards(cookbook);
+}
+
+function findPantryInfo(user, ingredientsData, pantryInfo) {
+  user.pantry.forEach(item => {
+      let itemInfo = ingredientsData.find(ingredient => {
+          return ingredient.id === item.ingredient;
+      });
+      let originalIngredient = pantryInfo.pantryIngredients.find(ingredient => {
+          if (itemInfo) {
+              return ingredient.name === itemInfo.name;
+          }
+      });
+      if (itemInfo && originalIngredient) {
+          originalIngredient.count += item.amount;
+      } else if (itemInfo) {
+          pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
+      }
+  });
+  domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
+}
+
+// LOAD COOKBOOK
+function createCards(cookbook) {
+  console.log('COOKBOOK', cookbook);
+  cookbook.recipes.forEach(recipe => {
+      let recipes = [];
+      let recipeInfo = new Recipe(recipe);
+      let shortRecipeName = recipeInfo.name;
+      recipes.push(recipeInfo);
+      if (recipeInfo.name.length > 40) {
+          shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
+      }
+      domUpdates.addCardsToDom(recipeInfo, shortRecipeName)
+  });
 }
 
 // FILTER BY RECIPE TAGS
