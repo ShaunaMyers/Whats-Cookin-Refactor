@@ -69,10 +69,6 @@ function findTags(recipe) {
   domUpdates.listTags()
 }
 
-function getRandomIndex(arr) {
-  return Math.random(Math.floor() * arr.length);
-}
-
 // function capitalize(words) {
 //   return words.split(" ").map(word => {
 //     return word.charAt(0).toUpperCase() + word.slice(1);
