@@ -147,8 +147,8 @@ let domUpdates = {
 
     toggleMenu() {
         var menuDropdown = document.querySelector(".drop-menu");
-        menuOpen = !menuOpen;
-        if (menuOpen) {
+        this.menuOpen = !this.menuOpen;
+        if (this.menuOpen) {
             menuDropdown.style.display = "block";
         } else {
             menuDropdown.style.display = "none";

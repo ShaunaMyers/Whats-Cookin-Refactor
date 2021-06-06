@@ -46,12 +46,12 @@ window.onload = onStartUp()
 function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
-      console.log(promise[0].length);
       user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
       console.log(user);
       ingredientsData = promise[1];
       cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
+      // recipe = new Recipe();
       domUpdates.generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
     })
 }
