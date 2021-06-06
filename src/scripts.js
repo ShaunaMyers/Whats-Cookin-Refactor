@@ -16,7 +16,6 @@ let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
 let tags = [];
-export default tags;
 
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
@@ -51,9 +50,8 @@ function onStartUp() {
       ingredientsData = promise[1];
       cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
-      // recipe = new Recipe();
       domUpdates.generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
-    })
+    })  
 }
 
 // FILTER BY RECIPE TAGS

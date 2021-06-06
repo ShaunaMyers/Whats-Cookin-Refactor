@@ -1,4 +1,5 @@
 import Recipe from './recipe';
+import User from './user';
 import tags from './scripts';
 import './images/apple-logo.png';
 import './images/apple-logo-outline.png';
@@ -12,6 +13,7 @@ let main = document.querySelector("main");
 let tagList = document.querySelector(".tag-list");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 
+// i dont think we should have any imports if dom/data separated fully. will cont to work on this....
 
 
 let domUpdates = {
@@ -81,6 +83,7 @@ let domUpdates = {
     },
 
     showSavedRecipes() {
+        let recipes = user.favoriteRecipes;
         let unsavedRecipes = recipes.filter(recipe => {
             return !user.favoriteRecipes.includes(recipe.id);
         });
