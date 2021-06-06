@@ -46,10 +46,11 @@ window.onload = onStartUp()
 function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
-      console.log('PROMISE', promise);
-      user = new User(promise[0]['usersData'][(Math.floor(Math.random() * promise[0]['usersData'].length) + 1)]);
-      ingredientsData = promise[1]['ingredientsData'];
-      cookbook = new Cookbook(promise[2]['recipeData'], promise[1]['ingredientsData']);
+      console.log(promise[0].length);
+      user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
+      console.log(user);
+      ingredientsData = promise[1];
+      cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
       domUpdates.generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
     })
@@ -66,6 +67,10 @@ function findTags(recipe) {
     return tags.sort();
   });
   domUpdates.listTags()
+}
+
+function getRandomIndex(arr) {
+  return Math.random(Math.floor() * arr.length);
 }
 
 // function capitalize(words) {
@@ -206,4 +211,3 @@ function findRecipesWithCheckedIngredients(selected) {
     }
   })
 }
-
