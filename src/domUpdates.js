@@ -1,4 +1,5 @@
 import Recipe from './recipe';
+import User from './user';
 import tags from './scripts';
 import './images/apple-logo.png';
 import './images/apple-logo-outline.png';
@@ -12,6 +13,7 @@ let main = document.querySelector("main");
 let tagList = document.querySelector(".tag-list");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 
+// i dont think we should have any imports if dom/data separated fully. will cont to work on this....
 
 
 let domUpdates = {
@@ -33,21 +35,7 @@ let domUpdates = {
             welcomeMsg);
     },
 
-    // CREATE RECIPE CARDS
-    createCards(cookbook) {
-        console.log('COOKBOOK', cookbook);
-        cookbook.recipes.forEach(recipe => {
-            let recipes = [];
-            let recipeInfo = new Recipe(recipe);
-            let shortRecipeName = recipeInfo.name;
-            recipes.push(recipeInfo);
-            if (recipeInfo.name.length > 40) {
-                shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
-            }
-            this.addCardsToDom(recipeInfo, shortRecipeName)
-        });
-    },
-
+    // ADD RECIPE CARDS TO DOM
     addCardsToDom(recipeInfo, shortRecipeName) {
         let cardHtml = `
           <div class="recipe-card" id=${recipeInfo.id}>
@@ -81,6 +69,7 @@ let domUpdates = {
     },
 
     showSavedRecipes() {
+        let recipes = user.favoriteRecipes;
         let unsavedRecipes = recipes.filter(recipe => {
             return !user.favoriteRecipes.includes(recipe.id);
         });
@@ -147,8 +136,9 @@ let domUpdates = {
 
     toggleMenu() {
         var menuDropdown = document.querySelector(".drop-menu");
-        menuOpen = !menuOpen;
-        if (menuOpen) {
+        console.log(this); // returns the button el - including this got the menuDropdown functioning
+        this.menuOpen = !this.menuOpen;
+        if (this.menuOpen) {
             menuDropdown.style.display = "block";
         } else {
             menuDropdown.style.display = "none";
@@ -164,24 +154,24 @@ let domUpdates = {
     },
 
     // CREATE AND USE PANTRY
-    findPantryInfo(user, ingredientsData, pantryInfo) {
-        user.pantry.forEach(item => {
-            let itemInfo = ingredientsData.find(ingredient => {
-                return ingredient.id === item.ingredient;
-            });
-            let originalIngredient = pantryInfo.pantryIngredients.find(ingredient => {
-                if (itemInfo) {
-                    return ingredient.name === itemInfo.name;
-                }
-            });
-            if (itemInfo && originalIngredient) {
-                originalIngredient.count += item.amount;
-            } else if (itemInfo) {
-                pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
-            }
-        });
-        this.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
-    },
+    // findPantryInfo(user, ingredientsData, pantryInfo) {
+    //     user.pantry.forEach(item => {
+    //         let itemInfo = ingredientsData.find(ingredient => {
+    //             return ingredient.id === item.ingredient;
+    //         });
+    //         let originalIngredient = pantryInfo.pantryIngredients.find(ingredient => {
+    //             if (itemInfo) {
+    //                 return ingredient.name === itemInfo.name;
+    //             }
+    //         });
+    //         if (itemInfo && originalIngredient) {
+    //             originalIngredient.count += item.amount;
+    //         } else if (itemInfo) {
+    //             pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
+    //         }
+    //     });
+    //     this.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
+    // },
 
     displayPantryInfo(pantry) {
         pantry.forEach(ingredient => {
