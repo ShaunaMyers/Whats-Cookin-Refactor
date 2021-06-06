@@ -15,8 +15,8 @@ let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
-let tags = [];
-export default tags;
+// let tags = [];
+// export default tags;
 
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
@@ -47,12 +47,11 @@ function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
       user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
-      console.log(user);
       ingredientsData = promise[1];
       cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
       generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
-    })  
+    })
 }
 
 function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
@@ -63,19 +62,19 @@ function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
 
 function findPantryInfo(user, ingredientsData, pantryInfo) {
   user.pantry.forEach(item => {
-      let itemInfo = ingredientsData.find(ingredient => {
-          return ingredient.id === item.ingredient;
-      });
-      let originalIngredient = pantryInfo.pantryIngredients.find(ingredient => {
-          if (itemInfo) {
-              return ingredient.name === itemInfo.name;
-          }
-      });
-      if (itemInfo && originalIngredient) {
-          originalIngredient.count += item.amount;
-      } else if (itemInfo) {
-          pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
+    let itemInfo = ingredientsData.find(ingredient => {
+      return ingredient.id === item.ingredient;
+    });
+    let originalIngredient = pantryInfo.pantryIngredients.find(ingredient => {
+      if (itemInfo) {
+        return ingredient.name === itemInfo.name;
       }
+    });
+    if (itemInfo && originalIngredient) {
+      originalIngredient.count += item.amount;
+    } else if (itemInfo) {
+      pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
+    }
   });
   domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
 }
@@ -84,19 +83,20 @@ function findPantryInfo(user, ingredientsData, pantryInfo) {
 function createCards(cookbook) {
   console.log('COOKBOOK', cookbook);
   cookbook.recipes.forEach(recipe => {
-      let recipes = [];
-      let recipeInfo = new Recipe(recipe);
-      let shortRecipeName = recipeInfo.name;
-      recipes.push(recipeInfo);
-      if (recipeInfo.name.length > 40) {
-          shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
-      }
-      domUpdates.addCardsToDom(recipeInfo, shortRecipeName)
+    let recipes = [];
+    let recipeInfo = new Recipe(recipe);
+    let shortRecipeName = recipeInfo.name;
+    recipes.push(recipeInfo);
+    if (recipeInfo.name.length > 40) {
+      shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
+    }
+    domUpdates.addCardsToDom(recipeInfo, shortRecipeName)
   });
 }
 
 // FILTER BY RECIPE TAGS
 function findTags(recipe) {
+  let tags = [];
   cookbook.recipes.forEach(recipe => {
     recipe.tags.forEach(tag => {
       if (!tags.includes(tag)) {
@@ -105,7 +105,7 @@ function findTags(recipe) {
     });
     return tags.sort();
   });
-  domUpdates.listTags()
+  domUpdates.listTags(tags)
 }
 
 // function capitalize(words) {
@@ -126,7 +126,7 @@ function findCheckedBoxes() {
 function findTaggedRecipes(selected) {
   let filteredResults = [];
   selected.forEach(tag => {
-    let allRecipes = recipes.filter(recipe => {
+    let allRecipes = cookbook.recipes.filter(recipe => {
       return recipe.tags.includes(tag.id);
     });
     allRecipes.forEach(recipe => {
@@ -136,14 +136,14 @@ function findTaggedRecipes(selected) {
     })
   });
 
-  domUpdates.showAllRecipes();
+  domUpdates.showAllRecipes(cookbook);
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
   }
 }
 
 function filterRecipes(filtered) {
-  let foundRecipes = recipes.filter(recipe => {
+  let foundRecipes = cookbook.recipes.filter(recipe => {
     return !filtered.includes(recipe);
   });
   domUpdates.hideUnselectedRecipes(foundRecipes)
