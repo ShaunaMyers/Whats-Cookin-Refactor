@@ -28,11 +28,11 @@ let user, cookbook, ingredientsData, pantryInfo;
 
 
 window.addEventListener("load", findTags);
-allRecipesBtn.addEventListener("click", showAllRecipes);
+allRecipesBtn.addEventListener("click", domUpdates.showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
-pantryBtn.addEventListener("click", toggleMenu);
-savedRecipesBtn.addEventListener("click", showSavedRecipes);
+pantryBtn.addEventListener("click", domUpdates.toggleMenu);
+savedRecipesBtn.addEventListener("click", domUpdates.showSavedRecipes);
 searchBtn.addEventListener("click", searchRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
@@ -46,13 +46,12 @@ window.onload = onStartUp()
 function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
+      console.log('PROMISE', promise);
       user = new User(promise[0]['usersData'][(Math.floor(Math.random() * promise[0]['usersData'].length) + 1)]);
-      console.log('USER', user);
       ingredientsData = promise[1]['ingredientsData'];
       cookbook = new Cookbook(promise[2]['recipeData'], promise[1]['ingredientsData']);
       pantryInfo = new Pantry(user.pantry)
       domUpdates.generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
-      // domUpdates.displayRecipeCards(recipeRepository, user, globalIngredientsData);
     })
 }
 
@@ -97,7 +96,7 @@ function findTaggedRecipes(selected) {
     })
   });
 
-  showAllRecipes();
+  domUpdates.showAllRecipes();
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
   }
@@ -107,14 +106,7 @@ function filterRecipes(filtered) {
   let foundRecipes = recipes.filter(recipe => {
     return !filtered.includes(recipe);
   });
-  hideUnselectedRecipes(foundRecipes)
-}
-
-function hideUnselectedRecipes(foundRecipes) {
-  foundRecipes.forEach(recipe => {
-    let domRecipe = document.getElementById(`${recipe.id}`);
-    domRecipe.style.display = "none";
-  });
+  domUpdates.hideUnselectedRecipes(foundRecipes)
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
@@ -146,17 +138,6 @@ function isDescendant(parent, child) {
   return false;
 }
 
-function showSavedRecipes() {
-  let unsavedRecipes = recipes.filter(recipe => {
-    return !user.favoriteRecipes.includes(recipe.id);
-  });
-  unsavedRecipes.forEach(recipe => {
-    let domRecipe = document.getElementById(`${recipe.id}`);
-    domRecipe.style.display = "none";
-  });
-  showMyRecipesBanner();
-}
-
 // CREATE RECIPE INSTRUCTIONS
 
 function openRecipeModal(event) {
@@ -169,26 +150,15 @@ function openRecipeModal(event) {
   domUpdates.openRecipeInfo();
 }
 
-
-// TOGGLE DISPLAYS
-function showMyRecipesBanner() {
-  document.querySelector(".welcome-msg").style.display = "none";
-  document.querySelector(".my-recipes-banner").style.display = "block";
-}
-
-function showWelcomeBanner() {
-  document.querySelector(".welcome-msg").style.display = "flex";
-  document.querySelector(".my-recipes-banner").style.display = "none";
-}
-
 // SEARCH RECIPES
+
 function pressEnterSearch(event) {
   event.preventDefault();
   searchRecipes();
 }
 
 function searchRecipes() {
-  showAllRecipes();
+  domUpdates.showAllRecipes();
   let searchedRecipes = cookbook.recipes.filter(recipe => {
     return recipe.name.toLowerCase().includes(searchInput.value.toLowerCase());
   });
@@ -208,31 +178,13 @@ function createRecipeObject(recipes) {
   return recipes
 }
 
-function toggleMenu() {
-  var menuDropdown = document.querySelector(".drop-menu");
-  menuOpen = !menuOpen;
-  if (menuOpen) {
-    menuDropdown.style.display = "block";
-  } else {
-    menuDropdown.style.display = "none";
-  }
-}
-
-function showAllRecipes() {
-  recipes.forEach(recipe => {
-    let domRecipe = document.getElementById(`${recipe.id}`);
-    domRecipe.style.display = "block";
-  });
-  showWelcomeBanner();
-}
-
 function findCheckedPantryBoxes() {
   let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
   let pantryCheckboxInfo = Array.from(pantryCheckboxes)
   let selectedIngredients = pantryCheckboxInfo.filter(box => {
     return box.checked;
   })
-  showAllRecipes();
+  domUpdates.showAllRecipes();
   if (selectedIngredients.length > 0) {
     findRecipesWithCheckedIngredients(selectedIngredients);
   }
