@@ -1,7 +1,7 @@
 body {
-  background-color: #5B7894;
+  // background-color: #5B7894;
   display: grid;
-  font-family: "Quicksand", sans-serif;
+  // font-family: "Quicksand", sans-serif;
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
     "header header"
@@ -15,7 +15,7 @@ body {
 
 h1 {
   align-self: center;
-  color: white;
+  // color: white;
   font-family: "Sulphur Point", sans-serif;
   font-size: 50px;
   margin: 0%;
@@ -38,7 +38,7 @@ h3 {
 
 h4 {
   color: #359567;
-  background-color: #C4EB67;
+  // background-color: #C4EB67;
   border-radius: 3px;
   margin: 10px 0px 0px 0px;
   padding: 1px 4px 1px 4px;
@@ -56,7 +56,7 @@ header {
 }
 
 span {
-  color: #C4EB67;
+  // color: #C4EB67;
   font-weight: 400;
 }
 
@@ -72,8 +72,6 @@ span {
   box-shadow: 0px 0px 7px 0px #475d74;
   display: flex;
   flex-direction: row;
-  font-family: "Quicksand", sans-serif;
-  justify-content: center;
   margin: 1.2% 0.5% 1.2% 0%;
   width: 100%;
 }
@@ -135,7 +133,7 @@ span {
   flex-direction: column;
   font-size: 0px;
   font-weight: 700;
-  justify-content: center;
+  // justify-content: center;
   margin: 0%;
   outline: none;
   overflow: hidden;
@@ -145,7 +143,7 @@ span {
 }
 
 .nav-btn:hover {
-  color: #C4EB67;
+  // color: #C4EB67;
   font-size: 14px;
   text-shadow: 0px 2px 4px black;
   transition: .4s ease;
@@ -200,15 +198,15 @@ span {
 
 /* FILTER SIDEBAR */
 aside {
-  background-color: white;
+  // background-color: white;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   height: auto;
   text-align: center;
 }
 
 .wrap {
-  background-color: white;
+  // background-color: white;
   height: 100vh;
   padding: 10px;
   position: relative;
@@ -230,14 +228,14 @@ li {
 main {
   grid-area: main;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 .recipe-card {
-  background-color: white;
+  // background-color: white;
   border: 2px solid #C4EB67;
   border-radius: 7px;
   cursor: pointer;
@@ -247,13 +245,8 @@ main {
   width: 250px;
 }
 
-.recipe-card:hover .card-photo-preview {
-  opacity: 50%;
-  transition: .8s ease;
-}
-
 .recipe-card:hover .text {
-  font-size: 20px;
+  // font-size: 20px;
   opacity: 100%;
   transition: .5s ease;
   width: 100%;
@@ -287,7 +280,7 @@ main {
   align-items: center;
   display: flex;
   height: 130px;
-  justify-content: center;
+  // justify-content: center;
   position: relative;
 }
 
@@ -387,7 +380,7 @@ main {
   border-radius: 5px;
   color: #359567;
   cursor: pointer;
-  font-size: 20px;
+  // font-size: 20px;
   font-weight: 700;
   margin: -4% -3% 2% -1%;
   position: fixed;

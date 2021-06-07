@@ -1,6 +1,94 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
+
+// variables
+$primary-background: #5B7894;
+$hover-color: #C4EB67;
+$body-font: "Quicksand", sans-serif;
+$secondary-background-color: white;
+$recipe-modal-font-size: 20px;
+
+// @mixins
+@mixin centerContent() {
+  justify-content: center
+}
+
+@mixin opacityTransition() {
+  opacity: 50%;
+  transition: .8s ease;
+}
+
+// @mixin giveWidth(num) {
+//   width: num
+// }
 
 body {
   background-color: $primary-background;
+  font-family: $body-font;
 }
+
+h1 {
+  color: $secondary-background-color;
+}
+
+h4 {
+  background-color: $hover-color;
+}
+
+.nav-btn {
+  background-color: $primary-background;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+span {
+  color: $hover-color;
+}
+
+aside {
+  @include centerContent();
+  background-color: $secondary-background-color;
+}
+
+main {
+  @include centerContent();
+}
+
+.wrap {
+  background-color: $secondary-background-color;
+}
+
+.card-photo-container {
+  @include centerContent();
+}
+
+.card-photo-preview {
+  @include opacityTransition();
+}
+
+.nav-btn {
+  @include centerContent();
+}
+
+#search {
+  @include centerContent();
+  font-family: $body-font;
+}
+
+.recipe-card {
+  background-color: $secondary-background-color;
+
+  &:hover {
+    @include opacityTransition();
+    font-size: $recipe-modal-font-size
+  }
+}
+
+#exit-recipe-btn {
+  font-size: $recipe-modal-font-size;
+}
+
+
+
+
