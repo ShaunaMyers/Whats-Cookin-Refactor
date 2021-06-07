@@ -24,7 +24,9 @@ let user, cookbook, ingredientsData, pantryInfo;
 
 
 window.addEventListener("load", findTags);
-allRecipesBtn.addEventListener("click", domUpdates.showAllRecipes);
+allRecipesBtn.addEventListener("click", function () {
+  domUpdates.showAllRecipes(cookbook);
+});
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 pantryBtn.addEventListener("click", domUpdates.toggleMenu);
@@ -232,7 +234,6 @@ function findRecipesWithCheckedIngredients(ingredientIds) {
       domRecipesCollection.push(recipe);
     }
   })
-  console.log(domRecipesCollection);
   domUpdates.createCards(domRecipesCollection);
 }
 
