@@ -7,7 +7,6 @@ $tertiary-color-text: #84C8A4;
 $quaternary-color: #C4EB67;
 $secondary-color: #359567;
 $body-font: "Quicksand", sans-serif;
-$primary-font-size: 20px;
 $full-width: 100%;
 $nope: none;
 
@@ -18,45 +17,50 @@ $nope: none;
   justify-content: center
 }
 
-@mixin setOpacity($perc) {
-  opacity: $perc;
-}
-
-@mixin setTransition($sec, $type) {
-  transition: $sec $type;
-}
-
 @mixin display($type) {
   display: $type;
-}
-
-@mixin giveWidth($width) {
-  width: $width;
 }
 
 @mixin giveFontSize($size) {
   font-size: $size;
 }
 
+@mixin giveWidth($width) {
+  width: $width;
+}
+
 @mixin setCursorStyle($style) {
   cursor: $style;
+}
+
+@mixin setFlexDirection($dir) {
+  flex-direction: $dir;
+}
+
+@mixin setOpacity($perc) {
+  opacity: $perc;
 }
 
 @mixin setPosition($pos) {
   position: $pos;
 }
 
-@mixin setNavBtnImgPadding {
-  max-height: 40px;
-  max-width: 40px;
-  padding: 2px 0px;
+@mixin setTransition($sec, $type) {
+  transition: $sec $type;
 }
 
 @mixin setZIndex($num) {
   z-index: $num;
 }
 
-// SELECTORS
+//REFACTOR THESE!!!
+@mixin setNavBtnImgPadding {
+  max-height: 40px;
+  max-width: 40px;
+  padding: 2px 0px;
+}
+
+// SELECTOR STYLES
 
 body {
   @include display(grid);
@@ -65,6 +69,7 @@ body {
 }
 
 h1 {
+  @include giveFontSize(50px);
   color: $secondary-background-color;
 
 }
@@ -74,6 +79,8 @@ h2 {
 }
 
 h3 {
+  @include setCursorStyle(pointer);
+  @include setTransition(.8s, ease);
   color: $tertiary-color-text;
 }
 
@@ -85,24 +92,28 @@ h4 {
 .nav-btn {
   @include centerContent();
   @include display(flex);
+  @include giveFontSize(0px);
   @include setNavBtnImgPadding();
   @include setCursorStyle(pointer);
   @include setTransition(.4s, ease);
   background-color: $primary-background no-repeat;
 
+  &:hover {
+    @include giveFontSize(14px);
+    @include setTransition(.4s, ease);
+    background-color: $quaternary-color;
+  }
+
   img {
     @include setNavBtnImgPadding();
   }
   
-  &:hover {
-    @include setTransition(.4s, ease);
-    background-color: $quaternary-color;
-  }
 }
 
 header {
   @include giveWidth($full-width);
   @include display(flex);
+  @include setFlexDirection(row);
 }
 
 span {
@@ -118,6 +129,7 @@ aside {
 main {
   @include centerContent();
   @include display(flex);
+  @include setFlexDirection(row)
 }
 
 .wrap {
@@ -144,28 +156,42 @@ main {
 
 #search {
   @include centerContent();
+  @include display(flex);
   @include giveWidth($full-width);
   @include giveFontSize($body-font);
-  @include display(flex);
+  @include setFlexDirection(row);
   border: 3px outset $quaternary-color;
 }
 
 #search-input {
+  @include giveFontSize(42px);
   @include giveWidth($full-width);
+  @include setTransition(.8s, ease);
   color: $primary-background;
   font-family: $body-font;
+
+  &:hover {
+    @include setTransition(.8s, ease);
+    box-shadow: inset 0px 0px 0px 0px $secondary-background-color;
+  }
+
+  &:focus {
+    box-shadow: inset 0px 0px 0px 0px $secondary-background-color;
+  }
   
   &::placeholder {
     color: $primary-background;
-    @include giveFontSize($primary-font-size);
+    @include giveFontSize(20px);
 
     &:focus::placeholder {
+      @include giveFontSize(0px);
       @include setTransition(.8s, ease);
     }
   }
 }
 
 .show-all-btn {
+  @include giveFontSize(12pt);
   @include setCursorStyle(pointer);
   background-color: $quaternary-color;
 }
@@ -179,19 +205,26 @@ main {
 }
 
 .filter-btn {
+  @include giveFontSize(12pt);
   @include setCursorStyle(pointer);
   background-color: $tertiary-color-text;
+
   &:hover {
     background-color: $tertiary-color-text;
   }
 }
 
 .text {
+  @include giveFontSize(0px);
+  @include setOpacity(0%);
   @include setPosition(absolute);
+  @include setTransition(.5s, ease);
   background: $secondary-color;
+  color: $secondary-background-color;
 }
 
 .show-pantry-recipes-btn {
+  @include giveFontSize(12pt);
   @include setCursorStyle(pointer);
   font-family: $body-font;
 }
@@ -215,7 +248,7 @@ main {
   &:hover {
     @include setOpacity(100%);
     @include setTransition(.8s, ease);
-    @include giveFontSize($primary-font-size);
+    @include giveFontSize(20px);
     text-shadow: 0px 0px 4px #C4EB67;
     transition: .8s ease;
     
@@ -229,6 +262,14 @@ main {
       transition: .8s ease;
     }
   }
+}
+
+#recipe-title {
+  @include giveFontSize(30px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 7px 7px 0px 0px;
+  color: $secondary-background-color;
 }
 
 .recipe-instructions {
@@ -245,11 +286,19 @@ main {
 }
 
 #exit-recipe-btn {
-  @include giveFontSize($primary-font-size);
+  @include giveFontSize(20px);
+  @include setCursorStyle(pointer);
   @include setPosition(fixed);
+  @include setTransition(.3s, ease);
   background: $secondary-background-color;
   color: $secondary-color;
   border: 2px double $secondary-color;
+
+  &:hover {
+    @include setTransition(.3s, ease);
+    background: $quaternary-color;
+  }
+
 }
 
 .saved-ingredients-btn {
@@ -283,8 +332,10 @@ main {
 
 #overlay {
   @include giveWidth($full-width);
+  @include setOpacity(0.5);
   @include setPosition(fixed);
   @include setZIndex(100);
+  filter:alpha(opacity=50);
   background-color: $primary-background;
 }
 
