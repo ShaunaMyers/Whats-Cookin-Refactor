@@ -201,17 +201,15 @@ function findCheckedPantryBoxes() {
   })
   domUpdates.showAllRecipes(cookbook);
   if (selectedIngredients.length > 0) {
-    findRecipesWithCheckedIngredients(selectedIngredients);
+    findIdsOfCheckedIngredients(selectedIngredients);
   }
 }
 
-function findRecipesWithCheckedIngredients(selected) {
-  let recipeChecker = (recipeIngredientIds, selectedIds) => selectedIds.every(id => recipeIngredientIds.includes(id));
+function findIdsOfCheckedIngredients(selected) {
   let ingredientHTMLIds = selected.map(item => {
     return item.id;
   })
 
-  let domRecipesCollection = []
   let ingredientIds = [];
 
   ingredientsData.forEach(item => {
@@ -219,7 +217,11 @@ function findRecipesWithCheckedIngredients(selected) {
       ingredientIds.push(item.id)
     }
   })
+  findRecipesWithCheckedIngredients(ingredientIds)
+}
 
+function findRecipesWithCheckedIngredients(ingredientIds) {
+  let domRecipesCollection = []
   cookbook.recipes.forEach(recipe => {
 
     let recipeIngredientIds = recipe.ingredients.map(ingredient => {
@@ -227,14 +229,13 @@ function findRecipesWithCheckedIngredients(selected) {
     })
 
     if (recipeChecker(recipeIngredientIds, ingredientIds)) {
-      // let domRecipe = document.getElementById(`${recipe.id}`);
       domRecipesCollection.push(recipe);
-      // domRecipe.style.display = "block";
     }
   })
-
-
-
-  console.log("recipe collection", domRecipesCollection);
+  console.log(domRecipesCollection);
   domUpdates.createCards(domRecipesCollection);
+}
+
+function recipeChecker(recipeIngredientIds, selectedIds) {
+  return selectedIds.every(id => recipeIngredientIds.includes(id));
 }
