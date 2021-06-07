@@ -7,8 +7,6 @@ class Cookbook {
   }
 
   filterByTags(tags) {
-    console.log(tags);
-
     let filteredResults = [];
     tags.forEach(tag => {
       let allRecipes = this.recipes.filter(recipe => {
@@ -21,25 +19,14 @@ class Cookbook {
       })
     })
     return filteredResults;
-    // const newFilterTags = typeof tags === "string" ? [tags] : tags;
-    // let filteredRecipes = [];
-    // newFilterTags.forEach(tag => {
-    //   this.recipes.forEach(recipe => {
-    //     if (recipe.tags.includes(tag)) {
-    //       filteredRecipes.push(recipe)
-    //     }
-    //   });
-    // });
-
-    // return [...new Set(filteredRecipes)];
   }
+
 
   searchForRecipe(searchText, ingredientsData) {
     let newSearchText = searchText.toLowerCase();
     let foundIngredientIds = [];
 
     ingredientsData.forEach(ingredient => {
-      // let splitName = ingredient.name.split(' ');
       if (ingredient.name) {
         if (ingredient.name.split(' ').includes(newSearchText)) {
           foundIngredientIds.push(ingredient.id)
@@ -47,6 +34,11 @@ class Cookbook {
       }
     })
 
+    return this.checkRecipeData(newSearchText, foundIngredientIds)
+  }
+
+
+  checkRecipeData(newSearchText, foundIngredientIds) {
     let foundRecipes = []
 
     this.recipes.forEach(recipe => {
@@ -62,8 +54,6 @@ class Cookbook {
         }
       })
     })
-
-    console.log("FOUND RECIPES", foundRecipes);
     return foundRecipes;
   }
 }
