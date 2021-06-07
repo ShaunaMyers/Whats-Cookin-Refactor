@@ -84,9 +84,9 @@ $nope: none;
 
 // //REFACTOR THESE!!!
 @mixin setNavBtnImgPadding {
-  max-height: 40px;
-  max-width: 40px;
-  padding: 2px 0px;
+  // max-height: 40px;
+  // max-width: 40px;
+  // padding: 2px 0px;
 }
 
 // SELECTOR STYLES
@@ -293,6 +293,39 @@ aside {
   color: $secondary-background;
 }
 
+.ing-pan-btn {
+  @include setPadding(1px 6px 5px 0px);
+  @include setMargin(1% 0%)
+}
+
+.banner-image {
+  @include giveWidth($full-width);
+  @include indicateGridArea(image);
+}
+
+.my-recipes-banner {
+  @include alignText(center);
+  @include justifyContent(center);
+  @include display(none);
+  @include giveWidth(95%);
+  @include setMargin(25px);
+  color: $secondary-background;
+
+  h1 {
+    @include giveFontSize($full-width);
+    @include giveWidth($full-width);
+    color: $secondary-background;
+  }
+
+  .welcome-msg {
+    @include alignText(center);
+    @include justifyContent(center);
+    @include giveWidth(95%);
+    @include setMargin(50px);
+    color: $secondary-background;
+  }
+}
+
 
 // PANTRY STUFF
 .show-pantry-recipes-btn {
@@ -400,38 +433,6 @@ main {
   @include setMargin(1% 0%);
   border-left: 3px solid $quaternary-color;
 }
-
-.ing-pan-btn {
-  @include setPadding(1px 6px 5px 0px);
-}
-
-.banner-image {
-  @include giveWidth($full-width);
-  @include indicateGridArea(image);
-}
-
-.my-recipes-banner {
-  @include alignText(center);
-  @include display(none);
-  @include giveWidth(95%);
-  @include setMargin(25px);
-  color: $secondary-background;
-
-  h1 {
-    @include giveFontSize($full-width);
-    @include giveWidth($full-width);
-    color: $secondary-background;
-  }
-
-  .welcome-msg {
-    @include alignText(center);
-    @include justifyContent(center);
-    @include giveWidth(95%);
-    @include setMargin(50px);
-    color: $secondary-background;
-  }
-}
-
 
 #overlay {
   @include giveWidth($full-width);
