@@ -84,18 +84,20 @@ function findPantryInfo(user, ingredientsData, pantryInfo) {
   domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
-function captureInputValue() {
-  let pantryInput = document.getElementById("pantryInput").value;
-  return pantryInput;
-}
+// function captureInputValue() {
+//   let pantryInput = document.getElementById("pantryInput").value;
+//   return pantryInput;
+// }
 
 function addIngToPantry(event) {
   event.preventDefault();
-  let ingToAdd = captureInputValue();
   console.log(user);
-  console.log(user.pantry);
+  let ingToAdd = domUpdates.captureInputValue();
+  // console.log(user.pantry)
   user.pantry.push(ingToAdd);
-  console.log(user.pantry);
+  // console.log(user.pantry)
+  domUpdates.clearPantryInput();
+  domUpdates.displayPantryInfo();
 }
 
 // FILTER BY RECIPE TAGS

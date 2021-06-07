@@ -257,6 +257,7 @@ let domUpdates = {
     },
 
     displayPantryInfo(pantry) {
+        // pantry = user.pantry;
         pantry.forEach(ingredient => {
             let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
             <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
@@ -265,12 +266,14 @@ let domUpdates = {
         });
     },
 
-    // captureInputValue() {
-    //     console.log(pantryInput.value);
-    //     let ingToAdd = pantryInput.value;
-    //     console.log(ingToAdd);
-    // },
+    captureInputValue() {
+        let pantryInput = document.getElementById("pantryInput").value;
+        return pantryInput;
+    },
 
+    clearPantryInput() {
+        document.getElementById("pantryInput").value = '';  
+    },
 
     findCheckedPantryBoxes() {
         let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
