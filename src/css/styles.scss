@@ -180,11 +180,11 @@ span {
   width: 95%;
 }
 
-.my-recipes-banner h1,
-.welcome-msg h1 {
-  color: white;
-  // width: 100%;
-}
+// .my-recipes-banner h1,
+// .welcome-msg h1 {
+//   color: white;
+//   // width: 100%;
+// }
 
 .my-recipes-banner {
   display: none;
@@ -258,7 +258,7 @@ main {
 }
 
 .card-apple-icon {
-  cursor: pointer;
+  // cursor: pointer;
   float: right;
   height: 50px;
   padding-bottom: 10px;
@@ -278,7 +278,7 @@ main {
   display: flex;
   height: 130px;
   // justify-content: center;
-  position: relative;
+  // position: relative;
 }
 
 .text {
@@ -288,7 +288,7 @@ main {
   font-size: 0px;
   opacity: 0%;
   padding: 0%;
-  position: absolute;
+  // position: absolute;
   text-align: center;
   width: 0%;
   transition: .5s ease;
@@ -304,7 +304,7 @@ main {
   border-radius: 3px;
   color: white;
   // cursor: pointer;
-  font-family: "Quicksand", sans-serif;
+  // font-family: "Quicksand", sans-serif;
   font-size: 12pt;
   font-weight: bold;
   padding: 5px 10px 5px 10px;
@@ -355,7 +355,7 @@ main {
 
 /* RECIPE INSTRUCTIONS */
 .recipe-instructions {
-  background: white;
+  // background: white;
   border: 3px solid #C4EB67;
   border-radius: 10px;
   box-shadow: 1px 1px 115px black;
@@ -364,7 +364,7 @@ main {
   margin: 0;
   overflow-x: scroll;
   padding: 1% 1% 1% 1%;
-  position: fixed;
+  // position: fixed;
   right: 15%;
   top: 15%;
   width: 70%;
@@ -380,7 +380,7 @@ main {
   // font-size: 20px;
   font-weight: 700;
   margin: -4% -3% 2% -1%;
-  position: fixed;
+  // position: fixed;
   transition: .3s ease;
 }
 
@@ -401,10 +401,10 @@ main {
   text-shadow: 0px 0px 6px black;
 }
 
-.recipe-instructions h4 {
-  background: white;
-  color: #359567;
-}
+// .recipe-instructions h4 {
+//   // background: white;
+//   // color: #359567;
+// }
 
 .recipe-instructions p {
   margin-left: 2%;
@@ -420,7 +420,7 @@ main {
   height:100%;
   left:0;
   opacity:0.5;
-  position:fixed;
+  // position: fixed;
   top:0;
   // width:100%;
   z-index:100;

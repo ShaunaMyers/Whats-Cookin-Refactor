@@ -32,7 +32,11 @@ $full-width: 100%;
   cursor: $style;
 }
 
+@mixin setPosition($pos) {
+  position: $pos;
+}
 
+// SELECTORS
 
 body {
   background-color: $primary-background;
@@ -93,9 +97,14 @@ main {
   background-color: $secondary-background-color;
 }
 
+.card-apple-icon {
+  @include setCursorStyle(pointer);
+}
+
 .card-photo-container {
   @include centerContent();
   @include setCursorStyle(pointer)
+  @include setPosition(relative);
   .card-photo-preview {
     @include opacityTransition();
     @include giveWidth($full-width);
@@ -136,11 +145,13 @@ main {
 }
 
 .text {
+  @include setPosition(absolute);
   background: $secondary-color;
 }
 
 .show-pantry-recipes-btn {
   @include setCursorStyle(pointer);
+  font-family: $body-font;
 }
 
 .recipe-card {
@@ -152,8 +163,19 @@ main {
   }
 }
 
+.recipe-instructions {
+  @include setPosition(fixed);
+  background: $secondary-background-color;
+  color: $secondary-color;
+  h4 {
+    background: $secondary-background-color;
+    color: $secondary-color;
+  }
+}
+
 #exit-recipe-btn {
   @include giveFontSize($primary-font-size);
+  @include setPosition(fixed);
   background: $secondary-background-color;
   color: $secondary-color;
   border: 2px double $secondary-color;
@@ -169,20 +191,25 @@ main {
 
 .my-recipes-banner {
   @include giveWidth($full-width);
+  color: $secondary-background-color;
   h1 {
     @include giveWidth($full-width);
+    color: $secondary-background-color;
   }
 }
 
 .welcome-msg {
   @include giveWidth($full-width);
+  color: $secondary-background-color;
   h1 {
     @include giveFontSize($full-width);
+    color: $secondary-background-color;
   }
 }
 
 #overlay {
   @include giveWidth($full-width);
+  @include setPosition(fixed);
   background-color: $primary-background;
 }
 
