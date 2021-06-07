@@ -1,11 +1,11 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 // // variables
+$body-font: "Quicksand", sans-serif;
 $primary-background: #5B7894;
-$secondary-background-color: white;
-$tertiary-color-text: #84C8A4;
+$secondary-background: white;
 $quaternary-color: #C4EB67;
 $secondary-color: #359567;
-$body-font: "Quicksand", sans-serif;
+$tertiary-color: #84C8A4;
 $full-width: 100%;
 $nope: none;
 
@@ -103,20 +103,20 @@ h1 {
   @include giveFontSize(50px);
   @include setMargin(0%);
   @include setPadding(0.5% 0.7% 0%)
-  color: $secondary-background-color;
+  color: $secondary-background;
 
 }
 
 h2 {
   @include setMargin(10px 0px 10px 0px)
-  color: $tertiary-color-text;
+  color: $tertiary-color;
 }
 
 h3 {
   @include setCursorStyle(pointer);
   @include setMargin(5px 5px 10px 0px);
   @include setTransition(.8s, ease);
-  color: $tertiary-color-text;
+  color: $tertiary-color;
 }
 
 h4 {
@@ -174,12 +174,12 @@ aside {
   @include alignText(center);
   @include justifyContent(center);
   @include display(flex);
-  background-color: $secondary-background-color;
+  background-color: $secondary-background;
 }
 
 .wrap {
   @include setPosition(relative);
-  background-color: $secondary-background-color;
+  background-color: $secondary-background;
 }
 
 .card-apple-icon {
@@ -229,11 +229,11 @@ aside {
 
   &:hover {
     @include setTransition(.8s, ease);
-    box-shadow: inset 0px 0px 0px 0px $secondary-background-color;
+    box-shadow: inset 0px 0px 0px 0px $secondary-background;
   }
 
   &:focus {
-    box-shadow: inset 0px 0px 0px 0px $secondary-background-color;
+    box-shadow: inset 0px 0px 0px 0px $secondary-background;
   }
   
   &::placeholder {
@@ -252,6 +252,7 @@ aside {
 .show-all-btn {
   @include addBorderRadius(3px);
   @include giveFontSize(12pt);
+  @include setMargin(20px 0 0 0);
   @include setPadding(5px 10px 5px 10px);
   @include setCursorStyle(pointer);
   background-color: $quaternary-color;
@@ -265,7 +266,7 @@ aside {
 .search-btn {
   @include addBorderRadius(0px 15px 15px 0px);
   @include setPadding(1%);
-  border-left: 3px outset $secondary-background-color;
+  border-left: 3px outset $secondary-background;
 }
 
 .filter-btn {
@@ -273,12 +274,12 @@ aside {
   @include giveFontSize(12pt);
   @include setPadding(5px 10px 5px 10px);
   @include setCursorStyle(pointer);
-  background-color: $tertiary-color-text;
-  color: $secondary-background-color;
+  background-color: $tertiary-color;
+  color: $secondary-background;
   font-family: $body-font;
 
   &:hover {
-    background-color: $tertiary-color-text;
+    background-color: $tertiary-color;
   }
 }
 
@@ -289,7 +290,7 @@ aside {
   @include setPosition(absolute);
   @include setTransition(.5s, ease);
   background: $secondary-color;
-  color: $secondary-background-color;
+  color: $secondary-background;
 }
 
 
@@ -297,6 +298,7 @@ aside {
 .show-pantry-recipes-btn {
   @include addBorderRadius(3px);
   @include giveFontSize(12pt);
+  @include setMargin(10px 0 0 0 );
   @include setPadding(5px 10px 5px 10px);
   @include setCursorStyle(pointer);
   font-family: $body-font;
@@ -331,7 +333,7 @@ main {
   @include setMargin(20px);
   @include setPadding(15px);
   @include setPosition(pointer);
-  background-color: $secondary-background-color;
+  background-color: $secondary-background;
   
   &:hover {
     @include setOpacity(100%);
@@ -359,7 +361,7 @@ main {
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 7px 7px 0px 0px;
-  color: $secondary-background-color;
+  color: $secondary-background;
 }
 
 .recipe-instructions {
@@ -368,11 +370,11 @@ main {
   @include setPadding(1% 1% 1% 1%);
   @include setPosition(fixed);
   @include setZIndex(1000);
-  background: $secondary-background-color;
+  background: $secondary-background;
   color: $secondary-color;
 
   h4 {
-    background: $secondary-background-color;
+    background: $secondary-background;
     color: $secondary-color;
   }
 }
@@ -383,7 +385,7 @@ main {
   @include setCursorStyle(pointer);
   @include setPosition(fixed);
   @include setTransition(.3s, ease);
-  background: $secondary-background-color;
+  background: $secondary-background;
   color: $secondary-color;
   border: 2px double $secondary-color;
 
@@ -413,12 +415,12 @@ main {
   @include display(none);
   @include giveWidth(95%);
   @include setMargin(25px);
-  color: $secondary-background-color;
+  color: $secondary-background;
 
   h1 {
     @include giveFontSize($full-width);
     @include giveWidth($full-width);
-    color: $secondary-background-color;
+    color: $secondary-background;
   }
 
   .welcome-msg {
@@ -426,7 +428,7 @@ main {
     @include justifyContent(center);
     @include giveWidth(95%);
     @include setMargin(50px);
-    color: $secondary-background-color;
+    color: $secondary-background;
   }
 }
 
