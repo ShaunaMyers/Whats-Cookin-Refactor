@@ -69,9 +69,8 @@ let domUpdates = {
     // FILTER BY RECIPE TAGS
     listTags(tags) {
         tags.forEach(tag => {
-            let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
-            <label for="${tag}">${tag}</label></li>`;
-            tagList.insertAdjacentHTML("beforeend", tagHtml);
+            tagList.insertAdjacentHTML("beforeend", `<li><input type="checkbox" class="checked-tag" id="${tag}">
+            <label for="${tag}">${tag}</label></li>`);
         });
     },
 
