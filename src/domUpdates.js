@@ -8,10 +8,11 @@ import './images/search.png';
 import './images/seasoning.png';
 import './images/pancakes.jpg';
 
+let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let menuOpen = false;
+// let pantryInput = document.querySelector("pantry-input");
 let tagList = document.querySelector(".tag-list");
-let fullRecipeInfo = document.querySelector(".recipe-instructions");
 
 // import tags from './scripts';
 
@@ -263,6 +264,12 @@ let domUpdates = {
                 ingredientHtml);
         });
     },
+
+    // captureInputValue() {
+    //     console.log(pantryInput.value);
+    //     let ingToAdd = pantryInput.value;
+    //     console.log(ingToAdd);
+    // },
 
 
     findCheckedPantryBoxes() {

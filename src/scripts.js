@@ -9,13 +9,13 @@ import Cookbook from './Cookbook';
 import domUpdates from './domUpdates';
 import Pantry from './Pantry';
 
-let addIngredientBtn = document.querySelector(".add-ingredient");
+let addIngredientBtn = document.querySelector(".add-ing-btn");
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let pantryBtn = document.querySelector(".my-pantry-btn");
-
+// let pantryInput = document.querySelector("pantry-input");
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
@@ -24,8 +24,12 @@ let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let user, cookbook, ingredientsData, pantryInfo;
 
 
+//need to move to domUpdates
+// let pantryInput = document.querySelector("pantry-input");
+
+
 window.addEventListener("load", findTags);
-add 
+addIngredientBtn.addEventListener("click", addIngToPantry)
 allRecipesBtn.addEventListener("click", domUpdates.showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
@@ -78,6 +82,20 @@ function findPantryInfo(user, ingredientsData, pantryInfo) {
     }
   });
   domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
+}
+
+function captureInputValue() {
+  let pantryInput = document.getElementById("pantryInput").value;
+  return pantryInput;
+}
+
+function addIngToPantry(event) {
+  event.preventDefault();
+  let ingToAdd = captureInputValue();
+  console.log(user);
+  console.log(user.pantry);
+  user.pantry.push(ingToAdd);
+  console.log(user.pantry);
 }
 
 // FILTER BY RECIPE TAGS
