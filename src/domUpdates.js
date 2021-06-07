@@ -74,16 +74,6 @@ let domUpdates = {
         });
     },
 
-    findCheckedBoxes() {
-        let tagCheckboxes = document.querySelectorAll(".checked-tag");
-        let checkboxInfo = Array.from(tagCheckboxes)
-        console.log(checkBoxInfo);
-        let selectedTags = checkboxInfo.filter(box => {
-            return box.checked;
-        })
-        findTaggedRecipes(selectedTags);
-    },
-
     findTaggedRecipes(selected) {
         let filteredResults = [];
         selected.forEach(tag => {

@@ -114,10 +114,10 @@ function findTags(recipe) {
 //   }).join(" ");
 // }
 
+
 function findCheckedBoxes() {
-  let tagCheckboxes = document.querySelectorAll(".checked-tag");
-  let checkboxInfo = Array.from(tagCheckboxes)
-  let selectedTags = checkboxInfo.filter(box => {
+  let tagCheckboxes = Array.from(document.querySelectorAll(".checked-tag"));
+  let selectedTags = tagCheckboxes.filter(box => {
     return box.checked;
   })
   findTaggedRecipes(selectedTags);
@@ -161,7 +161,7 @@ function addToMyRecipes(event) {
       user.removeRecipe(cardId);
     }
   } else if (event.target.id === "exit-recipe-btn") {
-    exitRecipe();
+    domUpdates.exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeModal(event);
   }
