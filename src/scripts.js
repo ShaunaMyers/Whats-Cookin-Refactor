@@ -44,6 +44,7 @@ window.onload = onStartUp()
 function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
+      console.log(promise)
       user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
       ingredientsData = promise[1];
       cookbook = new Cookbook(promise[2], promise[1]);
