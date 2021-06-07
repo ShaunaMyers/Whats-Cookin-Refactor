@@ -84,9 +84,9 @@ $nope: none;
 
 // //REFACTOR THESE!!!
 @mixin setNavBtnImgPadding {
-  max-height: 40px;
-  max-width: 40px;
-  padding: 2px 0px;
+  // max-height: 40px;
+  // max-width: 40px;
+  // padding: 2px 0px;
 }
 
 // SELECTOR STYLES
@@ -178,12 +178,19 @@ aside {
 }
 
 .wrap {
+  @include setPadding(10px);
   @include setPosition(relative);
   background-color: $secondary-background;
 }
 
+ul {
+  list-style-type: $nope;
+  text-align: left;
+  @include setPadding(0 0 0 35px);
+}
+
 .card-apple-icon {
-  @include setPadding(0 0 10px);
+  @include setPadding(0 0 10px 0);
   @include setCursorStyle(pointer);
 }
 
@@ -215,6 +222,7 @@ aside {
   @include setFlexDirection(row);
   @include setMargin(1.2% 0.5% 1.2% 0%);
   border: 3px outset $quaternary-color;
+  box-shadow: 0px 0px 7px 0px #475d74;
 }
 
 #search-input {
@@ -287,10 +295,44 @@ aside {
   @include alignText(center);
   @include giveFontSize(0px);
   @include setOpacity(0%);
+  @include setPadding(0%);
   @include setPosition(absolute);
   @include setTransition(.5s, ease);
   background: $secondary-color;
   color: $secondary-background;
+}
+
+.ing-pan-btn {
+  @include setPadding(1px 6px 5px 0px);
+  @include setMargin(1% 0%)
+}
+
+.banner-image {
+  @include giveWidth($full-width);
+  @include indicateGridArea(image);
+}
+
+.my-recipes-banner {
+  @include alignText(center);
+  @include justifyContent(center);
+  @include display(none);
+  @include giveWidth(95%);
+  @include setMargin(25px);
+  color: $secondary-background;
+
+  h1 {
+    @include giveFontSize($full-width);
+    @include giveWidth($full-width);
+    color: $secondary-background;
+  }
+
+  .welcome-msg {
+    @include alignText(center);
+    @include justifyContent(center);
+    @include giveWidth(95%);
+    @include setMargin(50px);
+    color: $secondary-background;
+  }
 }
 
 
@@ -308,6 +350,7 @@ aside {
   @include alignItems(center);
   @include alignText(center);
   @include display(none);
+  @include setPadding(12px);
   @include setPosition(absolute);
   @include setZIndex(3);
   color: $secondary-color;
@@ -400,38 +443,6 @@ main {
   @include setMargin(1% 0%);
   border-left: 3px solid $quaternary-color;
 }
-
-.ing-pan-btn {
-  @include setPadding(1px 6px 5px 0px);
-}
-
-.banner-image {
-  @include giveWidth($full-width);
-  @include indicateGridArea(image);
-}
-
-.my-recipes-banner {
-  @include alignText(center);
-  @include display(none);
-  @include giveWidth(95%);
-  @include setMargin(25px);
-  color: $secondary-background;
-
-  h1 {
-    @include giveFontSize($full-width);
-    @include giveWidth($full-width);
-    color: $secondary-background;
-  }
-
-  .welcome-msg {
-    @include alignText(center);
-    @include justifyContent(center);
-    @include giveWidth(95%);
-    @include setMargin(50px);
-    color: $secondary-background;
-  }
-}
-
 
 #overlay {
   @include giveWidth($full-width);

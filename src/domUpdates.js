@@ -227,11 +227,12 @@ let domUpdates = {
     },
 
     showAllRecipes(cookbook) {
+        console.log(cookbook);
         cookbook.recipes.forEach(recipe => {
             let domRecipe = document.getElementById(`${recipe.id}`);
             domRecipe.style.display = "block";
         });
-        this.showWelcomeBanner();
+        showWelcomeBanner();
     },
 
     // CREATE AND USE PANTRY
