@@ -51,7 +51,7 @@ class User {
         stringifiedInstructions.includes(newSearchText)
     });
   }
-  
+
 }
 
 module.exports = User;

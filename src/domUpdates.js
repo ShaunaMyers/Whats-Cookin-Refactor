@@ -1,6 +1,5 @@
 import Recipe from './recipe';
-import User from './user';
-import tags from './scripts';
+import recipeData from './data/sample-recipe-data';
 import './images/apple-logo.png';
 import './images/apple-logo-outline.png';
 import './images/cookbook.png';
@@ -13,12 +12,13 @@ let main = document.querySelector("main");
 let tagList = document.querySelector(".tag-list");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 
-// i dont think we should have any imports if dom/data separated fully. will cont to work on this....
+// import tags from './scripts';
+
+// let recipes = [];
 
 
 let domUpdates = {
 
-    // GENERATE USER ON LOAD
     generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
         this.findPantryInfo(user, ingredientsData, pantryInfo);
         this.displayUserGreeting(user);
@@ -35,7 +35,21 @@ let domUpdates = {
             welcomeMsg);
     },
 
-    // ADD RECIPE CARDS TO DOM
+    // CREATE RECIPE CARDS
+    createCards(cookbook) {
+        console.log('COOKBOOK', cookbook);
+        cookbook.recipes.forEach(recipe => {
+            let recipes = [];
+            let recipeInfo = new Recipe(recipe);
+            let shortRecipeName = recipeInfo.name;
+            recipes.push(recipeInfo);
+            if (recipeInfo.name.length > 40) {
+                shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
+            }
+            this.addCardsToDom(recipeInfo, shortRecipeName)
+        });
+    },
+
     addCardsToDom(recipeInfo, shortRecipeName) {
         let cardHtml = `
           <div class="recipe-card" id=${recipeInfo.id}>
@@ -53,12 +67,18 @@ let domUpdates = {
     },
 
     // FILTER BY RECIPE TAGS
-    listTags() {
+    listTags(tags) {
         tags.forEach(tag => {
-            let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
-            <label for="${tag}">${tag}</label></li>`;
-            tagList.insertAdjacentHTML("beforeend", tagHtml);
+            tagList.insertAdjacentHTML("beforeend", `<li><input type="checkbox" class="checked-tag" id="${tag}">
+            <label for="${tag}">${tag}</label></li>`);
         });
+    },
+
+    filterRecipes(filtered) {
+        let foundRecipes = recipes.filter(recipe => {
+            return !filtered.includes(recipe);
+        });
+        hideUnselectedRecipes(foundRecipes)
     },
 
     hideUnselectedRecipes(foundRecipes) {
@@ -68,8 +88,36 @@ let domUpdates = {
         });
     },
 
+    // FAVORITE RECIPE FUNCTIONALITY
+    addToMyRecipes(event) {
+        if (event.target.className === "card-apple-icon") {
+            let cardId = parseInt(event.target.closest(".recipe-card").id)
+            if (!user.favoriteRecipes.includes(cardId)) {
+                event.target.src = "../images/apple-logo.png";
+                user.saveRecipe(cardId);
+            } else {
+                event.target.src = "../images/apple-logo-outline.png";
+                user.removeRecipe(cardId);
+            }
+        } else if (event.target.id === "exit-recipe-btn") {
+            exitRecipe();
+        } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
+            openRecipeInfo(event);
+        }
+    },
+
+    isDescendant(parent, child) {
+        let node = child;
+        while (node !== null) {
+            if (node === parent) {
+                return true;
+            }
+            node = node.parentNode;
+        }
+        return false;
+    },
+
     showSavedRecipes() {
-        let recipes = user.favoriteRecipes;
         let unsavedRecipes = recipes.filter(recipe => {
             return !user.favoriteRecipes.includes(recipe.id);
         });
@@ -77,7 +125,7 @@ let domUpdates = {
             let domRecipe = document.getElementById(`${recipe.id}`);
             domRecipe.style.display = "none";
         });
-        this.showMyRecipesBanner();
+        showMyRecipesBanner();
     },
 
     // CREATE RECIPE INSTRUCTIONS
@@ -129,24 +177,51 @@ let domUpdates = {
         document.querySelector(".my-recipes-banner").style.display = "block";
     },
 
+    // moved to domUpdates but domUpdates is not connected to everything yet
     showWelcomeBanner() {
         document.querySelector(".welcome-msg").style.display = "flex";
         document.querySelector(".my-recipes-banner").style.display = "none";
     },
 
+    // SEARCH RECIPES
+    pressEnterSearch(event) {
+        event.preventDefault();
+        searchRecipes();
+    },
+
+    searchRecipes() {
+        showAllRecipes();
+        let searchedRecipes = recipeData.filter(recipe => {
+            return recipe.name.toLowerCase().includes(searchInput.value.toLowerCase());
+        });
+        filterNonSearched(createRecipeObject(searchedRecipes));
+    },
+
+    filterNonSearched(filtered) {
+        let found = recipes.filter(recipe => {
+            let ids = filtered.map(f => f.id);
+            return !ids.includes(recipe.id)
+        })
+        hideUnselectedRecipes(found);
+    },
+
+    createRecipeObject(recipes) {
+        recipes = recipes.map(recipe => new Recipe(recipe));
+        return recipes
+    },
+
     toggleMenu() {
         var menuDropdown = document.querySelector(".drop-menu");
-        console.log(this); // returns the button el - including this got the menuDropdown functioning
-        this.menuOpen = !this.menuOpen;
-        if (this.menuOpen) {
+        menuOpen = !menuOpen;
+        if (menuOpen) {
             menuDropdown.style.display = "block";
         } else {
             menuDropdown.style.display = "none";
         }
     },
 
-    showAllRecipes() {
-        recipes.forEach(recipe => {
+    showAllRecipes(cookbook) {
+        cookbook.recipes.forEach(recipe => {
             let domRecipe = document.getElementById(`${recipe.id}`);
             domRecipe.style.display = "block";
         });
@@ -154,24 +229,24 @@ let domUpdates = {
     },
 
     // CREATE AND USE PANTRY
-    // findPantryInfo(user, ingredientsData, pantryInfo) {
-    //     user.pantry.forEach(item => {
-    //         let itemInfo = ingredientsData.find(ingredient => {
-    //             return ingredient.id === item.ingredient;
-    //         });
-    //         let originalIngredient = pantryInfo.pantryIngredients.find(ingredient => {
-    //             if (itemInfo) {
-    //                 return ingredient.name === itemInfo.name;
-    //             }
-    //         });
-    //         if (itemInfo && originalIngredient) {
-    //             originalIngredient.count += item.amount;
-    //         } else if (itemInfo) {
-    //             pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
-    //         }
-    //     });
-    //     this.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
-    // },
+    findPantryInfo(user, ingredientsData, pantryInfo) {
+        user.pantry.forEach(item => {
+            let itemInfo = ingredientsData.find(ingredient => {
+                return ingredient.id === item.ingredient;
+            });
+            let originalIngredient = pantryInfo.pantryIngredients.find(ingredient => {
+                if (itemInfo) {
+                    return ingredient.name === itemInfo.name;
+                }
+            });
+            if (itemInfo && originalIngredient) {
+                originalIngredient.count += item.amount;
+            } else if (itemInfo) {
+                pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
+            }
+        });
+        this.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
+    },
 
     displayPantryInfo(pantry) {
         pantry.forEach(ingredient => {
@@ -180,6 +255,19 @@ let domUpdates = {
             document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
                 ingredientHtml);
         });
+    },
+
+
+    findCheckedPantryBoxes() {
+        let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
+        let pantryCheckboxInfo = Array.from(pantryCheckboxes)
+        let selectedIngredients = pantryCheckboxInfo.filter(box => {
+            return box.checked;
+        })
+        showAllRecipes();
+        if (selectedIngredients.length > 0) {
+            findRecipesWithCheckedIngredients(selectedIngredients);
+        }
     },
 
     findRecipesWithCheckedIngredients(selected) {

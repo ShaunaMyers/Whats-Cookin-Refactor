@@ -1,3 +1,5 @@
+import ingredient from './ingredient'
+
 class Cookbook {
   constructor(recipeData, ingredientData) {
     this.recipes = recipeData;
@@ -5,27 +7,54 @@ class Cookbook {
   }
 
   filterByTags(tags) {
-    const newFilterTags = typeof tags === "string" ? [tags] : tags;
-    let filteredRecipes = [];
-    newFilterTags.forEach(tag => {
-      this.recipes.forEach(recipe => {
-        if (recipe.tags.includes(tag)) {
-          filteredRecipes.push(recipe)
-        }
+    let filteredResults = [];
+    tags.forEach(tag => {
+      let allRecipes = this.recipes.filter(recipe => {
+        return recipe.tags.includes(tag.id);
       });
-    });
-
-    return [...new Set(filteredRecipes)];
+      allRecipes.forEach(recipe => {
+        if (!filteredResults.includes(recipe)) {
+          filteredResults.push(recipe);
+        }
+      })
+    })
+    return filteredResults;
   }
 
-  searchForRecipe(searchText) {
-    const newSearchText = searchText.toLowerCase();
-    return this.recipes.filter(recipe => {
-      return recipe.name.includes(newSearchText)
-      || recipe.ingredients.find(ingredient => {
-        return ingredient.name.includes(newSearchText);
-      });
-    });
+
+  searchForRecipe(searchText, ingredientsData) {
+    let newSearchText = searchText.toLowerCase();
+    let foundIngredientIds = [];
+
+    ingredientsData.forEach(ingredient => {
+      if (ingredient.name) {
+        if (ingredient.name.split(' ').includes(newSearchText)) {
+          foundIngredientIds.push(ingredient.id)
+        }
+      }
+    })
+
+    return this.checkRecipeData(newSearchText, foundIngredientIds)
+  }
+
+
+  checkRecipeData(newSearchText, foundIngredientIds) {
+    let foundRecipes = []
+
+    this.recipes.forEach(recipe => {
+      if (recipe.name.split(' ').includes(newSearchText)) {
+        foundRecipes.push(recipe)
+      }
+    })
+
+    this.recipes.forEach(recipe => {
+      recipe.ingredients.forEach(ingredient => {
+        if (foundIngredientIds.includes(ingredient.id)) {
+          foundRecipes.push(recipe);
+        }
+      })
+    })
+    return foundRecipes;
   }
 }
 
