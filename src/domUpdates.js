@@ -38,8 +38,14 @@ let domUpdates = {
 
     // CREATE RECIPE CARDS
     createCards(cookbook) {
-        console.log('COOKBOOK', cookbook);
-        cookbook.recipes.forEach(recipe => {
+        console.log("COOKBOOK", cookbook);
+        let recipeCollection;
+        if (cookbook.recipes) {
+            recipeCollection = cookbook.recipes
+        } else {
+            recipeCollection = cookbook;
+        }
+        recipeCollection.forEach(recipe => {
             let recipes = [];
             let recipeInfo = new Recipe(recipe);
             let shortRecipeName = recipeInfo.name;
