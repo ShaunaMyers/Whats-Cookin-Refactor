@@ -74,24 +74,6 @@ let domUpdates = {
         });
     },
 
-    findTaggedRecipes(selected) {
-        let filteredResults = [];
-        selected.forEach(tag => {
-            let allRecipes = recipes.filter(recipe => {
-                return recipe.tags.includes(tag.id);
-            });
-            allRecipes.forEach(recipe => {
-                if (!filteredResults.includes(recipe)) {
-                    filteredResults.push(recipe);
-                }
-            })
-        }),
-            showAllRecipes();
-        if (filteredResults.length > 0) {
-            filterRecipes(filteredResults);
-        }
-    },
-
     filterRecipes(filtered) {
         let foundRecipes = recipes.filter(recipe => {
             return !filtered.includes(recipe);

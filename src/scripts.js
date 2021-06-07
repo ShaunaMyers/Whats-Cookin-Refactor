@@ -120,7 +120,15 @@ function findCheckedBoxes() {
   let selectedTags = tagCheckboxes.filter(box => {
     return box.checked;
   })
-  findTaggedRecipes(selectedTags);
+
+  let filteredResults = cookbook.filterByTags(selectedTags);
+
+  domUpdates.showAllRecipes(cookbook);
+
+  if (filteredResults.length > 0) {
+    filterRecipes(filteredResults);
+  }
+  // findTaggedRecipes(selectedTags);
 }
 
 function findTaggedRecipes(selected) {
