@@ -123,32 +123,35 @@ function findCheckedBoxes() {
 
   let filteredResults = cookbook.filterByTags(selectedTags);
 
-  domUpdates.showAllRecipes(cookbook);
-
-  if (filteredResults.length > 0) {
-    filterRecipes(filteredResults);
-  }
+  displayAndHideRecipes(cookbook, filteredResults)
   // findTaggedRecipes(selectedTags);
 }
 
-function findTaggedRecipes(selected) {
-  let filteredResults = [];
-  selected.forEach(tag => {
-    let allRecipes = cookbook.recipes.filter(recipe => {
-      return recipe.tags.includes(tag.id);
-    });
-    allRecipes.forEach(recipe => {
-      if (!filteredResults.includes(recipe)) {
-        filteredResults.push(recipe);
-      }
-    })
-  });
-
+function displayAndHideRecipes(cookbook, filteredResults) {
   domUpdates.showAllRecipes(cookbook);
+
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
   }
 }
+// function findTaggedRecipes(selected) {
+//   let filteredResults = [];
+//   selected.forEach(tag => {
+//     let allRecipes = cookbook.recipes.filter(recipe => {
+//       return recipe.tags.includes(tag.id);
+//     });
+//     allRecipes.forEach(recipe => {
+//       if (!filteredResults.includes(recipe)) {
+//         filteredResults.push(recipe);
+//       }
+//     })
+//   });
+
+//   domUpdates.showAllRecipes(cookbook);
+//   if (filteredResults.length > 0) {
+//     filterRecipes(filteredResults);
+//   }
+// }
 
 function filterRecipes(filtered) {
   let foundRecipes = cookbook.recipes.filter(recipe => {
@@ -206,23 +209,27 @@ function pressEnterSearch(event) {
 }
 
 function searchRecipes() {
-  domUpdates.showAllRecipes();
-  let searchedRecipes = cookbook.recipes.filter(recipe => {
-    return recipe.name.toLowerCase().includes(searchInput.value.toLowerCase());
-  });
+  domUpdates.showAllRecipes(cookbook);
+  let searchText = searchInput.value;
+  let searchedRecipes = cookbook.searchForRecipe(searchText, ingredientsData);
+  console.log("SEARCHED RECIPES", searchedRecipes);
+  // let searchedRecipes = cookbook.recipes.filter(recipe => {
+  //   return recipe.name.toLowerCase().includes(searchText.toLowerCase());
+  // });
   filterNonSearched(createRecipeObject(searchedRecipes));
 }
 
 function filterNonSearched(filtered) {
-  let found = recipes.filter(recipe => {
+  let found = cookbook.recipes.filter(recipe => {
     let ids = filtered.map(f => f.id);
     return !ids.includes(recipe.id)
   })
-  hideUnselectedRecipes(found);
+  domUpdates.hideUnselectedRecipes(found);
 }
 
 function createRecipeObject(recipes) {
-  recipes = recipes.map(recipe => new Recipe(recipe));
+  recipes = recipes.map(recipe => new Recipe(recipe, ingredientsData));
+  console.log("RECIPES", recipes);
   return recipes
 }
 
