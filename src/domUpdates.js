@@ -9,6 +9,7 @@ import './images/seasoning.png';
 import './images/pancakes.jpg';
 
 let main = document.querySelector("main");
+let menuOpen = false;
 let tagList = document.querySelector(".tag-list");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 
@@ -117,15 +118,15 @@ let domUpdates = {
         return false;
     },
 
-    showSavedRecipes() {
-        let unsavedRecipes = recipes.filter(recipe => {
+    showSavedRecipes(cookbook, user) {
+        let unsavedRecipes = cookbook.recipes.filter(recipe => {
             return !user.favoriteRecipes.includes(recipe.id);
         });
         unsavedRecipes.forEach(recipe => {
             let domRecipe = document.getElementById(`${recipe.id}`);
             domRecipe.style.display = "none";
         });
-        showMyRecipesBanner();
+        this.showMyRecipesBanner();
     },
 
     // CREATE RECIPE INSTRUCTIONS
@@ -177,7 +178,6 @@ let domUpdates = {
         document.querySelector(".my-recipes-banner").style.display = "block";
     },
 
-    // moved to domUpdates but domUpdates is not connected to everything yet
     showWelcomeBanner() {
         document.querySelector(".welcome-msg").style.display = "flex";
         document.querySelector(".my-recipes-banner").style.display = "none";
