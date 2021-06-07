@@ -13,6 +13,14 @@ $nope: none;
 
 
 // @mixins
+@mixin addBorderRadius($val) {
+  border-radius: $val;
+}
+
+@mixin alignItems($pos) {
+  align-items: $pos;
+}
+
 @mixin centerContent() {
   justify-content: center
 }
@@ -21,12 +29,20 @@ $nope: none;
   display: $type;
 }
 
+@mixin flexWrap($val) {
+  flex-wrap: $val;
+}
+
 @mixin giveFontSize($size) {
   font-size: $size;
 }
 
 @mixin giveWidth($width) {
   width: $width;
+}
+
+@mixin indicateGridArea($area) {
+  grid-area: $area;
 }
 
 @mixin setCursorStyle($style) {
@@ -85,18 +101,23 @@ h3 {
 }
 
 h4 {
+  @include addBorderRadius(3px);
   background-color: $quaternary-color;
   color: $secondary-color;
 }
 
 .nav-btn {
+  @include alignItems(center);
   @include centerContent();
   @include display(flex);
   @include giveFontSize(0px);
-  @include setNavBtnImgPadding();
   @include setCursorStyle(pointer);
+  @include setFlexDirection(column);
+  @include setNavBtnImgPadding();
   @include setTransition(.4s, ease);
   background-color: $primary-background no-repeat;
+  border: $nope;
+  outline: $nope;
 
   &:hover {
     @include giveFontSize(14px);
@@ -111,8 +132,9 @@ h4 {
 }
 
 header {
-  @include giveWidth($full-width);
   @include display(flex);
+  @include giveWidth($full-width);
+  @include indicateGridArea(header);
   @include setFlexDirection(row);
 }
 
@@ -126,12 +148,6 @@ aside {
   background-color: $secondary-background-color;
 }
 
-main {
-  @include centerContent();
-  @include display(flex);
-  @include setFlexDirection(row)
-}
-
 .wrap {
   @include setPosition(relative);
   background-color: $secondary-background-color;
@@ -142,6 +158,7 @@ main {
 }
 
 .card-photo-container {
+  @include alignItems(center);
   @include centerContent();
   @include display(flex);
   @include setCursorStyle(pointer)
@@ -152,9 +169,15 @@ main {
   @include setOpacity(50%);
   @include setTransition(.8s, ease);
   @include giveWidth($full-width);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 7px;
+  height: 130px;
 }
 
 #search {
+  @include addBorderRadius(15px 15px 15px 15px);
   @include centerContent();
   @include display(flex);
   @include giveWidth($full-width);
@@ -164,9 +187,11 @@ main {
 }
 
 #search-input {
+  @include addBorderRadius(10px 0px 0px 10px);
   @include giveFontSize(42px);
   @include giveWidth($full-width);
   @include setTransition(.8s, ease);
+  border: $nope;
   color: $primary-background;
   font-family: $body-font;
 
@@ -180,8 +205,9 @@ main {
   }
   
   &::placeholder {
-    color: $primary-background;
     @include giveFontSize(20px);
+    color: $primary-background;
+    text-shadow: $nope;
 
     &:focus::placeholder {
       @include giveFontSize(0px);
@@ -191,6 +217,7 @@ main {
 }
 
 .show-all-btn {
+  @include addBorderRadius(3px);
   @include giveFontSize(12pt);
   @include setCursorStyle(pointer);
   background-color: $quaternary-color;
@@ -201,13 +228,16 @@ main {
 }
 
 .search-btn {
+  @include addBorderRadius(0px 15px 15px 0px);
   border-left: 3px outset $secondary-background-color;
 }
 
 .filter-btn {
+  @include addBorderRadius(3px);
   @include giveFontSize(12pt);
   @include setCursorStyle(pointer);
   background-color: $tertiary-color-text;
+  color: $secondary-background-color;
 
   &:hover {
     background-color: $tertiary-color-text;
@@ -223,13 +253,17 @@ main {
   color: $secondary-background-color;
 }
 
+
+// PANTRY STUFF
 .show-pantry-recipes-btn {
+  @include addBorderRadius(3px);
   @include giveFontSize(12pt);
   @include setCursorStyle(pointer);
   font-family: $body-font;
 }
 
 .drop-menu {
+  @include alignItems(center);
   @include display(none);
   @include setPosition(absolute);
   @include setZIndex(3);
@@ -240,7 +274,18 @@ main {
   }
 }
 
+
+// RECIPE CARD SECTION
+main {
+  @include centerContent();
+  @include display(flex);
+  @include flexWrap(wrap);
+  @include indicateGridArea(main);
+  @include setFlexDirection(row)
+}
+
 .recipe-card {
+  @include addBorderRadius(7px);
   @include giveWidth($full-width);
   @include setPosition(pointer);
   background-color: $secondary-background-color;
@@ -249,7 +294,8 @@ main {
     @include setOpacity(100%);
     @include setTransition(.8s, ease);
     @include giveFontSize(20px);
-    text-shadow: 0px 0px 4px #C4EB67;
+    border: 2px solid $quaternary-color;
+    text-shadow: 0px 0px 4px $quaternary-color;
     transition: .8s ease;
     
     .text {
@@ -273,6 +319,7 @@ main {
 }
 
 .recipe-instructions {
+  @include addBorderRadius(10px)
   @include display(none);
   @include setPosition(fixed);
   @include setZIndex(1000);
@@ -286,6 +333,7 @@ main {
 }
 
 #exit-recipe-btn {
+  @include addBorderRadius(5px)
   @include giveFontSize(20px);
   @include setCursorStyle(pointer);
   @include setPosition(fixed);
@@ -307,28 +355,30 @@ main {
 
 .banner-image {
   @include giveWidth($full-width);
+  @include indicateGridArea(image);
 }
 
 .my-recipes-banner {
   @include display(none);
-  @include giveWidth($full-width);
+  @include giveWidth(95%);
   color: $secondary-background-color;
 
   h1 {
     @include giveWidth($full-width);
     color: $secondary-background-color;
   }
-}
 
-.welcome-msg {
-  @include giveWidth($full-width);
-  color: $secondary-background-color;
-
-  h1 {
-    @include giveFontSize($full-width);
+  .welcome-msg {
+    @include giveWidth(95%);
     color: $secondary-background-color;
+  
+    h1 {
+      @include giveFontSize($full-width);
+      color: $secondary-background-color;
+    }
   }
 }
+
 
 #overlay {
   @include giveWidth($full-width);
