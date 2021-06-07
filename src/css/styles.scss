@@ -6,211 +6,63 @@ body {
     "aside main";
   height: 100vh;
   -webkit-font-smoothing: auto;
-  // background-color: #5B7894;
-  // display: grid;
-  // font-family: "Quicksand", sans-serif;
-  // margin: 0;
-  // padding: 0;
 }
 
 h1 {
   align-self: center;
   font-family: "Sulphur Point", sans-serif;
   width: 70%;
-  // color: white;
-  // font-size: 50px;
-  // margin: 0%;
-  // padding: 0.5% 0.7% 0%;
-}
-
-h2 {
-  // color: #84C8A4;
-  // margin: 10px 0px 10px 0px;
 }
 
 h3 {
   height: 17%;
-  // color: #359567;
-  // cursor: pointer;
-  // margin: 5px 5px 10px 0px;
-  // transition: .8s ease;
 }
 
 h4 {
   width: max-content;
-  // color: #359567;
-  // background-color: #C4EB67;
-  // border-radius: 3px;
-  // margin: 10px 0px 0px 0px;
-  // padding: 1px 4px 1px 4px;
 }
 
 
 /* HEADER */
-header {
-  // display: flex;
-  // flex-direction: row;
-  // grid-area: header;
-  // padding: 0% 0%;
-  // width: 100%;
-}
-
 span {
   font-weight: 400;
-  // color: #C4EB67;
 }
 
 .header-apple-icon {
   height: 40px;
   width: 35px;
-  // margin-left: 5px;
-}
-
-#search {
-  // border-radius: 15px 15px 15px 15px;
-  // border: 3px outset #C4EB67;
-  // box-shadow: 0px 0px 7px 0px #475d74;
-  // display: flex;
-  // flex-direction: row;
-  // margin: 1.2% 0.5% 1.2% 0%;
-  // width: 100%;
 }
 
 #search-input {
   background-color: #b6dcca;
   background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(255, 255, 255)), color-stop(1, rgb(225,225,225)));
-  // border-radius: 10px 0px 0px 10px;
-  // border: none;
-  // box-shadow: inset -3px -1px 20px 1px #5c7894;
-  // color: #5B7894;
-  // font-family: "Quicksand", sans-serif;
-  // font-size: 42px;
-  // height: 100%;
-  // outline: none;
-  // padding: 0% 2% 0% 0%;
-  // text-align: right;
-  // transition: .8s ease;
-  // width: 100%;
 }
-
-#search-input:hover {
-  // box-shadow: inset 0px 0px 0px 0px white;
-  // transition: .8s ease;
-}
-
-// #search-input:focus {
-//   // box-shadow: inset 0px 0px 0px 0px white;
-// }
-
-// #search-input::placeholder {
-//   // color: #5B7894;
-//   // font-size: 20px;
-//   // text-align: right;
-//   // text-shadow: none;
-// }
-
-// #search-input:focus::placeholder {
-//   // font-size: 0px;
-//   // transition: .8s ease;
-// }
-
-// .search-label {
-//   // display: none;
-// }
-
-// .search-btn {
-//   // border-left: 3px outset #C4EB67;
-//   // border-radius: 0px 15px 15px 0px;
-//   // padding: 1%;
-// }
 
 .nav-btn {
   font-weight: 700;
   overflow: hidden;
   width: 15%;
-  // align-items: center;
-  // background: #5B7894 no-repeat;
-  // border: none;
-  // cursor: pointer;
-  // display: flex;
-  // flex-direction: column;
-  // font-size: 0px;
-  // justify-content: center;
-  // margin: 0%;
-  // outline: none;
-  // text-align: center;
-  // transition: .4s ease;
 }
 
 .nav-btn:hover {
   text-shadow: 0px 2px 4px black;
-  // color: #C4EB67;
-  // font-size: 14px;
-  // transition: .4s ease;
 }
-
-// .nav-btn img {
-//   max-height: 40px;
-//   max-width: 40px;
-//   padding: 2px 0px;
-// }
-
-// .saved-ingredients-btn {
-//   // border-left: 3px solid #C4EB67;
-// }
-
-.ing-pan-btn {
-  // margin: 1% 0%;
-  // padding: 1px 6px 5px 0px;
-}
-
 
 /* BANNER IMAGE*/
 .banner-image {
   background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),url("../images/green-apples.jpg");
   height: 150px;
   overflow: hidden;
-  // grid-area: image;
-  // width: 100%;
 }
-
-// .my-recipes-banner,
-// .welcome-msg {
-//   text-align: center;
-//   // width: 95%;
-// }
-
-// .my-recipes-banner h1,
-// .welcome-msg h1 {
-//   color: white;
-//   // width: 100%;
-// }
-
-.my-recipes-banner {
-  // display: none;
-  // margin-top: 25px;
-}
-
-.welcome-msg {
-  // margin-top: 50px;
-}
-
 
 /* FILTER SIDEBAR */
 aside {
   height: auto;
-  // background-color: white;
-  // display: flex;
-  // justify-content: center;
-  // text-align: center;
 }
 
 .wrap {
   height: 100vh;
   width: 200px;
-  // background-color: white;
-  // padding: 10px;
-  // position: relative;
 }
 
 ul {
@@ -227,71 +79,27 @@ li {
 /* RECIPE CARD SECTION */
 main {
   align-content: flex-start;
-  // grid-area: main;
-  // display: flex;
-  // justify-content: center;
-  // flex-direction: row;
-  // flex-wrap: wrap;
+
 }
 
 .recipe-card {
   height: 270px;
   width: 250px;
-  // background-color: white;
-  // border: 2px solid #C4EB67;
-  // border-radius: 7px;
-  // cursor: pointer;
-  // margin: 20px;
-  // padding: 15px;
 }
-
-// .recipe-card:hover .text {
-//   // font-size: 20px;
-//   // opacity: 100%;
-//   // transition: .5s ease;
-//   // width: 100%;
-// }
-
-// .recipe-card:hover h3 {
-//   text-shadow: 0px 0px 4px #C4EB67;
-//   transition: .8s ease;
-// }
 
 .card-apple-icon {
   float: right;
   height: 50px;
   width: 45px;
-  // cursor: pointer;
-  // padding-bottom: 10px;
 }
-
-// .card-photo-preview {
-//   // background-position: 50% 50%;
-//   // background-repeat: no-repeat;
-//   // background-size: cover;
-//   // border-radius: 7px;
-//   // height: 130px;
-// }
 
 .card-photo-container {
   height: 130px;
-  // align-items: center;
-  // display: flex;
-  // justify-content: center;
-  // position: relative;
 }
 
 .text {
   font-weight: 700;
   width: 0%;
-  // background: #359567;
-  // color: white;
-  // font-size: 0px;
-  // opacity: 0%;
-  // padding: 0%;
-  // position: absolute;
-  // text-align: center;
-  // transition: .5s ease;
 }
 
 
@@ -301,29 +109,12 @@ main {
 .filter-btn {
   border: 0;
   font-weight: bold;
-  // background-color: #359567;
-  // border-radius: 3px;
-  // color: white;
-  // cursor: pointer;
-  // font-family: "Quicksand", sans-serif;
-  // font-size: 12pt;
-  // padding: 5px 10px 5px 10px;
-}
-
-.show-pantry-recipes-btn {
-  // margin-top: 10px;
 }
 
 .show-all-btn {
   height: 40px;
   width: 200px;
-  // margin-top: 20px;
 }
-
-// .filter-btn:hover {
-//   // background-color: #84C8A4;
-// }
-
 
 /* PANTRY LIST */
 .drop-menu {
@@ -333,17 +124,10 @@ main {
   margin-top: 92px;
   overflow: scroll;
   width: 250px;
-  // align-items: center;
-  // display: none;
-  // padding: 12px;
-  // position: absolute;
-  // text-align: center;
-  // z-index: 3;
 }
 
 .drop-menu h2 {
   margin: 0px;
-  // color: #359567;
 }
 
 .pantry-list {
@@ -361,50 +145,16 @@ main {
   right: 15%;
   top: 15%;
   width: 70%;
-  overflow-x: scroll;
-  // background: white;
-  // margin: 0;
-  // border-radius: 10px;
-  // display: none;
-  // padding: 1% 1% 1% 1%;
-  // position: fixed;
-  // z-index: 1000;
 }
 
 #exit-recipe-btn {
   font-weight: 700;
   margin: -4% -3% 2% -1%;
-  // background: white;
-  // border: 2px double #359567;
-  // border-radius: 5px;
-  // color: #359567;
-  // cursor: pointer;
-  // font-size: 20px;
-  // position: fixed;
-  // transition: .3s ease;
-}
-
-#exit-recipe-btn:hover {
-  // background: #C4EB67;
-  // transition: .3s ease;
 }
 
 #recipe-title {
   text-shadow: 0px 0px 6px black;
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  // border-radius: 7px 7px 0px 0px;
-  // color: white;
-  // font-size: 30px;
-  // margin: 0;
-  // padding: 5%;
-  // text-align: center;
 }
-
-// .recipe-instructions h4 {
-//   // background: white;
-//   // color: #359567;
-// }
 
 .recipe-instructions p {
   margin-left: 2%;
@@ -418,10 +168,4 @@ main {
   height: 100%;
   left: 0;
   top: 0;
-  // filter: alpha(opacity=50);
-  // background-color: #5B7894;
-  // opacity: 0.5;
-  // position: fixed;
-  // width:100%;
-  // z-index: 100;
 }

@@ -1,3 +1,5 @@
+
+
 /* This is an example of using Sass, otherwise plain CSS works too*/
 // variables
 $body-font: "Quicksand", sans-serif;
@@ -46,6 +48,10 @@ $nope: none;
   grid-area: $area;
 }
 
+@mixin setOverflowX($val) {
+  overflow-x: $val;
+}
+
 @mixin setPadding($padAmt) {
   padding: $padAmt;
 }
@@ -82,6 +88,12 @@ $nope: none;
   z-index: $num;
 }
 
+// // //REFACTOR THIS!!!
+@mixin setNavBtnImgPadding {
+  max-height: 40px;
+  max-width: 40px;
+  padding: 2px 0px;
+}
 
 // SELECTOR STYLES
 
@@ -130,7 +142,7 @@ h4 {
   @include setCursorStyle(pointer);
   @include setFlexDirection(column);
   @include setMargin(0%);
-  @include setNavBtnImgPadding();
+  @include setPadding(2px 0px);
   @include setTransition(.4s, ease);
   background: $primary-background no-repeat;
   border: $nope;
@@ -143,7 +155,7 @@ h4 {
   }
 
   img {
-    @include setNavBtnImgPadding();
+    @include setPadding(2px 0px);
   }
   
 }
@@ -407,6 +419,7 @@ main {
   @include addBorderRadius(10px)
   @include display(none);
   @include setMargin(0);
+  @include setOverflowX(scroll);
   @include setPadding(1% 1% 1% 1%);
   @include setPosition(fixed);
   @include setZIndex(1000);
