@@ -15,9 +15,9 @@ $full-width: 100%;
   justify-content: center
 }
 
-@mixin opacityTransition() {
-  opacity: 85%;
-  transition: .8s ease;
+@mixin opacityTransition($opac, $sec, $type) {
+  opacity: $opac;
+  transition: $sec $type;
 }
 
 @mixin giveWidth($width) {
@@ -70,6 +70,7 @@ h4 {
 }
 
 .drop-menu {
+  @include setPosition(absolute);
   color: $secondary-color;
   h2 {
     color: $secondary-color;
@@ -105,10 +106,11 @@ main {
   @include centerContent();
   @include setCursorStyle(pointer)
   @include setPosition(relative);
-  .card-photo-preview {
-    @include opacityTransition();
-    @include giveWidth($full-width);
-  }
+}
+
+.card-photo-preview {
+  @include opacityTransition(50%, .8s, ease);
+  @include giveWidth($full-width);
 }
 
 #search {
@@ -139,6 +141,7 @@ main {
 
 .filter-btn {
   @include setCursorStyle(pointer);
+  background-color: $tertiary-color-text;
   &:hover {
     background-color: $tertiary-color-text;
   }
@@ -157,9 +160,21 @@ main {
 .recipe-card {
   background-color: $secondary-background-color;
   @include giveWidth($full-width);
+  
   &:hover {
-    @include opacityTransition();
+    @include opacityTransition(100%, .8s, ease);
     @include giveFontSize($primary-font-size);
+    text-shadow: 0px 0px 4px #C4EB67;
+    transition: .8s ease;
+    
+    .text {
+      @include opacityTransition(100%, .8s, ease);
+    }
+
+    h3 {
+      text-shadow: 0px 0px 4px #C4EB67;
+      transition: .8s ease;
+    }
   }
 }
 
