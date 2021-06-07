@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 
 
 import { recipeData } from '../src/data/sample-recipe-data';
@@ -25,7 +25,7 @@ describe('Cookbook', () => {
   });
 
   it('should filter recipes by one tag', () => {
-    expect(cookbook.filterByTags('snack'))
+    expect(cookbook.filterByTags(['snack']))
       .to.deep.equal([recipeData[0], recipeData[7]]);
   });
 

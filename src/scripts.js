@@ -46,7 +46,6 @@ window.onload = onStartUp()
 function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
-      console.log(promise)
       user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
       ingredientsData = promise[1];
       cookbook = new Cookbook(promise[2], promise[1]);
@@ -104,9 +103,9 @@ function findTags(recipe) {
 function findCheckedBoxes() {
   let tagCheckboxes = Array.from(document.querySelectorAll(".checked-tag"));
   let selectedTags = tagCheckboxes.filter(box => {
-    return box.checked;
-  })
-
+    return box.checked
+  }).map(tag => tag.id);
+  console.log("What do these tags look like?", selectedTags);
   let filteredResults = cookbook.filterByTags(selectedTags);
 
   displayAndHideRecipes(cookbook, filteredResults)

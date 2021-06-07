@@ -10,7 +10,7 @@ class Cookbook {
     let filteredResults = [];
     tags.forEach(tag => {
       let allRecipes = this.recipes.filter(recipe => {
-        return recipe.tags.includes(tag.id);
+        return recipe.tags.includes(tag);
       });
       allRecipes.forEach(recipe => {
         if (!filteredResults.includes(recipe)) {
