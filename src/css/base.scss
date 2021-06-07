@@ -2,10 +2,13 @@
 
 // variables
 $primary-background: #5B7894;
-$hover-color: #C4EB67;
-$body-font: "Quicksand", sans-serif;
 $secondary-background-color: white;
-$recipe-modal-font-size: 20px;
+$tertiary-color-text: #84C8A4;
+$quaternary-color: #C4EB67;
+$secondary-color: #359567;
+$body-font: "Quicksand", sans-serif;
+$primary-font-size: 20px;
+$full-width: 100%;
 
 // @mixins
 @mixin centerContent() {
@@ -13,13 +16,23 @@ $recipe-modal-font-size: 20px;
 }
 
 @mixin opacityTransition() {
-  opacity: 50%;
+  opacity: 85%;
   transition: .8s ease;
 }
 
-// @mixin giveWidth(num) {
-//   width: num
-// }
+@mixin giveWidth($width) {
+  width: $width;
+}
+
+@mixin giveFontSize($size) {
+  font-size: $size;
+}
+
+@mixin setCursorStyle($style) {
+  cursor: $style;
+}
+
+
 
 body {
   background-color: $primary-background;
@@ -28,22 +41,43 @@ body {
 
 h1 {
   color: $secondary-background-color;
+
+}
+
+h2 {
+  color: $tertiary-color-text;
+}
+
+h3 {
+  color: $tertiary-color-text;
 }
 
 h4 {
-  background-color: $hover-color;
+  background-color: $quaternary-color;
+  color: $secondary-color;
 }
 
 .nav-btn {
   background-color: $primary-background;
-
+  @include centerContent();
   &:hover {
-    background-color: $hover-color;
+    background-color: $quaternary-color;
   }
 }
 
+.drop-menu {
+  color: $secondary-color;
+  h2 {
+    color: $secondary-color;
+  }
+}
+
+header {
+  @include giveWidth($full-width);
+}
+
 span {
-  color: $hover-color;
+  color: $quaternary-color;
 }
 
 aside {
@@ -61,32 +95,95 @@ main {
 
 .card-photo-container {
   @include centerContent();
-}
-
-.card-photo-preview {
-  @include opacityTransition();
-}
-
-.nav-btn {
-  @include centerContent();
+  @include setCursorStyle(pointer)
+  .card-photo-preview {
+    @include opacityTransition();
+    @include giveWidth($full-width);
+  }
 }
 
 #search {
   @include centerContent();
+  @include giveWidth($full-width);
+  @include giveFontSize($body-font);
+  border: 3px outset $quaternary-color;
+}
+
+#search-input {
+  @include giveWidth($full-width);
+  color: $primary-background;
   font-family: $body-font;
+  &::placeholder {
+    color: $primary-background;
+    @include giveFontSize($primary-font-size);
+  }
+}
+
+.show-all-btn {
+  @include setCursorStyle(pointer);
+  background-color: $quaternary-color;
+}
+
+.search-btn {
+  border-left: 3px outset $secondary-background-color;
+}
+
+.filter-btn {
+  @include setCursorStyle(pointer);
+  &:hover {
+    background-color: $tertiary-color-text;
+  }
+}
+
+.text {
+  background: $secondary-color;
+}
+
+.show-pantry-recipes-btn {
+  @include setCursorStyle(pointer);
 }
 
 .recipe-card {
   background-color: $secondary-background-color;
-
+  @include giveWidth($full-width);
   &:hover {
     @include opacityTransition();
-    font-size: $recipe-modal-font-size
+    @include giveFontSize($primary-font-size);
   }
 }
 
 #exit-recipe-btn {
-  font-size: $recipe-modal-font-size;
+  @include giveFontSize($primary-font-size);
+  background: $secondary-background-color;
+  color: $secondary-color;
+  border: 2px double $secondary-color;
+}
+
+.saved-ingredients-btn {
+  border-left: 3px solid $quaternary-color;
+}
+
+.banner-image {
+  @include giveWidth($full-width);
+}
+
+.my-recipes-banner {
+  @include giveWidth($full-width);
+  h1 {
+    @include giveWidth($full-width);
+  }
+}
+
+.welcome-msg {
+  @include giveWidth($full-width);
+  h1 {
+    @include giveFontSize($full-width);
+  }
+}
+
+#overlay {
+  @include giveWidth($full-width);
+  background-color: $primary-background;
 }
 
 
