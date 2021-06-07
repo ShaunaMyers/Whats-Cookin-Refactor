@@ -3,10 +3,7 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/index.scss';
-// import './css/_variables.scss';
-// import './css/_mixins.scss';
-// import './css/base.scss';
-// import './css/styles.scss';
+
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/apple-logo.png'

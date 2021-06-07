@@ -1,10 +1,7 @@
-// @import './css/_variables.scss';
-// @import './css/_mixins.scss';
-// @import './css/base.scss';
-// @import './css/styles.scss';
-
-
-//i guess we need an index.scss where all files are imported for scss. but needing to see if we have to import these on all scss files, or just index.scss and index.js....
+@import 'mixins';
+@import 'variables';
+@import 'base';
+@import 'styles';
 
 //do we also need to import css styled images?
 @import './images/apple-logo.png';
