@@ -178,12 +178,19 @@ aside {
 }
 
 .wrap {
+  @include setPadding(10px);
   @include setPosition(relative);
   background-color: $secondary-background;
 }
 
+ul {
+  list-style-type: $nope;
+  text-align: left;
+  @include setPadding(0 0 0 35px);
+}
+
 .card-apple-icon {
-  @include setPadding(0 0 10px);
+  @include setPadding(0 0 10px 0);
   @include setCursorStyle(pointer);
 }
 
@@ -215,6 +222,7 @@ aside {
   @include setFlexDirection(row);
   @include setMargin(1.2% 0.5% 1.2% 0%);
   border: 3px outset $quaternary-color;
+  box-shadow: 0px 0px 7px 0px #475d74;
 }
 
 #search-input {
@@ -287,6 +295,7 @@ aside {
   @include alignText(center);
   @include giveFontSize(0px);
   @include setOpacity(0%);
+  @include setPadding(0%);
   @include setPosition(absolute);
   @include setTransition(.5s, ease);
   background: $secondary-color;
@@ -341,6 +350,7 @@ aside {
   @include alignItems(center);
   @include alignText(center);
   @include display(none);
+  @include setPadding(12px);
   @include setPosition(absolute);
   @include setZIndex(3);
   color: $secondary-color;

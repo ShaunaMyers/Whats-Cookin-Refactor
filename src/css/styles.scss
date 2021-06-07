@@ -72,7 +72,7 @@ span {
 #search {
   // border-radius: 15px 15px 15px 15px;
   // border: 3px outset #C4EB67;
-  box-shadow: 0px 0px 7px 0px #475d74;
+  // box-shadow: 0px 0px 7px 0px #475d74;
   // display: flex;
   // flex-direction: row;
   // margin: 1.2% 0.5% 1.2% 0%;
@@ -201,19 +201,19 @@ span {
 
 /* FILTER SIDEBAR */
 aside {
+  height: auto;
   // background-color: white;
   // display: flex;
   // justify-content: center;
-  height: auto;
   // text-align: center;
 }
 
 .wrap {
-  // background-color: white;
   height: 100vh;
-  padding: 10px;
-  // position: relative;
   width: 200px;
+  // background-color: white;
+  // padding: 10px;
+  // position: relative;
 }
 
 ul {
@@ -238,14 +238,14 @@ main {
 }
 
 .recipe-card {
+  height: 270px;
+  width: 250px;
   // background-color: white;
   // border: 2px solid #C4EB67;
   // border-radius: 7px;
   // cursor: pointer;
-  height: 270px;
   // margin: 20px;
   // padding: 15px;
-  width: 250px;
 }
 
 // .recipe-card:hover .text {
@@ -261,11 +261,11 @@ main {
 // }
 
 .card-apple-icon {
-  // cursor: pointer;
   float: right;
   height: 50px;
-  padding-bottom: 10px;
   width: 45px;
+  // cursor: pointer;
+  // padding-bottom: 10px;
 }
 
 // .card-photo-preview {
@@ -277,23 +277,23 @@ main {
 // }
 
 .card-photo-container {
+  height: 130px;
   // align-items: center;
   // display: flex;
-  height: 130px;
   // justify-content: center;
   // position: relative;
 }
 
 .text {
+  font-weight: 700;
+  width: 0%;
   // background: #359567;
   // color: white;
-  font-weight: 700;
   // font-size: 0px;
   // opacity: 0%;
-  padding: 0%;
+  // padding: 0%;
   // position: absolute;
   // text-align: center;
-  width: 0%;
   // transition: .5s ease;
 }
 
@@ -302,14 +302,14 @@ main {
 .show-pantry-recipes-btn,
 .show-all-btn,
 .filter-btn {
-  // background-color: #359567;
   border: 0;
+  font-weight: bold;
+  // background-color: #359567;
   // border-radius: 3px;
   // color: white;
   // cursor: pointer;
   // font-family: "Quicksand", sans-serif;
   // font-size: 12pt;
-  font-weight: bold;
   // padding: 5px 10px 5px 10px;
 }
 
@@ -319,8 +319,8 @@ main {
 
 .show-all-btn {
   height: 40px;
-  // margin-top: 20px;
   width: 200px;
+  // margin-top: 20px;
 }
 
 // .filter-btn:hover {
@@ -330,17 +330,17 @@ main {
 
 /* PANTRY LIST */
 .drop-menu {
-  // align-items: center;
   background-color: #DAE4EE;
-  // display: none;
   height: 600px;
   margin-left: 81%;
   margin-top: 92px;
   overflow: scroll;
-  padding: 12px;
+  width: 250px;
+  // align-items: center;
+  // display: none;
+  // padding: 12px;
   // position: absolute;
   // text-align: center;
-  width: 250px;
   // z-index: 3;
 }
 
