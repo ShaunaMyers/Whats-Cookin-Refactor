@@ -24,7 +24,9 @@ let user, cookbook, ingredientsData, pantryInfo;
 
 
 window.addEventListener("load", findTags);
-allRecipesBtn.addEventListener("click", domUpdates.showAllRecipes);
+allRecipesBtn.addEventListener("click", function () {
+  domUpdates.showAllRecipes(cookbook);
+});
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 pantryBtn.addEventListener("click", domUpdates.toggleMenu);
@@ -201,28 +203,40 @@ function findCheckedPantryBoxes() {
   })
   domUpdates.showAllRecipes(cookbook);
   if (selectedIngredients.length > 0) {
-    findRecipesWithCheckedIngredients(selectedIngredients);
+    findIdsOfCheckedIngredients(selectedIngredients);
   }
 }
 
-function findRecipesWithCheckedIngredients(selected) {
-  let recipeChecker = (arr, target) => target.every(v => arr.includes(v));
-  let ingredientIds = selected.map(item => {
+function findIdsOfCheckedIngredients(selected) {
+  let ingredientHTMLIds = selected.map(item => {
     return item.id;
   })
-  let domRecipesCollection = []
 
-  cookbook.recipes.forEach(recipe => {
-    let allRecipeIngredientIds = [];
-    recipe.ingredients.forEach(ingredient => {
-      allRecipeIngredientIds.push(ingredient.id);
-    });
-    if (!recipeChecker(allRecipeIngredientIds, ingredientIds)) {
-      // let domRecipe = document.getElementById(`${recipe.id}`);
-      domRecipesCollection.push(recipe);
-      // domRecipe.style.display = "block";
+  let ingredientIds = [];
+
+  ingredientsData.forEach(item => {
+    if (ingredientHTMLIds.includes(item.name)) {
+      ingredientIds.push(item.id)
     }
   })
-  console.log("recipe collection", domRecipesCollection);
+  findRecipesWithCheckedIngredients(ingredientIds)
+}
+
+function findRecipesWithCheckedIngredients(ingredientIds) {
+  let domRecipesCollection = []
+  cookbook.recipes.forEach(recipe => {
+
+    let recipeIngredientIds = recipe.ingredients.map(ingredient => {
+      return ingredient.id;
+    })
+
+    if (recipeChecker(recipeIngredientIds, ingredientIds)) {
+      domRecipesCollection.push(recipe);
+    }
+  })
   domUpdates.createCards(domRecipesCollection);
+}
+
+function recipeChecker(recipeIngredientIds, selectedIds) {
+  return selectedIds.every(id => recipeIngredientIds.includes(id));
 }
