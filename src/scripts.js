@@ -9,6 +9,7 @@ import Cookbook from './Cookbook';
 import domUpdates from './domUpdates';
 import Pantry from './Pantry';
 
+let addIngredientBtn = document.querySelector(".add-ingredient");
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
@@ -24,6 +25,7 @@ let user, cookbook, ingredientsData, pantryInfo;
 
 
 window.addEventListener("load", findTags);
+add 
 allRecipesBtn.addEventListener("click", domUpdates.showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
