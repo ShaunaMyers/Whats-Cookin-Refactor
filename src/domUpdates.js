@@ -178,7 +178,6 @@ let domUpdates = {
         document.querySelector(".my-recipes-banner").style.display = "block";
     },
 
-    // moved to domUpdates but domUpdates is not connected to everything yet
     showWelcomeBanner() {
         document.querySelector(".welcome-msg").style.display = "flex";
         document.querySelector(".my-recipes-banner").style.display = "none";

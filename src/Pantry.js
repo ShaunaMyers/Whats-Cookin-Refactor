@@ -7,18 +7,10 @@ class Pantry {
         this.ingredientsNeeded = [];
     }
 
-
-    // Create classes and methods that can:
-
-    // Determine whether a user’s pantry has enough ingredients to cook a given meal.
-
     evaluateUsersPantry() {
         this.pantryIngredients = this.contents.map(item => item.ingredient);
         this.pantryAmounts = this.contents.map(item => item.amount);
     }
-
-    // Determine if a user has enough ingredients to cook a meal
-    // Do I need to evaluate if the amount of each ingredient is enough???
 
     evaluateUsersIngredients(recipe) {
         this.evaluateUsersPantry();
@@ -47,7 +39,6 @@ class Pantry {
             return this.determineIngredientsNeeded();
         }
     }
-    // Determine the amount of missing ingredients still needed to cook a given meal, based on what’s in the user’s pantry.
 
     determineIngredientsNeeded() {
         if (this.ingredientsNeeded.length > 0) {
@@ -69,10 +60,5 @@ class Pantry {
         }
     }
 }
-
-// User Stories
-// As a user, I should be able to view what ingredients exist inside of my pantry.
-// As a user, I should be able to check my list of recipes to cook and see if my pantry has enough ingredients to cook a meal.
-// As a user, I should be told what ingredients are still needed if I don’t have enough ingredients in my pantry to cook the recipe.
 
 export default Pantry;
