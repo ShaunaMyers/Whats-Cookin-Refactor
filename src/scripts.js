@@ -207,16 +207,28 @@ function findCheckedPantryBoxes() {
 
 function findRecipesWithCheckedIngredients(selected) {
   let recipeChecker = (arr, target) => target.every(v => arr.includes(v));
-  let ingredientIds = selected.map(item => {
+  let ingredientHTMLIds = selected.map(item => {
     return item.id;
   })
+
+  let allRecipeIngredientIds = cookbook.recipes.map(recipe => {
+    return recipe.ingredients;
+  }).flat().map(ingredient => ingredient.id)
+
   let domRecipesCollection = []
+  let ingredientIds = [];
 
   cookbook.recipes.forEach(recipe => {
-    let allRecipeIngredientIds = [];
-    recipe.ingredients.forEach(ingredient => {
-      allRecipeIngredientIds.push(ingredient.id);
-    });
+    allRecipeIngredientIds = recipe.ingredients.map(ingredient => ingredient.id)
+
+    ingredientsData.forEach(item => {
+      if (ingredientHTMLIds.includes(item.name)) {
+        ingredientIds.push(item.id)
+      }
+    })
+
+    // console.log("NEW INGRED IDs", ingredientIds);
+
     if (!recipeChecker(allRecipeIngredientIds, ingredientIds)) {
       // let domRecipe = document.getElementById(`${recipe.id}`);
       domRecipesCollection.push(recipe);
