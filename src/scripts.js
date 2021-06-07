@@ -62,6 +62,7 @@ function onStartUp() {
 function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
   findPantryInfo(user, ingredientsData, pantryInfo);
   domUpdates.displayUserGreeting(user);
+  // domUpdates.displayPantryInfo();
   domUpdates.createCards(cookbook);
 }
 
@@ -84,19 +85,15 @@ function findPantryInfo(user, ingredientsData, pantryInfo) {
   domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
-// function captureInputValue() {
-//   let pantryInput = document.getElementById("pantryInput").value;
-//   return pantryInput;
-// }
-
 function addIngToPantry(event) {
   event.preventDefault();
   console.log(user);
   let ingToAdd = domUpdates.captureInputValue();
-  // console.log(user.pantry)
-  user.pantry.push(ingToAdd);
-  // console.log(user.pantry)
-  domUpdates.clearPantryInput();
+  console.log(user.pantry)
+  if (!user.pantry.includes(ingToAdd)) {
+    user.pantry.push(ingToAdd);
+  }
+  console.log(user.pantry)
   domUpdates.displayPantryInfo();
 }
 

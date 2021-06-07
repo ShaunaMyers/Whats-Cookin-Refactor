@@ -1,93 +1,95 @@
+
+
 /* This is an example of using Sass, otherwise plain CSS works too*/
 // // variables
-$body-font: "Quicksand", sans-serif;
-$primary-background: #5B7894;
-$secondary-background: white;
-$quaternary-color: #C4EB67;
-$secondary-color: #359567;
-$tertiary-color: #84C8A4;
-$full-width: 100%;
-$nope: none;
+// $body-font: "Quicksand", sans-serif;
+// $primary-background: #5B7894;
+// $secondary-background: white;
+// $quaternary-color: #C4EB67;
+// $secondary-color: #359567;
+// $tertiary-color: #84C8A4;
+// $full-width: 100%;
+// $nope: none;
 
-// @mixins
-@mixin addBorderRadius($val) {
-  border-radius: $val;
-}
+// // @mixins
+// @mixin addBorderRadius($val) {
+//   border-radius: $val;
+// }
 
-@mixin alignItems($pos) {
-  align-items: $pos;
-}
+// @mixin alignItems($pos) {
+//   align-items: $pos;
+// }
 
-@mixin alignText($pos) {
-  text-align: $pos;
-}
+// @mixin alignText($pos) {
+//   text-align: $pos;
+// }
 
-@mixin justifyContent($pos) {
-  justify-content: $pos;
-}
+// @mixin justifyContent($pos) {
+//   justify-content: $pos;
+// }
 
-@mixin display($type) {
-  display: $type;
-}
+// @mixin display($type) {
+//   display: $type;
+// }
 
-@mixin flexWrap($val) {
-  flex-wrap: $val;
-}
+// @mixin flexWrap($val) {
+//   flex-wrap: $val;
+// }
 
-@mixin giveFontSize($size) {
-  font-size: $size;
-}
+// @mixin giveFontSize($size) {
+//   font-size: $size;
+// }
 
-@mixin giveWidth($width) {
-  width: $width;
-}
+// @mixin giveWidth($width) {
+//   width: $width;
+// }
 
-@mixin indicateGridArea($area) {
-  grid-area: $area;
-}
+// @mixin indicateGridArea($area) {
+//   grid-area: $area;
+// }
 
-@mixin setPadding($padAmt) {
-  padding: $padAmt;
-}
+// @mixin setPadding($padAmt) {
+//   padding: $padAmt;
+// }
 
-@mixin setCursorStyle($style) {
-  cursor: $style;
-}
+// @mixin setCursorStyle($style) {
+//   cursor: $style;
+// }
 
-@mixin setFlexDirection($dir) {
-  flex-direction: $dir;
-}
+// @mixin setFlexDirection($dir) {
+//   flex-direction: $dir;
+// }
 
-@mixin setMargin($vals) {
-  margin: $vals;
-}
+// @mixin setMargin($vals) {
+//   margin: $vals;
+// }
 
-@mixin setOpacity($perc) {
-  opacity: $perc;
-}
+// @mixin setOpacity($perc) {
+//   opacity: $perc;
+// }
 
-@mixin setPadding($vals) {
-  padding: $vals;
-}
+// @mixin setPadding($vals) {
+//   padding: $vals;
+// }
 
-@mixin setPosition($pos) {
-  position: $pos;
-}
+// @mixin setPosition($pos) {
+//   position: $pos;
+// }
 
-@mixin setTransition($sec, $type) {
-  transition: $sec $type;
-}
+// @mixin setTransition($sec, $type) {
+//   transition: $sec $type;
+// }
 
-@mixin setZIndex($num) {
-  z-index: $num;
-}
+// @mixin setZIndex($num) {
+//   z-index: $num;
+// }
 
-// //REFACTOR THESE!!!
-@mixin setNavBtnImgPadding {
-  // max-height: 40px;
-  // max-width: 40px;
-  // padding: 2px 0px;
-}
+// // //REFACTOR THESE!!!
+// @mixin setNavBtnImgPadding {
+//   // max-height: 40px;
+//   // max-width: 40px;
+//   // padding: 2px 0px;
+// }
 
 // SELECTOR STYLES
 
@@ -138,7 +140,7 @@ h4 {
   @include setMargin(0%);
   @include setNavBtnImgPadding();
   @include setTransition(.4s, ease);
-  background-color: $primary-background no-repeat;
+  background: $primary-background no-repeat;
   border: $nope;
   outline: $nope;
 
@@ -401,6 +403,8 @@ main {
 #recipe-title {
   @include alignText(center);
   @include giveFontSize(30px);
+  @include setMargin(0);
+  @include setPadding(5%);
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 7px 7px 0px 0px;
@@ -410,6 +414,7 @@ main {
 .recipe-instructions {
   @include addBorderRadius(10px)
   @include display(none);
+  @include setMargin(0);
   @include setPadding(1% 1% 1% 1%);
   @include setPosition(fixed);
   @include setZIndex(1000);
@@ -426,6 +431,7 @@ main {
   @include addBorderRadius(5px)
   @include giveFontSize(20px);
   @include setCursorStyle(pointer);
+  @include setMargin(-4% -3% 2% -1%);
   @include setPosition(fixed);
   @include setTransition(.3s, ease);
   background: $secondary-background;

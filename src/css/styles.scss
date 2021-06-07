@@ -1,29 +1,26 @@
-@import 'variables';
-@import 'mixins';
-
 body {
-  // background-color: #5B7894;
-  // display: grid;
-  // font-family: "Quicksand", sans-serif;
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
     "header header"
     "image image"
     "aside main";
   height: 100vh;
+  -webkit-font-smoothing: auto;
+  // background-color: #5B7894;
+  // display: grid;
+  // font-family: "Quicksand", sans-serif;
   // margin: 0;
   // padding: 0;
-  -webkit-font-smoothing: auto;
 }
 
 h1 {
   align-self: center;
-  // color: white;
   font-family: "Sulphur Point", sans-serif;
+  width: 70%;
+  // color: white;
   // font-size: 50px;
   // margin: 0%;
   // padding: 0.5% 0.7% 0%;
-  width: 70%;
 }
 
 h2 {
@@ -32,20 +29,20 @@ h2 {
 }
 
 h3 {
+  height: 17%;
   // color: #359567;
   // cursor: pointer;
-  height: 17%;
   // margin: 5px 5px 10px 0px;
   // transition: .8s ease;
 }
 
 h4 {
+  width: max-content;
   // color: #359567;
   // background-color: #C4EB67;
   // border-radius: 3px;
   // margin: 10px 0px 0px 0px;
   // padding: 1px 4px 1px 4px;
-  width: max-content;
 }
 
 
@@ -59,14 +56,14 @@ header {
 }
 
 span {
-  // color: #C4EB67;
   font-weight: 400;
+  // color: #C4EB67;
 }
 
 .header-apple-icon {
   height: 40px;
-  // margin-left: 5px;
   width: 35px;
+  // margin-left: 5px;
 }
 
 #search {
@@ -128,6 +125,9 @@ span {
 // }
 
 .nav-btn {
+  font-weight: 700;
+  overflow: hidden;
+  width: 15%;
   // align-items: center;
   // background: #5B7894 no-repeat;
   // border: none;
@@ -135,20 +135,17 @@ span {
   // display: flex;
   // flex-direction: column;
   // font-size: 0px;
-  font-weight: 700;
   // justify-content: center;
   // margin: 0%;
   // outline: none;
-  overflow: hidden;
   // text-align: center;
   // transition: .4s ease;
-  width: 15%;
 }
 
 .nav-btn:hover {
+  text-shadow: 0px 2px 4px black;
   // color: #C4EB67;
   // font-size: 14px;
-  text-shadow: 0px 2px 4px black;
   // transition: .4s ease;
 }
 
@@ -171,9 +168,9 @@ span {
 /* BANNER IMAGE*/
 .banner-image {
   background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),url("../images/green-apples.jpg");
-  // grid-area: image;
   height: 150px;
   overflow: hidden;
+  // grid-area: image;
   // width: 100%;
 }
 
@@ -229,10 +226,10 @@ li {
 
 /* RECIPE CARD SECTION */
 main {
+  align-content: flex-start;
   // grid-area: main;
   // display: flex;
   // justify-content: center;
-  align-content: flex-start;
   // flex-direction: row;
   // flex-wrap: wrap;
 }
@@ -345,8 +342,8 @@ main {
 }
 
 .drop-menu h2 {
-  // color: #359567;
   margin: 0px;
+  // color: #359567;
 }
 
 .pantry-list {
@@ -358,31 +355,31 @@ main {
 
 /* RECIPE INSTRUCTIONS */
 .recipe-instructions {
-  // background: white;
   border: 3px solid #C4EB67;
-  // border-radius: 10px;
   box-shadow: 1px 1px 115px black;
-  // display: none;
   height: 70%;
-  margin: 0;
-  overflow-x: scroll;
-  // padding: 1% 1% 1% 1%;
-  // position: fixed;
   right: 15%;
   top: 15%;
   width: 70%;
+  overflow-x: scroll;
+  // background: white;
+  // margin: 0;
+  // border-radius: 10px;
+  // display: none;
+  // padding: 1% 1% 1% 1%;
+  // position: fixed;
   // z-index: 1000;
 }
 
 #exit-recipe-btn {
+  font-weight: 700;
+  margin: -4% -3% 2% -1%;
   // background: white;
   // border: 2px double #359567;
   // border-radius: 5px;
   // color: #359567;
   // cursor: pointer;
   // font-size: 20px;
-  font-weight: 700;
-  margin: -4% -3% 2% -1%;
   // position: fixed;
   // transition: .3s ease;
 }
@@ -393,15 +390,15 @@ main {
 }
 
 #recipe-title {
+  text-shadow: 0px 0px 6px black;
   // background-repeat: no-repeat;
   // background-size: cover;
   // border-radius: 7px 7px 0px 0px;
   // color: white;
   // font-size: 30px;
-  margin: 0;
-  padding: 5%;
+  // margin: 0;
+  // padding: 5%;
   // text-align: center;
-  text-shadow: 0px 0px 6px black;
 }
 
 // .recipe-instructions h4 {
@@ -418,13 +415,13 @@ main {
 }
 
 #overlay {
-  // filter: alpha(opacity=50);
-  // background-color: #5B7894;
   height: 100%;
   left: 0;
+  top: 0;
+  // filter: alpha(opacity=50);
+  // background-color: #5B7894;
   // opacity: 0.5;
   // position: fixed;
-  top: 0;
   // width:100%;
   // z-index: 100;
 }
