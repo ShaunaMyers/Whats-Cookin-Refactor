@@ -1,5 +1,4 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-
 // // variables
 $primary-background: #5B7894;
 $secondary-background-color: white;
@@ -10,9 +9,7 @@ $body-font: "Quicksand", sans-serif;
 $full-width: 100%;
 $nope: none;
 
-
-
-// // @mixins
+// @mixins
 @mixin addBorderRadius($val) {
   border-radius: $val;
 }
@@ -25,8 +22,8 @@ $nope: none;
   text-align: $pos;
 }
 
-@mixin centerContent() {
-  justify-content: center
+@mixin justifyContent($pos) {
+  justify-content: $pos;
 }
 
 @mixin display($type) {
@@ -49,7 +46,7 @@ $nope: none;
   grid-area: $area;
 }
 
-@mixin putPaddingOn($padAmt) {
+@mixin setPadding($padAmt) {
   padding: $padAmt;
 }
 
@@ -61,8 +58,16 @@ $nope: none;
   flex-direction: $dir;
 }
 
+@mixin setMargin($vals) {
+  margin: $vals;
+}
+
 @mixin setOpacity($perc) {
   opacity: $perc;
+}
+
+@mixin setPadding($vals) {
+  padding: $vals;
 }
 
 @mixin setPosition($pos) {
@@ -88,28 +93,36 @@ $nope: none;
 
 body {
   @include display(grid);
+  @include setMargin(0);
+  @include setPadding(0)
   background-color: $primary-background;
   font-family: $body-font;
 }
 
 h1 {
   @include giveFontSize(50px);
+  @include setMargin(0%);
+  @include setPadding(0.5% 0.7% 0%)
   color: $secondary-background-color;
 
 }
 
 h2 {
+  @include setMargin(10px 0px 10px 0px)
   color: $tertiary-color-text;
 }
 
 h3 {
   @include setCursorStyle(pointer);
+  @include setMargin(5px 5px 10px 0px);
   @include setTransition(.8s, ease);
   color: $tertiary-color-text;
 }
 
 h4 {
   @include addBorderRadius(3px);
+  @include setMargin(10px 0px 0px 0px);
+  @include setPadding(1px 4px 1px 4px);
   background-color: $quaternary-color;
   color: $secondary-color;
 }
@@ -117,11 +130,12 @@ h4 {
 .nav-btn {
   @include alignItems(center);
   @include alignText(center);
-  @include centerContent();
+  @include justifyContent(center);
   @include display(flex);
   @include giveFontSize(0px);
   @include setCursorStyle(pointer);
   @include setFlexDirection(column);
+  @include setMargin(0%);
   @include setNavBtnImgPadding();
   @include setTransition(.4s, ease);
   background-color: $primary-background no-repeat;
@@ -145,6 +159,11 @@ header {
   @include giveWidth($full-width);
   @include indicateGridArea(header);
   @include setFlexDirection(row);
+  @include setPadding(0% 0%);
+}
+
+.header-apple-icon {
+  @include setMargin(0px 0px 0px 5px);
 }
 
 span {
@@ -153,7 +172,7 @@ span {
 
 aside {
   @include alignText(center);
-  @include centerContent();
+  @include justifyContent(center);
   @include display(flex);
   background-color: $secondary-background-color;
 }
@@ -164,12 +183,13 @@ aside {
 }
 
 .card-apple-icon {
+  @include setPadding(0 0 10px);
   @include setCursorStyle(pointer);
 }
 
 .card-photo-container {
   @include alignItems(center);
-  @include centerContent();
+  @include justifyContent(center);
   @include display(flex);
   @include setCursorStyle(pointer)
   @include setPosition(relative);
@@ -188,11 +208,12 @@ aside {
 
 #search {
   @include addBorderRadius(15px 15px 15px 15px);
-  @include centerContent();
+  @include justifyContent(center);
   @include display(flex);
   @include giveWidth($full-width);
   @include giveFontSize($body-font);
   @include setFlexDirection(row);
+  @include setMargin(1.2% 0.5% 1.2% 0%);
   border: 3px outset $quaternary-color;
 }
 
@@ -231,8 +252,10 @@ aside {
 .show-all-btn {
   @include addBorderRadius(3px);
   @include giveFontSize(12pt);
+  @include setPadding(5px 10px 5px 10px);
   @include setCursorStyle(pointer);
   background-color: $quaternary-color;
+  font-family: $body-font
 }
 
 .search-label {
@@ -241,16 +264,18 @@ aside {
 
 .search-btn {
   @include addBorderRadius(0px 15px 15px 0px);
-  @include putPaddingOn(1%);
+  @include setPadding(1%);
   border-left: 3px outset $secondary-background-color;
 }
 
 .filter-btn {
   @include addBorderRadius(3px);
   @include giveFontSize(12pt);
+  @include setPadding(5px 10px 5px 10px);
   @include setCursorStyle(pointer);
   background-color: $tertiary-color-text;
   color: $secondary-background-color;
+  font-family: $body-font;
 
   &:hover {
     background-color: $tertiary-color-text;
@@ -272,6 +297,7 @@ aside {
 .show-pantry-recipes-btn {
   @include addBorderRadius(3px);
   @include giveFontSize(12pt);
+  @include setPadding(5px 10px 5px 10px);
   @include setCursorStyle(pointer);
   font-family: $body-font;
 }
@@ -292,7 +318,7 @@ aside {
 
 // RECIPE CARD SECTION
 main {
-  @include centerContent();
+  @include justifyContent(center);
   @include display(flex);
   @include flexWrap(wrap);
   @include indicateGridArea(main);
@@ -302,6 +328,8 @@ main {
 .recipe-card {
   @include addBorderRadius(7px);
   @include giveWidth($full-width);
+  @include setMargin(20px);
+  @include setPadding(15px);
   @include setPosition(pointer);
   background-color: $secondary-background-color;
   
@@ -337,6 +365,7 @@ main {
 .recipe-instructions {
   @include addBorderRadius(10px)
   @include display(none);
+  @include setPadding(1% 1% 1% 1%);
   @include setPosition(fixed);
   @include setZIndex(1000);
   background: $secondary-background-color;
@@ -366,11 +395,12 @@ main {
 }
 
 .saved-ingredients-btn {
+  @include setMargin(1% 0%);
   border-left: 3px solid $quaternary-color;
 }
 
 .ing-pan-btn {
-  @include putPaddingOn(1px 6px 5px 0px);
+  @include setPadding(1px 6px 5px 0px);
 }
 
 .banner-image {
@@ -382,22 +412,21 @@ main {
   @include alignText(center);
   @include display(none);
   @include giveWidth(95%);
+  @include setMargin(25px);
   color: $secondary-background-color;
 
   h1 {
+    @include giveFontSize($full-width);
     @include giveWidth($full-width);
     color: $secondary-background-color;
   }
 
   .welcome-msg {
     @include alignText(center);
+    @include justifyContent(center);
     @include giveWidth(95%);
+    @include setMargin(50px);
     color: $secondary-background-color;
-  
-    h1 {
-      @include giveFontSize($full-width);
-      color: $secondary-background-color;
-    }
   }
 }
 
