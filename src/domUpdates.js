@@ -38,7 +38,6 @@ let domUpdates = {
 
     // CREATE RECIPE CARDS
     createCards(cookbook) {
-        console.log("COOKBOOK", cookbook);
         let recipeCollection;
         if (cookbook.recipes) {
             recipeCollection = cookbook.recipes

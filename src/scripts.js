@@ -206,35 +206,35 @@ function findCheckedPantryBoxes() {
 }
 
 function findRecipesWithCheckedIngredients(selected) {
-  let recipeChecker = (arr, target) => target.every(v => arr.includes(v));
+  let recipeChecker = (recipeIngredientIds, selectedIds) => selectedIds.every(id => recipeIngredientIds.includes(id));
   let ingredientHTMLIds = selected.map(item => {
     return item.id;
   })
 
-  let allRecipeIngredientIds = cookbook.recipes.map(recipe => {
-    return recipe.ingredients;
-  }).flat().map(ingredient => ingredient.id)
-
   let domRecipesCollection = []
   let ingredientIds = [];
 
-  cookbook.recipes.forEach(recipe => {
-    allRecipeIngredientIds = recipe.ingredients.map(ingredient => ingredient.id)
+  ingredientsData.forEach(item => {
+    if (ingredientHTMLIds.includes(item.name)) {
+      ingredientIds.push(item.id)
+    }
+  })
 
-    ingredientsData.forEach(item => {
-      if (ingredientHTMLIds.includes(item.name)) {
-        ingredientIds.push(item.id)
-      }
+  cookbook.recipes.forEach(recipe => {
+
+    let recipeIngredientIds = recipe.ingredients.map(ingredient => {
+      return ingredient.id;
     })
 
-    // console.log("NEW INGRED IDs", ingredientIds);
-
-    if (!recipeChecker(allRecipeIngredientIds, ingredientIds)) {
+    if (recipeChecker(recipeIngredientIds, ingredientIds)) {
       // let domRecipe = document.getElementById(`${recipe.id}`);
       domRecipesCollection.push(recipe);
       // domRecipe.style.display = "block";
     }
   })
+
+
+
   console.log("recipe collection", domRecipesCollection);
   domUpdates.createCards(domRecipesCollection);
 }
