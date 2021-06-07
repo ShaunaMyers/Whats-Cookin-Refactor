@@ -9,15 +9,25 @@ $secondary-color: #359567;
 $body-font: "Quicksand", sans-serif;
 $primary-font-size: 20px;
 $full-width: 100%;
+$nope: none;
+
+
 
 // @mixins
 @mixin centerContent() {
   justify-content: center
 }
 
-@mixin opacityTransition($opac, $sec, $type) {
-  opacity: $opac;
+@mixin setOpacity($perc) {
+  opacity: $perc;
+}
+
+@mixin setTransition($sec, $type) {
   transition: $sec $type;
+}
+
+@mixin display($type) {
+  display: $type;
 }
 
 @mixin giveWidth($width) {
@@ -36,9 +46,20 @@ $full-width: 100%;
   position: $pos;
 }
 
+@mixin setNavBtnImgPadding {
+  max-height: 40px;
+  max-width: 40px;
+  padding: 2px 0px;
+}
+
+@mixin setZIndex($num) {
+  z-index: $num;
+}
+
 // SELECTORS
 
 body {
+  @include display(grid);
   background-color: $primary-background;
   font-family: $body-font;
 }
@@ -62,23 +83,26 @@ h4 {
 }
 
 .nav-btn {
-  background-color: $primary-background;
   @include centerContent();
-  &:hover {
-    background-color: $quaternary-color;
-  }
-}
+  @include display(flex);
+  @include setNavBtnImgPadding();
+  @include setCursorStyle(pointer);
+  @include setTransition(.4s, ease);
+  background-color: $primary-background no-repeat;
 
-.drop-menu {
-  @include setPosition(absolute);
-  color: $secondary-color;
-  h2 {
-    color: $secondary-color;
+  img {
+    @include setNavBtnImgPadding();
+  }
+  
+  &:hover {
+    @include setTransition(.4s, ease);
+    background-color: $quaternary-color;
   }
 }
 
 header {
   @include giveWidth($full-width);
+  @include display(flex);
 }
 
 span {
@@ -87,14 +111,17 @@ span {
 
 aside {
   @include centerContent();
+  @include display(flex);
   background-color: $secondary-background-color;
 }
 
 main {
   @include centerContent();
+  @include display(flex);
 }
 
 .wrap {
+  @include setPosition(relative);
   background-color: $secondary-background-color;
 }
 
@@ -104,12 +131,14 @@ main {
 
 .card-photo-container {
   @include centerContent();
+  @include display(flex);
   @include setCursorStyle(pointer)
   @include setPosition(relative);
 }
 
 .card-photo-preview {
-  @include opacityTransition(50%, .8s, ease);
+  @include setOpacity(50%);
+  @include setTransition(.8s, ease);
   @include giveWidth($full-width);
 }
 
@@ -117,6 +146,7 @@ main {
   @include centerContent();
   @include giveWidth($full-width);
   @include giveFontSize($body-font);
+  @include display(flex);
   border: 3px outset $quaternary-color;
 }
 
@@ -124,15 +154,24 @@ main {
   @include giveWidth($full-width);
   color: $primary-background;
   font-family: $body-font;
+  
   &::placeholder {
     color: $primary-background;
     @include giveFontSize($primary-font-size);
+
+    &:focus::placeholder {
+      @include setTransition(.8s, ease);
+    }
   }
 }
 
 .show-all-btn {
   @include setCursorStyle(pointer);
   background-color: $quaternary-color;
+}
+
+.search-label {
+  @include display(none);
 }
 
 .search-btn {
@@ -157,18 +196,32 @@ main {
   font-family: $body-font;
 }
 
+.drop-menu {
+  @include display(none);
+  @include setPosition(absolute);
+  @include setZIndex(3);
+  color: $secondary-color;
+
+  h2 {
+    color: $secondary-color;
+  }
+}
+
 .recipe-card {
-  background-color: $secondary-background-color;
   @include giveWidth($full-width);
+  @include setPosition(pointer);
+  background-color: $secondary-background-color;
   
   &:hover {
-    @include opacityTransition(100%, .8s, ease);
+    @include setOpacity(100%);
+    @include setTransition(.8s, ease);
     @include giveFontSize($primary-font-size);
     text-shadow: 0px 0px 4px #C4EB67;
     transition: .8s ease;
     
     .text {
-      @include opacityTransition(100%, .8s, ease);
+      @include setOpacity(100%);
+      @include setTransition(.8s, ease);
     }
 
     h3 {
@@ -179,9 +232,12 @@ main {
 }
 
 .recipe-instructions {
+  @include display(none);
   @include setPosition(fixed);
+  @include setZIndex(1000);
   background: $secondary-background-color;
   color: $secondary-color;
+
   h4 {
     background: $secondary-background-color;
     color: $secondary-color;
@@ -205,8 +261,10 @@ main {
 }
 
 .my-recipes-banner {
+  @include display(none);
   @include giveWidth($full-width);
   color: $secondary-background-color;
+
   h1 {
     @include giveWidth($full-width);
     color: $secondary-background-color;
@@ -216,6 +274,7 @@ main {
 .welcome-msg {
   @include giveWidth($full-width);
   color: $secondary-background-color;
+
   h1 {
     @include giveFontSize($full-width);
     color: $secondary-background-color;
@@ -225,6 +284,7 @@ main {
 #overlay {
   @include giveWidth($full-width);
   @include setPosition(fixed);
+  @include setZIndex(100);
   background-color: $primary-background;
 }
 
