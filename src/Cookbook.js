@@ -3,7 +3,6 @@ import ingredient from './ingredient'
 class Cookbook {
   constructor(recipeData, ingredientData) {
     this.recipes = recipeData;
-    console.log("cookbook recipes", this.recipes);
     this.ingredients = ingredientData;
   }
 
