@@ -259,14 +259,30 @@ let domUpdates = {
         // this.clearPantryInput();
     },
 
+    // captureInputValue() {
+    //     let pantryInput = document.getElementById("pantryInput").value;
+    //     return pantryInput = { ingredient: pantryInput, amount: 1 };
+    // },
+
+
     captureInputValue() {
-        let pantryInput = document.getElementById("pantryInput").value;
-        return pantryInput = { ingredient: pantryInput, amount: 1 };
+        let pantryIngName = document.getElementById("pantryIngName").value;
+        let pantryIngQuanity = document.getElementById("pantryIngQuantity").value;
+
+        if (!pantryIngName || !pantryIngQuanity) {
+            document.getElementById("addIngBtn").disabled = true;
+            this.displayAddIngredientError();
+        } else {
+            document.getElementById("addIngBtn").disabled = false;
+            this.displayAddIngredientError();
+            return pantryInput = { ingredient: pantryIngName, amount: pantryIngQuanity };
+        }
     },
 
-    // clearPantryInput() {
-    //     document.getElementById("pantryInput").value = '';
-    // }
+    displayAddIngredientError() {
+        let pantryForm = document.getElementById('pantryForm')
+        pantryForm.insertAdjacentHTML('beforeend', `,<p class="add-ing-error"> Please fill out both fields<p>`)
+    }
 }
 
 export default domUpdates;

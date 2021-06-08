@@ -27,7 +27,7 @@ let allTags;
 
 
 window.addEventListener("load", findTags);
-addIngredientBtn.addEventListener("click", addIngToPantry)
+addIngredientBtn.addEventListener("click", addIngredientToPantry)
 allRecipesBtn.addEventListener("click", function () {
   domUpdates.showAllRecipes(cookbook);
 });
@@ -50,11 +50,8 @@ window.onload = onStartUp()
 function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
-      console.log("Promise", promise);
       user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
-      console.log("User", user);
       ingredientsData = promise[1];
-      console.log('INGREDIENTS DATA', ingredientsData);
       cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
       generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
@@ -64,10 +61,7 @@ function onStartUp() {
 function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
   findPantryInfo(user, ingredientsData, pantryInfo);
   domUpdates.displayUserGreeting(user);
-  // domUpdates.displayPantryInfo();
   domUpdates.createCards(cookbook);
-  // console.log(findTags());
-  // console.log(cookbook);
 }
 
 function findPantryInfo(user, ingredientsData, pantryInfo) {
@@ -89,16 +83,15 @@ function findPantryInfo(user, ingredientsData, pantryInfo) {
   domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
-function addIngToPantry(event) {
+function addIngredientToPantry(event) {
   event.preventDefault();
   console.log(user);
   let ingToAdd = domUpdates.captureInputValue();
-  console.log(user.pantry)
   if (!user.pantry.includes(ingToAdd)) {
     user.pantry.push(ingToAdd);
   }
-  console.log(user.pantry)
-  domUpdates.displayPantryInfo();
+  console.log('USER PANTRY', user.pantry)
+  domUpdates.displayPantryInfo(user.pantry);
 }
 
 // FILTER BY RECIPE TAGS

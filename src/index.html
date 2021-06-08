@@ -35,14 +35,14 @@
   </section>
   <div class="drop-menu">
     <h2>My Pantry</h2>
-    <form action="submit" class="pantry-form">
+    <form action="submit" class="pantry-form" id="pantryForm">
       <h3>Add Ingredient</h3>
       <input type="text" name="addnew" placeholder="Ingredient Name" class="pantry-input" id="pantryIngName" required>
       <input type="text" name="addnew" placeholder="Ingredient Quantity" class="pantry-input" id="pantryIngQuantity"
         required>
-      <button class="add-ing-btn">Add</button>
-      <button type="submit" class="show-pantry-recipes-btn">What Can I Make?</button>
+      <button type="submit" class="add-ing-btn" id="addIngBtn">Add</button>
     </form>
+    <button type="submit" class="show-pantry-recipes-btn">What Can I Make?</button>
     <ul class="pantry-list"></ul>
   </div>
   <aside>
