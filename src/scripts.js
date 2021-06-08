@@ -24,6 +24,11 @@ let user, cookbook, ingredientsData, pantryInfo;
 let allTags;
 
 
+// ARIA 
+let wrap = document.getElementById("wrap");
+wrap.addEventListener("change", changeARIAChkd);
+let dropArea = document.getElementById("pantryDrop");
+dropArea.addEventListener("change", changeARIAChkd); 
 
 
 // window.addEventListener("load", findTags);
@@ -110,9 +115,16 @@ function findTags() {
     });
     return allTags.sort();
   });
-  // allTags.map(tag => (domUpdates.capitalize(tag));
   domUpdates.listTags(allTags);
 }
+
+function changeARIAChkd(event) {
+  event.preventDefault();
+  let el = event.target.closest(".checked-tag")
+    if (el.getAttribute("aria-checked", "false")) {
+      el.setAttribute("aria-checked", "true");
+    }
+  }
 
 
 function findCheckedBoxes() {

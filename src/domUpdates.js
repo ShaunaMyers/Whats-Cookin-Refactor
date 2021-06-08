@@ -78,10 +78,13 @@ let domUpdates = {
     // FILTER BY RECIPE TAGS
     listTags(allTags) {
         allTags.forEach(tag => {
-            tagList.insertAdjacentHTML("beforeend", `<li><input type="checkbox" class="checked-tag" id="${tag}">
-            <label for="${tag}">${tag}</label></li>`);
+            tagList.insertAdjacentHTML("beforeend", `<li><input type="checkbox" role="checkbox" aria-checked="false" class="checked-tag" id="${tag}">
+            <label for="${tag}">${domUpdates.capitalize(tag)}</label></li>`);
+            let checkbox = document.getElementById(`${tag}`);
+            console.log(checkbox.getAttribute("aria-checked"));
         });
     },
+
 
     capitalize(words) {
         return words.split(" ").map(word => {
@@ -153,7 +156,7 @@ let domUpdates = {
           <button id="exit-recipe-btn">X</button>
           <h3 id="recipe-title">${recipe.name}</h3>
           <h4>Ingredients</h4>
-          <p>${ingredients}</p>`
+          <p>${domUpdates.capitalize(ingredients)}</p>`
         fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
     },
 
@@ -251,8 +254,8 @@ let domUpdates = {
     // CREATE AND USE PANTRY
     displayPantryInfo(pantry) {
         pantry.forEach(ingredient => {
-            let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
-            <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
+            let ingredientHtml = `<li><input type="checkbox" role="checkbox" aria-checked="false" class="checked-tag pantry-checkbox" id="${ingredient.name}">
+            <label for="${ingredient.name}">${domUpdates.capitalize(ingredient.name)}, ${ingredient.count}</label></li>`;
             document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
                 ingredientHtml);
         });
