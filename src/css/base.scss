@@ -1,5 +1,7 @@
+
+
 /* This is an example of using Sass, otherwise plain CSS works too*/
-// // variables
+// variables
 $body-font: "Quicksand", sans-serif;
 $primary-background: #5B7894;
 $secondary-background: white;
@@ -46,6 +48,10 @@ $nope: none;
   grid-area: $area;
 }
 
+@mixin setOverflowX($val) {
+  overflow-x: $val;
+}
+
 @mixin setPadding($padAmt) {
   padding: $padAmt;
 }
@@ -82,11 +88,11 @@ $nope: none;
   z-index: $num;
 }
 
-// //REFACTOR THESE!!!
+// // //REFACTOR THIS!!!
 @mixin setNavBtnImgPadding {
-  // max-height: 40px;
-  // max-width: 40px;
-  // padding: 2px 0px;
+  max-height: 40px;
+  max-width: 40px;
+  padding: 2px 0px;
 }
 
 // SELECTOR STYLES
@@ -136,9 +142,9 @@ h4 {
   @include setCursorStyle(pointer);
   @include setFlexDirection(column);
   @include setMargin(0%);
-  @include setNavBtnImgPadding();
+  @include setPadding(2px 0px);
   @include setTransition(.4s, ease);
-  background-color: $primary-background no-repeat;
+  background: $primary-background no-repeat;
   border: $nope;
   outline: $nope;
 
@@ -149,7 +155,7 @@ h4 {
   }
 
   img {
-    @include setNavBtnImgPadding();
+    @include setPadding(2px 0px);
   }
   
 }
@@ -401,6 +407,8 @@ main {
 #recipe-title {
   @include alignText(center);
   @include giveFontSize(30px);
+  @include setMargin(0);
+  @include setPadding(5%);
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 7px 7px 0px 0px;
@@ -410,6 +418,8 @@ main {
 .recipe-instructions {
   @include addBorderRadius(10px)
   @include display(none);
+  @include setMargin(0);
+  @include setOverflowX(scroll);
   @include setPadding(1% 1% 1% 1%);
   @include setPosition(fixed);
   @include setZIndex(1000);
@@ -426,6 +436,7 @@ main {
   @include addBorderRadius(5px)
   @include giveFontSize(20px);
   @include setCursorStyle(pointer);
+  @include setMargin(-4% -3% 2% -1%);
   @include setPosition(fixed);
   @include setTransition(.3s, ease);
   background: $secondary-background;

@@ -8,10 +8,11 @@ import './images/search.png';
 import './images/seasoning.png';
 import './images/pancakes.jpg';
 
+let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let menuOpen = false;
+// let pantryInput = document.querySelector("pantry-input");
 let tagList = document.querySelector(".tag-list");
-let fullRecipeInfo = document.querySelector(".recipe-instructions");
 
 // import tags from './scripts';
 
@@ -235,25 +236,6 @@ let domUpdates = {
     },
 
     // CREATE AND USE PANTRY
-    findPantryInfo(user, ingredientsData, pantryInfo) {
-        user.pantry.forEach(item => {
-            let itemInfo = ingredientsData.find(ingredient => {
-                return ingredient.id === item.ingredient;
-            });
-            let originalIngredient = pantryInfo.pantryIngredients.find(ingredient => {
-                if (itemInfo) {
-                    return ingredient.name === itemInfo.name;
-                }
-            });
-            if (itemInfo && originalIngredient) {
-                originalIngredient.count += item.amount;
-            } else if (itemInfo) {
-                pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
-            }
-        });
-        this.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
-    },
-
     displayPantryInfo(pantry) {
         pantry.forEach(ingredient => {
             let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
@@ -261,7 +243,17 @@ let domUpdates = {
             document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
                 ingredientHtml);
         });
+        this.clearPantryInput();
     },
+
+    captureInputValue() {
+        let pantryInput = document.getElementById("pantryInput").value;
+        return pantryInput = {ingredient: pantryInput, amount: 1};
+    },
+
+    clearPantryInput() {
+        document.getElementById("pantryInput").value = '';  
+    }
 }
 
 export default domUpdates;

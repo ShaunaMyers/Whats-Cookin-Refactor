@@ -57,10 +57,3 @@
 @mixin setZIndex($num) {
     z-index: $num;
 }
-
-//REFACTOR THESE!!!
-@mixin setNavBtnImgPadding {
-    max-height: 40px;
-    max-width: 40px;
-    padding: 2px 0px;
-}

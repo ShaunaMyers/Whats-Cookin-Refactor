@@ -9,12 +9,13 @@ import Cookbook from './Cookbook';
 import domUpdates from './domUpdates';
 import Pantry from './Pantry';
 
+let addIngredientBtn = document.querySelector(".add-ing-btn");
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let pantryBtn = document.querySelector(".my-pantry-btn");
-
+// let pantryInput = document.querySelector("pantry-input");
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
@@ -23,7 +24,12 @@ let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let user, cookbook, ingredientsData, pantryInfo;
 
 
+//need to move to domUpdates
+// let pantryInput = document.querySelector("pantry-input");
+
+
 window.addEventListener("load", findTags);
+addIngredientBtn.addEventListener("click", addIngToPantry)
 allRecipesBtn.addEventListener("click", function () {
   domUpdates.showAllRecipes(cookbook);
 });
@@ -58,6 +64,7 @@ function onStartUp() {
 function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
   findPantryInfo(user, ingredientsData, pantryInfo);
   domUpdates.displayUserGreeting(user);
+  // domUpdates.displayPantryInfo();
   domUpdates.createCards(cookbook);
 }
 
@@ -78,6 +85,18 @@ function findPantryInfo(user, ingredientsData, pantryInfo) {
     }
   });
   domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
+}
+
+function addIngToPantry(event) {
+  event.preventDefault();
+  console.log(user);
+  let ingToAdd = domUpdates.captureInputValue();
+  console.log(user.pantry)
+  if (!user.pantry.includes(ingToAdd)) {
+    user.pantry.push(ingToAdd);
+  }
+  console.log(user.pantry)
+  domUpdates.displayPantryInfo();
 }
 
 // FILTER BY RECIPE TAGS
