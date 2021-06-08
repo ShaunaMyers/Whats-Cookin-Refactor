@@ -39,7 +39,7 @@ let domUpdates = {
 
     // CREATE RECIPE CARDS
     createCards(cookbook) {
-        console.log("COOKBOOK", cookbook);
+        // console.log("COOKBOOK", cookbook);
         let recipeCollection;
         if (cookbook.recipes) {
             recipeCollection = cookbook.recipes
@@ -75,8 +75,8 @@ let domUpdates = {
     },
 
     // FILTER BY RECIPE TAGS
-    listTags(tags) {
-        tags.forEach(tag => {
+    listTags(tags, tagList) {
+        tags.forEach(rec => {
             tagList.insertAdjacentHTML("beforeend", `<li><input type="checkbox" class="checked-tag" id="${tag}">
             <label for="${tag}">${tag}</label></li>`);
         });
@@ -228,7 +228,7 @@ let domUpdates = {
     },
 
     showAllRecipes(cookbook) {
-        console.log(cookbook);
+        // console.log(cookbook);
         cookbook.recipes.forEach(recipe => {
             let domRecipe = document.getElementById(`${recipe.id}`);
             domRecipe.style.display = "block";
