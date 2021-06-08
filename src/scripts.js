@@ -102,14 +102,14 @@ function findTags() {
   allTags = [];
   cookbook.recipes.forEach(recipe => {
     recipe.tags.forEach(tag => {
-      console.log(tag);
-      if (!tags.includes(tag)) {
-        tags.push(tag);
+      if (!allTags.includes(tag)) {
+        allTags.push(tag);
       }
     });
-    return tags.sort();
+    console.log(allTags.sort())
+    return allTags.sort();
   });
-  domUpdates.listTags(tags)
+  domUpdates.listTags(allTags)
 }
 
 // function capitalize(words) {
