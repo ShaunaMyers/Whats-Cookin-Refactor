@@ -1,5 +1,5 @@
 import Recipe from './recipe';
-import recipeData from './data/sample-recipe-data';
+// import recipeData from './data/sample-recipe-data';
 import './images/apple-logo.png';
 import './images/apple-logo-outline.png';
 import './images/cookbook.png';
@@ -15,6 +15,7 @@ let menuOpen = false;
 let tagList = document.querySelector(".tag-list");
 
 import allTags from './scripts';
+import ingredientsData from './data/sample-ingredient-data';
 
 // let recipes = [];
 
@@ -81,6 +82,12 @@ let domUpdates = {
             <label for="${tag}">${tag}</label></li>`);
         });
     },
+
+    capitalize(words) {
+        return words.split(" ").map(word => {
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        }).join(" ");
+      },
 
     filterRecipes(filtered) {
         let foundRecipes = recipes.filter(recipe => {
@@ -155,10 +162,16 @@ let domUpdates = {
     },
 
     generateIngredients(recipe) {
-        return recipe.ingredients.map(i => {
+        let theseIngs;
+        return theseIngs = recipe.ingredients.map(i => {
+            ingredientsData.forEach(data => {
+                if (data.id === i.id) {
+                    i.name = data.name;
+                }
+            })
             return `${i.name} (${i.quantity.amount} ${i.quantity.unit})`
         }).join(", ");
-    },
+    },  
 
     generateInstructions(recipe) {
         let instructionsList = "";

@@ -112,14 +112,9 @@ function findTags() {
     });
     return allTags.sort();
   });
-  domUpdates.listTags(allTags)
+  // allTags.map(tag => (domUpdates.capitalize(tag));
+  domUpdates.listTags(allTags);
 }
-
-// function capitalize(words) {
-//   return words.split(" ").map(word => {
-//     return word.charAt(0).toUpperCase() + word.slice(1);
-//   }).join(" ");
-// }
 
 
 function findCheckedBoxes() {
@@ -183,6 +178,7 @@ function openRecipeModal(event) {
   fullRecipeInfo.style.display = "inline";
   let recipeId = event.path.find(e => e.id).id;
   let recipe = cookbook.recipes.find(recipe => recipe.id === Number(recipeId));
+  console.log(recipe.ingredients);
   domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
   domUpdates.addRecipeImage(recipe);
   domUpdates.generateInstructions(recipe);

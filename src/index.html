@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>Fresh Picks</title>
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
@@ -17,8 +18,8 @@
         <label for="search-input" class="search-label">Search</label>
         <button class="nav-btn search-btn" type="button" name="button"><img src="../images/search.png" alt="search button"></button>
       </form>
-      <button class="nav-btn ing-pan-btn saved-recipes-btn" type="button" name="button"><img src="../images/cookbook.png" alt="search button">My Recipes</button>
-      <button class="nav-btn my-pantry-btn ing-pan-btn saved-ingredients-btn" type="button" name="button"><img src="../images/seasoning.png" alt="search button">My Pantry</button>
+      <button class="nav-btn ing-pan-btn saved-recipes-btn" type="button" name="button"><img src="../images/cookbook.png" alt="search button" class="hat">My Recipes</button>
+      <button class="nav-btn my-pantry-btn ing-pan-btn saved-ingredients-btn" type="button" name="button"><img src="../images/seasoning.png" alt="search button" class="paper">My Pantry</button>
     </header>
     <section class="banner-image">
       <div class="my-recipes-banner">
@@ -29,7 +30,7 @@
     <div class="drop-menu">
       <h2>My Pantry</h2>
       <form action="submit" class="pantry-form">Add Ingredient</form>
-      <input type="text" class="pantry-input" id="pantryInput"><span><button class="add-ing-btn">Add</button></span>
+      <input type="text" name="addnew" placeholder="new ingredient" class="pantry-input" id="pantryInput" required><span><button class="add-ing-btn">Add</button></span>
       <button type="submit" class="show-pantry-recipes-btn">What Can I Make?</button>
       <ul class="pantry-list"></ul>
     </div>

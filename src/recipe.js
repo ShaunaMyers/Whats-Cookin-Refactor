@@ -11,7 +11,13 @@ class Recipe {
 
   
   returnIngredients() {
+    this.ingredients = this.ingredients.forEach(ing => {
+      let match = this.ingredientsData.find(data => data.id === ing.id);
+      return ing.name = match.name
+    })
+    console.log(this.ingredients);
     this.calculateIngredientsCost();
+    // console.log(this.ingredients);
     return this.ingredients;
   }
 
