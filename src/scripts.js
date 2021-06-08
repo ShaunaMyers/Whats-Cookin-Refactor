@@ -26,7 +26,7 @@ let allTags;
 
 
 
-window.addEventListener("load", findTags);
+// window.addEventListener("load", findTags);
 addIngredientBtn.addEventListener("click", addIngToPantry)
 allRecipesBtn.addEventListener("click", function () {
   domUpdates.showAllRecipes(cookbook);
@@ -52,7 +52,6 @@ function onStartUp() {
     .then((promise) => {
       console.log("Promise", promise);
       user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
-      console.log("User", user);
       ingredientsData = promise[1];
       console.log('INGREDIENTS DATA', ingredientsData);
       cookbook = new Cookbook(promise[2], promise[1]);
@@ -63,11 +62,13 @@ function onStartUp() {
 
 function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
   findPantryInfo(user, ingredientsData, pantryInfo);
+  findTags();
   domUpdates.displayUserGreeting(user);
   // domUpdates.displayPantryInfo();
   domUpdates.createCards(cookbook);
+  domUpdates.listTags(allTags);
   // console.log(findTags());
-  // console.log(cookbook);
+  console.log(cookbook);
 }
 
 function findPantryInfo(user, ingredientsData, pantryInfo) {
@@ -91,13 +92,10 @@ function findPantryInfo(user, ingredientsData, pantryInfo) {
 
 function addIngToPantry(event) {
   event.preventDefault();
-  console.log(user);
   let ingToAdd = domUpdates.captureInputValue();
-  console.log(user.pantry)
   if (!user.pantry.includes(ingToAdd)) {
     user.pantry.push(ingToAdd);
   }
-  console.log(user.pantry)
   domUpdates.displayPantryInfo();
 }
 
