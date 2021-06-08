@@ -108,9 +108,9 @@ function findTags() {
         allTags.push(tag);
       }
     });
-    allTags.sort();
-    return allTags.map(tag => domUpdates.capitalize(tag));
+    return allTags.sort();
   });
+  // allTags.map(tag => (domUpdates.capitalize(tag));
   domUpdates.listTags(allTags);
 }
 
@@ -176,6 +176,7 @@ function openRecipeModal(event) {
   fullRecipeInfo.style.display = "inline";
   let recipeId = event.path.find(e => e.id).id;
   let recipe = cookbook.recipes.find(recipe => recipe.id === Number(recipeId));
+  console.log(recipe.ingredients);
   domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
   domUpdates.addRecipeImage(recipe);
   domUpdates.generateInstructions(recipe);

@@ -4,6 +4,7 @@ import { recipeData } from '../src/data/sample-recipe-data';
 import Ingredient from '../src/Ingredient';
 import { ingredientsData } from '../src/data/sample-ingredient-data';
 
+
 describe('Recipe', function() {
   let recipe;
   let recipeInfo;
@@ -51,7 +52,7 @@ describe('Recipe', function() {
     expect(recipe.instructions).to.be.an.an('array');
   });
 
-  it('should be able to return the names of the ingredients', function() {
+  it.skip('should be able to return the names of the ingredients', function() {
     const result = recipe.returnIngredients();
     expect(result).to.be.an('array');
     expect(result[1].name).to.equal('baking soda');
