@@ -14,7 +14,7 @@ let menuOpen = false;
 // let pantryInput = document.querySelector("pantry-input");
 let tagList = document.querySelector(".tag-list");
 
-// import tags from './scripts';
+import allTags from './scripts';
 
 // let recipes = [];
 
@@ -75,8 +75,8 @@ let domUpdates = {
     },
 
     // FILTER BY RECIPE TAGS
-    listTags(tags) {
-        tags.forEach(tag => {
+    listTags(allTags) {
+        allTags.forEach(tag => {
             tagList.insertAdjacentHTML("beforeend", `<li><input type="checkbox" class="checked-tag" id="${tag}">
             <label for="${tag}">${tag}</label></li>`);
         });

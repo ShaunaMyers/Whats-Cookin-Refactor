@@ -15,17 +15,15 @@ let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let pantryBtn = document.querySelector(".my-pantry-btn");
-// let pantryInput = document.querySelector("pantry-input");
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let user, cookbook, ingredientsData, pantryInfo;
+let allTags;
 
 
-//need to move to domUpdates
-// let pantryInput = document.querySelector("pantry-input");
 
 
 window.addEventListener("load", findTags);
@@ -66,6 +64,8 @@ function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
   domUpdates.displayUserGreeting(user);
   // domUpdates.displayPantryInfo();
   domUpdates.createCards(cookbook);
+  console.log(findTags());
+  console.log(cookbook);
 }
 
 function findPantryInfo(user, ingredientsData, pantryInfo) {
@@ -100,17 +100,18 @@ function addIngToPantry(event) {
 }
 
 // FILTER BY RECIPE TAGS
-function findTags(recipe) {
-  let tags = [];
+function findTags() {
+  allTags = [];
   cookbook.recipes.forEach(recipe => {
     recipe.tags.forEach(tag => {
-      if (!tags.includes(tag)) {
-        tags.push(tag);
+      if (!allTags.includes(tag)) {
+        allTags.push(tag);
       }
     });
-    return tags.sort();
+    console.log(allTags.sort())
+    return allTags.sort();
   });
-  domUpdates.listTags(tags)
+  domUpdates.listTags(allTags)
 }
 
 // function capitalize(words) {
