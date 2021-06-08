@@ -1,5 +1,4 @@
 import Recipe from './recipe';
-// import recipeData from './data/sample-recipe-data';
 import './images/apple-logo.png';
 import './images/apple-logo-outline.png';
 import './images/cookbook.png';
@@ -14,13 +13,21 @@ let menuOpen = false;
 // let pantryInput = document.querySelector("pantry-input");
 let tagList = document.querySelector(".tag-list");
 
-import allTags from './scripts';
 import ingredientsData from './data/sample-ingredient-data';
 
 // let recipes = [];
-
-
+ 
 let domUpdates = {
+
+    changeARIAChkd(event) {
+        event.preventDefault();
+        let el = event.target.closest("input")
+          if (el.getAttribute("aria-checked", "false")) {
+            el.setAttribute("aria-checked", "true");
+        } else if (el.getAttribute("aria-checked", "true")) {
+            el.setAttribute("aria-checked", "false");
+        }
+    },
 
     // generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
     //     this.findPantryInfo(user, ingredientsData, pantryInfo);
@@ -80,8 +87,6 @@ let domUpdates = {
         allTags.forEach(tag => {
             tagList.insertAdjacentHTML("beforeend", `<li><input type="checkbox" role="checkbox" aria-checked="false" class="checked-tag" id="${tag}">
             <label for="${tag}">${domUpdates.capitalize(tag)}</label></li>`);
-            let checkbox = document.getElementById(`${tag}`);
-            console.log(checkbox.getAttribute("aria-checked"));
         });
     },
 
