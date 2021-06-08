@@ -51,6 +51,7 @@ function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
       user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
+      console.log("USER", user);
       ingredientsData = promise[1];
       cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
@@ -86,12 +87,17 @@ function findPantryInfo(user, ingredientsData, pantryInfo) {
 function addIngredientToPantry(event) {
   event.preventDefault();
   console.log(user);
-  let ingToAdd = domUpdates.captureInputValue();
-  if (!user.pantry.includes(ingToAdd)) {
-    user.pantry.push(ingToAdd);
+  let ingredientAdded = domUpdates.captureInputValue();
+  if (!ingredientAdded) {
+    domUpdates.displayAddIngredientError();
+  } else {
+    console.log("INGRED ADDED", ingredientAdded);
+    if (!user.pantry.includes(ingredientAdded)) {
+      user.pantry.push(ingredientAdded);
+    }
+    console.log('USER PANTRY', user.pantry)
+    domUpdates.displayPantryInfo(user.pantry);
   }
-  console.log('USER PANTRY', user.pantry)
-  domUpdates.displayPantryInfo(user.pantry);
 }
 
 // FILTER BY RECIPE TAGS

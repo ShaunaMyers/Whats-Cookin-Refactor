@@ -271,7 +271,7 @@ let domUpdates = {
 
         if (!pantryIngName || !pantryIngQuanity) {
             document.getElementById("addIngBtn").disabled = true;
-            this.displayAddIngredientError();
+            return;
         } else {
             document.getElementById("addIngBtn").disabled = false;
             this.displayAddIngredientError();
@@ -280,8 +280,15 @@ let domUpdates = {
     },
 
     displayAddIngredientError() {
-        let pantryForm = document.getElementById('pantryForm')
-        pantryForm.insertAdjacentHTML('beforeend', `,<p class="add-ing-error"> Please fill out both fields<p>`)
+        let addIngredientBtn = document.getElementById('addIngBtn');
+        // let pantryForm = document.getElementById('pantryForm')
+        let addIngredientError = document.getElementById('addIngError');
+        addIngredientError.classList.remove('hidden');
+
+        if (!addIngredientBtn.disabled) {
+            addIngredientError.disabled = true;
+            addIngredientError.classList.add('hidden');
+        }
     }
 }
 
