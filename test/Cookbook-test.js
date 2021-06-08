@@ -34,7 +34,7 @@ describe('Cookbook', () => {
       .to.deep.equal([recipeData[0], recipeData[7], recipeData[2]]);
   });
 
-  it('should allow the user to search recipes by name', () => {
+  it.only('should allow the user to search recipes by name', () => {
     expect(cookbook.searchForRecipe('wing')).to.deep.equal([recipeData[2]]);
   });
 
