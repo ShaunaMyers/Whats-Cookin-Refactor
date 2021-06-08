@@ -265,28 +265,24 @@ let domUpdates = {
     // },
 
 
-    captureInputValue() {
+    captureInputValue(user) {
         let pantryIngName = document.getElementById("pantryIngName").value;
         let pantryIngQuanity = document.getElementById("pantryIngQuantity").value;
 
         if (!pantryIngName || !pantryIngQuanity) {
-            document.getElementById("addIngBtn").disabled = true;
             return;
         } else {
-            document.getElementById("addIngBtn").disabled = false;
-            this.displayAddIngredientError();
-            return pantryInput = { ingredient: pantryIngName, amount: pantryIngQuanity };
+            this.displayAddIngredientError(false);
+            let pantryInput = { ingredient: pantryIngName, amount: pantryIngQuanity };
+            return pantryInput;
         }
     },
 
-    displayAddIngredientError() {
-        let addIngredientBtn = document.getElementById('addIngBtn');
-        // let pantryForm = document.getElementById('pantryForm')
+    displayAddIngredientError(inputFieldValues) {
         let addIngredientError = document.getElementById('addIngError');
-        addIngredientError.classList.remove('hidden');
-
-        if (!addIngredientBtn.disabled) {
-            addIngredientError.disabled = true;
+        if (inputFieldValues) {
+            addIngredientError.classList.remove('hidden');
+        } else {
             addIngredientError.classList.add('hidden');
         }
     }
