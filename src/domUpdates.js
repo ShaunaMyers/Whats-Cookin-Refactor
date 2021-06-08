@@ -75,6 +75,12 @@ let domUpdates = {
     },
 
     // FILTER BY RECIPE TAGS
+    capitalize(words) {
+        words.split(" ").map(word => {
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        }).join(" ");
+      },
+
     listTags(allTags) {
         allTags.forEach(tag => {
             tagList.insertAdjacentHTML("beforeend", `<li><input type="checkbox" class="checked-tag" id="${tag}">

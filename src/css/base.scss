@@ -283,7 +283,8 @@ ul {
   font-family: $body-font;
 
   &:hover {
-    background-color: $light-green;
+    color: black;
+    background-color: $yellow-green;
   }
 }
 
@@ -327,10 +328,16 @@ ul {
   @include setMargin(25px 0 0 0);
   width: 95%;
 
-  h1{
+  h1 {
+    @include justifyContent(center);
     color: $secondary-background;
+    width: 95%;
   }
+}
 
+.my-recipes-banner {
+  @include display($nope);
+  @include setMargin(25px 0 0 0);
 }
 
 .welcome-msg {
@@ -344,10 +351,6 @@ ul {
     width: 100%;
   }
 
-}
-
-.my-recipes-banner {
-  @include display($nope);
 }
 
 // PANTRY STUFF

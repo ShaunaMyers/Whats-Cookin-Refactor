@@ -108,17 +108,11 @@ function findTags() {
         allTags.push(tag);
       }
     });
-    console.log(allTags.sort())
-    return allTags.sort();
+    allTags.sort();
+    return allTags.map(tag => domUpdates.capitalize(tag));
   });
-  domUpdates.listTags(allTags)
+  domUpdates.listTags(allTags);
 }
-
-// function capitalize(words) {
-//   return words.split(" ").map(word => {
-//     return word.charAt(0).toUpperCase() + word.slice(1);
-//   }).join(" ");
-// }
 
 
 function findCheckedBoxes() {
