@@ -228,10 +228,6 @@ let domUpdates = {
     },
 
     showAllRecipes(cookbook) {
-<<<<<<< HEAD
-        // console.log(cookbook);
-=======
->>>>>>> main
         cookbook.recipes.forEach(recipe => {
             let domRecipe = document.getElementById(`${recipe.id}`);
             domRecipe.style.display = "block";
