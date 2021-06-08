@@ -295,6 +295,16 @@ ul {
   }
 }
 
+.add-ing-btn {
+  background-color: $tertiary-color;
+  color: $secondary-background;
+  font-family: $body-font;
+
+  &:hover {
+    background-color: $quaternary-color;
+  }
+}
+
 .text {
   @include alignText(center);
   @include giveFontSize(0px);
