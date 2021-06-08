@@ -5,7 +5,7 @@ $primary-background: #5B7894;
 $secondary-background: white;
 $yellow-green: #C4EB67;
 $secondary-color: #359567;
-$tertiary-color: #84C8A4;
+$light-green: #84C8A4;
 $full-width: 100%;
 $nope: none;
 
@@ -87,7 +87,6 @@ $nope: none;
 }
 
 // SELECTOR STYLES
-
 body {
   @include display(grid);
   @include setMargin(0);
@@ -106,14 +105,14 @@ h1 {
 
 h2 {
   @include setMargin(10px 0px 10px 0px)
-  color: $tertiary-color;
+  color: $light-green;
 }
 
 h3 {
   @include setCursorStyle(pointer);
   @include setMargin(5px 5px 10px 0px);
   @include setTransition(.8s, ease);
-  color: $tertiary-color;
+  color: $light-green;
 }
 
 h4 {
@@ -279,21 +278,25 @@ ul {
   @include giveFontSize(12pt);
   @include setPadding(5px 10px 5px 10px);
   @include setCursorStyle(pointer);
-  background-color: $tertiary-color;
+  background-color: $light-green;
   color: $secondary-background;
   font-family: $body-font;
 
   &:hover {
-    background-color: $tertiary-color;
+    background-color: $light-green;
   }
 }
 
 .add-ing-btn {
-  background-color: $tertiary-color;
-  color: $secondary-background;
+  @include giveFontSize(14px);
+  @include setMargin(5px 0 0 10px);
   font-family: $body-font;
+  font-weight: bold;
+  background-color: $light-green;
+  color: $secondary-background;
 
   &:hover {
+    color: black;
     background-color: $yellow-green;
   }
 }
@@ -355,6 +358,8 @@ ul {
   @include setPadding(5px 10px 5px 10px);
   @include setCursorStyle(pointer);
   font-family: $body-font;
+  background-color: $light-green;
+  color: $secondary-background;
 }
 
 .drop-menu {
@@ -505,31 +510,53 @@ main {
 }
 
 @media only screen and (max-width: 480px) {
+//   body {
+//   grid-template-areas:
+//   "header header"
+//   "image image"
+//   "main main";
+// }
+
+  .header-apple-icon {
+    @include setMargin(13px 0 0 0px);
+  }
+
+  h1 {
+    @include setMargin(0 0 10px 10px);
+    font-size: 24px;
+    text-align: center;
+  }
+
   .hat {
     @include setMargin(12px 0 0 0);
-    height: 40px;
+    height: 30px;
   }
 
   .paper {
     @include setMargin(12px 0 0 0);
-    height: 40px;
+    height: 30px;
   }
 
   #search {
     @include setMargin(25px 0 0 0);
-    height: 40px;
+    height: 30px;
+    width: 150px;
   }
 
   .search-btn {
-    height: 40px;
+    height: 30px;
 
     img {
-      height: 40px;
+      height: 30px;
     }
   }
 
   .search-label {
-    height: 40px;
+    height: 30px;
+  }
+
+  .banner-image {
+    height: 30px;
   }
 
 }
