@@ -468,6 +468,71 @@ main {
   background-color: $primary-background;
 }
 
+//MEDIA QUERIES
+
+@media only screen and (max-width: 1024px) {
+  .recipe-card {
+    min-width: 35%;
+  }
+
+  .hat {
+    @include setMargin(15px 0 0 0);
+    height: 40px;
+  }
+
+  .paper {
+    @include setMargin(15px 0 0 0);
+    height: 40px;
+  }
+
+  #search {
+    @include setMargin(25px 0 0 0);
+    height: 40px;
+  }
+
+  .search-btn {
+    height: 40px;
+
+    img {
+      height: 40px;
+    }
+  }
+
+  .search-label {
+    height: 40px;
+  }
+
+}
+
+@media only screen and (max-width: 480px) {
+  .hat {
+    @include setMargin(12px 0 0 0);
+    height: 40px;
+  }
+
+  .paper {
+    @include setMargin(12px 0 0 0);
+    height: 40px;
+  }
+
+  #search {
+    @include setMargin(25px 0 0 0);
+    height: 40px;
+  }
+
+  .search-btn {
+    height: 40px;
+
+    img {
+      height: 40px;
+    }
+  }
+
+  .search-label {
+    height: 40px;
+  }
+
+}
 
 
 
