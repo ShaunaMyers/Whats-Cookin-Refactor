@@ -3,7 +3,7 @@
 $body-font: "Quicksand", sans-serif;
 $primary-background: #5B7894;
 $secondary-background: white;
-$quaternary-color: #C4EB67;
+$yellow-green: #C4EB67;
 $secondary-color: #359567;
 $tertiary-color: #84C8A4;
 $full-width: 100%;
@@ -86,13 +86,6 @@ $nope: none;
   z-index: $num;
 }
 
-// // //REFACTOR THIS!!!
-// @mixin setNavBtnImgPadding {
-//   max-height: 40px;
-//   max-width: 40px;
-//   padding: 2px 0px;
-// }
-
 // SELECTOR STYLES
 
 body {
@@ -127,7 +120,7 @@ h4 {
   @include addBorderRadius(3px);
   @include setMargin(10px 0px 0px 0px);
   @include setPadding(1px 4px 1px 4px);
-  background-color: $quaternary-color;
+  background-color: $yellow-green;
   color: $secondary-color;
 }
 
@@ -149,7 +142,7 @@ h4 {
   &:hover {
     @include giveFontSize(14px);
     @include setTransition(.4s, ease);
-    background-color: $quaternary-color;
+    background-color: $yellow-green;
   }
 
   img {
@@ -171,7 +164,7 @@ header {
 }
 
 span {
-  color: $quaternary-color;
+  color: $yellow-green;
 }
 
 aside {
@@ -225,7 +218,7 @@ ul {
   @include giveFontSize($body-font);
   @include setFlexDirection(row);
   @include setMargin(1.2% 0.5% 1.2% 0%);
-  border: 3px outset $quaternary-color;
+  border: 3px outset $yellow-green;
   box-shadow: 0px 0px 7px 0px #475d74;
 }
 
@@ -267,7 +260,7 @@ ul {
   @include setMargin(20px 0 0 0);
   @include setPadding(5px 10px 5px 10px);
   @include setCursorStyle(pointer);
-  background-color: $quaternary-color;
+  background-color: $yellow-green;
   font-family: $body-font
 }
 
@@ -301,7 +294,7 @@ ul {
   font-family: $body-font;
 
   &:hover {
-    background-color: $quaternary-color;
+    background-color: $yellow-green;
   }
 }
 
@@ -326,29 +319,33 @@ ul {
   @include indicateGridArea(image);
 }
 
-.my-recipes-banner {
+.myrecipes-banner {
   @include alignText(center);
-  @include justifyContent(center);
-  @include display(none);
-  @include giveWidth(95%);
-  @include setMargin(25px);
-  color: $secondary-background;
+  @include setMargin(25px 0 0 0);
+  width: 95%;
 
-  h1 {
-    @include giveFontSize($full-width);
-    @include giveWidth($full-width);
+  h1{
     color: $secondary-background;
   }
 
-  .welcome-msg {
-    @include alignText(center);
-    @include justifyContent(center);
-    @include giveWidth(95%);
-    @include setMargin(50px);
-    color: $secondary-background;
-  }
 }
 
+.welcome-msg {
+  @include alignText(center);
+  width: 95%;
+  color: $secondary-background;
+  margin-top: 50px;
+
+  h1{
+    color: $secondary-background;
+    width: 100%;
+  }
+
+}
+
+.my-recipes-banner {
+  @include display($nope);
+}
 
 // PANTRY STUFF
 .show-pantry-recipes-btn {
@@ -396,9 +393,8 @@ main {
     @include setOpacity(100%);
     @include setTransition(.8s, ease);
     @include giveFontSize(20px);
-    border: 2px solid $quaternary-color;
-    text-shadow: 0px 0px 4px $quaternary-color;
-    transition: .8s ease;
+    border: 2px solid $yellow-green;
+    text-shadow: 0px 0px 4px $yellow-green;
     
     .text {
       @include setOpacity(100%);
@@ -453,14 +449,14 @@ main {
 
   &:hover {
     @include setTransition(.3s, ease);
-    background: $quaternary-color;
+    background: $yellow-green;
   }
 
 }
 
 .saved-ingredients-btn {
   @include setMargin(1% 0%);
-  border-left: 3px solid $quaternary-color;
+  border-left: 3px solid $yellow-green;
 }
 
 #overlay {

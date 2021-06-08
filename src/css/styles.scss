@@ -173,3 +173,10 @@ main {
   left: 0;
   top: 0;
 }
+
+@media only screen and (max-width: 1024px) {
+  .recipe-card {
+    // height: 270px;
+    min-width: 35%;
+  }
+}
