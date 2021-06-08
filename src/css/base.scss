@@ -513,12 +513,6 @@ main {
 }
 
 @media only screen and (max-width: 480px) {
-//   body {
-//   grid-template-areas:
-//   "header header"
-//   "image image"
-//   "main main";
-// }
 
   .header-apple-icon {
     @include setMargin(13px 0 0 0px);
@@ -543,7 +537,7 @@ main {
   #search {
     @include setMargin(25px 0 0 0);
     height: 30px;
-    width: 150px;
+    length: 200px;
   }
 
   .search-btn {
