@@ -9,21 +9,25 @@ import Cookbook from './Cookbook';
 import domUpdates from './domUpdates';
 import Pantry from './Pantry';
 
+let addIngredientBtn = document.querySelector(".add-ing-btn");
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let pantryBtn = document.querySelector(".my-pantry-btn");
-
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let user, cookbook, ingredientsData, pantryInfo;
+let allTags;
+
+
 
 
 window.addEventListener("load", findTags);
+addIngredientBtn.addEventListener("click", addIngToPantry)
 allRecipesBtn.addEventListener("click", function () {
   domUpdates.showAllRecipes(cookbook);
 });
@@ -57,7 +61,10 @@ function onStartUp() {
 function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
   findPantryInfo(user, ingredientsData, pantryInfo);
   domUpdates.displayUserGreeting(user);
+  // domUpdates.displayPantryInfo();
   domUpdates.createCards(cookbook);
+  console.log(findTags());
+  console.log(cookbook);
 }
 
 function findPantryInfo(user, ingredientsData, pantryInfo) {
@@ -79,18 +86,31 @@ function findPantryInfo(user, ingredientsData, pantryInfo) {
   domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
+function addIngToPantry(event) {
+  event.preventDefault();
+  console.log(user);
+  let ingToAdd = domUpdates.captureInputValue();
+  console.log(user.pantry)
+  if (!user.pantry.includes(ingToAdd)) {
+    user.pantry.push(ingToAdd);
+  }
+  console.log(user.pantry)
+  domUpdates.displayPantryInfo();
+}
+
 // FILTER BY RECIPE TAGS
-function findTags(recipe) {
-  let tags = [];
+function findTags() {
+  allTags = [];
   cookbook.recipes.forEach(recipe => {
     recipe.tags.forEach(tag => {
-      if (!tags.includes(tag)) {
-        tags.push(tag);
+      if (!allTags.includes(tag)) {
+        allTags.push(tag);
       }
     });
-    return tags.sort();
+    console.log(allTags.sort())
+    return allTags.sort();
   });
-  domUpdates.listTags(tags)
+  domUpdates.listTags(allTags)
 }
 
 // function capitalize(words) {
