@@ -85,9 +85,9 @@ let domUpdates = {
 
     capitalize(words) {
         return words.split(" ").map(word => {
-          return word.charAt(0).toUpperCase() + word.slice(1);
+            return word.charAt(0).toUpperCase() + word.slice(1);
         }).join(" ");
-      },
+    },
 
     filterRecipes(filtered) {
         let foundRecipes = recipes.filter(recipe => {
@@ -171,7 +171,7 @@ let domUpdates = {
             })
             return `${i.name} (${i.quantity.amount} ${i.quantity.unit})`
         }).join(", ");
-    },  
+    },
 
     generateInstructions(recipe) {
         let instructionsList = "";
@@ -256,7 +256,7 @@ let domUpdates = {
             document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
                 ingredientHtml);
         });
-        this.clearPantryInput();
+        // this.clearPantryInput();
     },
 
     captureInputValue() {
@@ -264,9 +264,9 @@ let domUpdates = {
         return pantryInput = { ingredient: pantryInput, amount: 1 };
     },
 
-    clearPantryInput() {
-        document.getElementById("pantryInput").value = '';
-    }
+    // clearPantryInput() {
+    //     document.getElementById("pantryInput").value = '';
+    // }
 }
 
 export default domUpdates;
