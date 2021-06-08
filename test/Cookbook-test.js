@@ -1,4 +1,4 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 
 
 import { recipeData } from '../src/data/sample-recipe-data';
@@ -7,7 +7,7 @@ import Cookbook from '../src/cookbook.js';
 
 let cookbook;
 
-describe('Cookbook', () => {
+describe.only('Cookbook', () => {
   beforeEach(() => {
     cookbook = new Cookbook(recipeData, ingredientsData);
   });
@@ -25,7 +25,7 @@ describe('Cookbook', () => {
   });
 
   it('should filter recipes by one tag', () => {
-    expect(cookbook.filterByTags('snack'))
+    expect(cookbook.filterByTags(['snack']))
       .to.deep.equal([recipeData[0], recipeData[7]]);
   });
 
@@ -35,16 +35,15 @@ describe('Cookbook', () => {
   });
 
   it('should allow the user to search recipes by name', () => {
-    expect(cookbook.searchForRecipe('wing')).to.deep.equal([recipeData[2]]);
+    expect(cookbook.searchForRecipe('wing', ingredientsData)).to.deep.equal([recipeData[2]]);
   });
 
-  it('should allow the user to search recipes by ingredient', () => {
-    expect(cookbook.searchForRecipe('apples'))
-      .to.deep.equal([recipeData[1]]);
+  it('should allow the user to search recipes by ingredient or name', () => {
+    expect(cookbook.searchForRecipe('apple', ingredientsData)).to.deep.equal([recipeData[1], recipeData[4]]);
   });
 
   it(`should be able to search recipes,
               without regard to capitalization`, () => {
-    expect(cookbook.searchForRecipe('PUDDING')).to.deep.equal([recipeData[0]]);
+    expect(cookbook.searchForRecipe('PUDDING', ingredientsData)).to.deep.equal([recipeData[0]]);
   });
 });

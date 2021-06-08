@@ -50,9 +50,11 @@ window.onload = onStartUp()
 function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
-      console.log(promise)
+      console.log("Promise", promise);
       user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
+      console.log("User", user);
       ingredientsData = promise[1];
+      console.log('INGREDIENTS DATA', ingredientsData);
       cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
       generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
@@ -64,8 +66,8 @@ function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
   domUpdates.displayUserGreeting(user);
   // domUpdates.displayPantryInfo();
   domUpdates.createCards(cookbook);
-  console.log(findTags());
-  console.log(cookbook);
+  // console.log(findTags());
+  // console.log(cookbook);
 }
 
 function findPantryInfo(user, ingredientsData, pantryInfo) {
@@ -108,7 +110,6 @@ function findTags() {
         allTags.push(tag);
       }
     });
-    console.log(allTags.sort())
     return allTags.sort();
   });
   domUpdates.listTags(allTags)
@@ -124,9 +125,9 @@ function findTags() {
 function findCheckedBoxes() {
   let tagCheckboxes = Array.from(document.querySelectorAll(".checked-tag"));
   let selectedTags = tagCheckboxes.filter(box => {
-    return box.checked;
-  })
-
+    return box.checked
+  }).map(tag => tag.id);
+  console.log("What do these tags look like?", selectedTags);
   let filteredResults = cookbook.filterByTags(selectedTags);
 
   displayAndHideRecipes(cookbook, filteredResults)

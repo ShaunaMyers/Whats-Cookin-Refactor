@@ -21,11 +21,11 @@ import allTags from './scripts';
 
 let domUpdates = {
 
-    generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
-        this.findPantryInfo(user, ingredientsData, pantryInfo);
-        this.displayUserGreeting(user);
-        this.createCards(cookbook);
-    },
+    // generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
+    //     this.findPantryInfo(user, ingredientsData, pantryInfo);
+    //     this.displayUserGreeting(user);
+    //     this.createCards(cookbook);
+    // },
 
     displayUserGreeting(user) {
         let firstName = user.name.split(" ")[0];
@@ -248,11 +248,11 @@ let domUpdates = {
 
     captureInputValue() {
         let pantryInput = document.getElementById("pantryInput").value;
-        return pantryInput = {ingredient: pantryInput, amount: 1};
+        return pantryInput = { ingredient: pantryInput, amount: 1 };
     },
 
     clearPantryInput() {
-        document.getElementById("pantryInput").value = '';  
+        document.getElementById("pantryInput").value = '';
     }
 }
 
