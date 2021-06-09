@@ -22,18 +22,12 @@ let domUpdates = {
     changeARIAChkd(event) {
         event.preventDefault();
         let el = event.target.closest("input")
-          if (el.getAttribute("aria-checked", "false")) {
+            if (el.getAttribute("aria-checked", "false")) {
             el.setAttribute("aria-checked", "true");
         } else if (el.getAttribute("aria-checked", "true")) {
             el.setAttribute("aria-checked", "false");
         }
     },
-
-    // generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
-    //     this.findPantryInfo(user, ingredientsData, pantryInfo);
-    //     this.displayUserGreeting(user);
-    //     this.createCards(cookbook);
-    // },
 
     displayUserGreeting(user) {
         let firstName = user.name.split(" ")[0];
@@ -217,14 +211,6 @@ let domUpdates = {
         searchRecipes();
     },
 
-    // searchRecipes() {
-    //     showAllRecipes();
-    //     let searchedRecipes = recipeData.filter(recipe => {
-    //         return recipe.name.toLowerCase().includes(searchInput.value.toLowerCase());
-    //     });
-    //     filterNonSearched(createRecipeObject(searchedRecipes));
-    // },
-
     filterNonSearched(filtered) {
         let found = recipes.filter(recipe => {
             let ids = filtered.map(f => f.id);
@@ -265,14 +251,7 @@ let domUpdates = {
             document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
                 ingredientHtml);
         });
-        // this.clearPantryInput();
     },
-
-    // captureInputValue() {
-    //     let pantryInput = document.getElementById("pantryInput").value;
-    //     return pantryInput = { ingredient: pantryInput, amount: 1 };
-    // },
-
 
     captureInputValue() {
         let pantryIngName = document.getElementById("pantryIngName").value.toLowerCase();

@@ -89,7 +89,6 @@ function findPantryInfo() {
       pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
     }
   });
-  console.log('pantry info', pantryInfo.pantryIngredients);
   domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
@@ -116,7 +115,7 @@ function checkIngredientsData(ingredientAdded) {
     apiCalls.fetchRequests.updateUserData({ userID: user.id, ingredientID: ingredientAdded.id, ingredientModification: ingredientAdded[1] });
     return { name: ingredientAdded[0].name, count: ingredientAdded[1] }
   }
-};
+}
 
 // FILTER BY RECIPE TAGS
 function findTags() {
@@ -127,7 +126,6 @@ function findTags() {
         allTags.push(tag);
       }
     });
-    console.log(allTags.sort());
     return allTags.sort();
   });
   domUpdates.listTags(allTags);
@@ -138,15 +136,12 @@ function findCheckedBoxes() {
   let selectedTags = tagCheckboxes.filter(box => {
     return box.checked
   }).map(tag => tag.id);
-  console.log("What do these tags look like?", selectedTags);
   let filteredResults = cookbook.filterByTags(selectedTags);
-
   displayAndHideRecipes(cookbook, filteredResults)
 }
 
 function displayAndHideRecipes(cookbook, filteredResults) {
   domUpdates.showAllRecipes(cookbook);
-
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
   }

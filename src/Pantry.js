@@ -3,7 +3,6 @@ class Pantry {
         this.contents = pantryData;
         this.pantryIngredients = [];
         this.pantryAmounts = [];
-        // this.recipeIngredients = [];
         this.ingredientsNeeded = [];
     }
 
