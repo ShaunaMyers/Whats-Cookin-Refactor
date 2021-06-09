@@ -22,14 +22,14 @@ A Front-End Project by: [Beth Meeker](https://github.com/Meekb) and [Shauna Myer
      - User can select ingredients in their Pantry, and click the What Can I Make? button to view all the recipes that they can make with the ingredients they have 
 
 ### Filter recipes by selecting recipe tags
-https://media.giphy.com/media/n2zmK45rocC0i5uVSl/giphy.gif
+<iframe src="https://giphy.com/embed/n2zmK45rocC0i5uVSl" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/n2zmK45rocC0i5uVSl">via GIPHY</a></p>
    
 ### View the user Pantry
-https://media.giphy.com/media/M8p11iwT0jT6al49Yz/giphy.gif
+<iframe src="https://giphy.com/embed/M8p11iwT0jT6al49Yz" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/M8p11iwT0jT6al49Yz">via GIPHY</a></p>
 
 
 ### Search for recipes
-https://media.giphy.com/media/MYmXvmLqrjpuT2nC1l/giphy.gif
+<iframe src="https://giphy.com/embed/MYmXvmLqrjpuT2nC1l" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/MYmXvmLqrjpuT2nC1l">via GIPHY</a></p>
 
   
   * Architecture 
