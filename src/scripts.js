@@ -56,18 +56,20 @@ function onStartUp() {
       console.log("INGRED DATA", ingredientsData);
       cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
-      generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
+      generateAllInfo();
     })
 }
 
-function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
-  findPantryInfo(user, ingredientsData, pantryInfo);
+function generateAllInfo() {
+  findPantryInfo();
+  console.log("USER", user);
   domUpdates.displayUserGreeting(user);
   domUpdates.createCards(cookbook);
 }
 
-function findPantryInfo(user, ingredientsData, pantryInfo) {
+function findPantryInfo() {
   user.pantry.forEach(item => {
+    console.log("USER PANTRY", user.pantry);
     let itemInfo = ingredientsData.find(ingredient => {
       return ingredient.id === item.ingredient;
     });
@@ -93,21 +95,21 @@ function addIngredientToPantry(event) {
   if (!ingredientAdded.length) {
     domUpdates.displayAddIngredientError(true);
   } else {
-    let foundIngredient = checkIngredientsData(ingredientAdded[0]);
+    let foundIngredient = checkIngredientsData(ingredientAdded);
     if (!user.pantry.includes(foundIngredient)) {
       user.pantry.push(foundIngredient);
     }
     console.log('USER PANTRY', user.pantry)
-    domUpdates.displayPantryInfo(user.pantry);
+    findPantryInfo(user.pantry);
   }
 }
 
 function checkIngredientsData(ingredientAdded) {
-  let foundIngredient = ingredientsData.find(ingredient => ingredient.name === ingredientAdded.name);
+  let foundIngredient = ingredientsData.find(ingredient => ingredient.name === ingredientAdded[0].name);
   if (foundIngredient) {
-    return foundIngredient
+    return { name: foundIngredient.name, count: ingredientAdded[1] }
   } else {
-    ingredientsData.push(ingredientAdded)
+    ingredientsData.push([{ name: ingredientAdded[0].name, count: ingredientAdded[1] }])
     apiCalls.fetchRequests.updateIngredientData(ingredientAdded);
   }
 };

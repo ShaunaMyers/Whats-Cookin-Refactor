@@ -8,10 +8,10 @@ const retrieveData = (path) => {
 const updateData = (path, data) => {
     return fetch(path, {
         method: 'POST',
+        body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        }
     })
         .then(response => checkForError(response))
         .catch(err => console.log(`User API Error: ${err.message}`));
@@ -42,6 +42,7 @@ const fetchRequests = {
     // updateData functions will go here later...will invoke the updateData method (above)
     // and will pass in two args: the path and data
     updateIngredientData: (data) => {
+        console.log('DATA PASSED IN', data);
         updateData('http://localhost:3001/api/v1/ingredients', data);
     }
 }
