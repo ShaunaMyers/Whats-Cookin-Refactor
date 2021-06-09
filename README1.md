@@ -22,14 +22,15 @@ A Front-End Project by: [Beth Meeker](https://github.com/Meekb) and [Shauna Myer
      - User can select ingredients in their Pantry, and click the What Can I Make? button to view all the recipes that they can make with the ingredients they have 
 
 ### Filter recipes by selecting recipe tags
-gif here
+https://media.giphy.com/media/n2zmK45rocC0i5uVSl/giphy.gif
    
 ### View the user Pantry
-gif here
+https://media.giphy.com/media/M8p11iwT0jT6al49Yz/giphy.gif
 
 
 ### Search for recipes
-gif here
+https://media.giphy.com/media/MYmXvmLqrjpuT2nC1l/giphy.gif
+
   
   * Architecture 
     * Five class files - Ingredient, Recipe, User, Pantry, and Cookbook
