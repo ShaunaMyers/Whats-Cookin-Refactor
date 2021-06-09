@@ -10,7 +10,7 @@ A Front-End Project by: [Beth Meeker](https://github.com/Meekb) and [Shauna Myer
 
 ## Functionality
 
-   - Main page navigation
+   - Main Functionality and Features
      - User can navigate between the main page showing all recipes, their favorite recipes, and their pantry
      - Recipe Type area displays all recipe tags in the database, allowing recipe filter by tag
      - Search Bar allows the user to search the recipe database by recipe name, or by ingredient (single word searches only at the time of deployment)
