@@ -5,8 +5,8 @@ A Front-End Project by: [Beth Meeker](https://github.com/Meekb) and [Shauna Myer
 ## Overview
   Refactor-Tractor is a paired project in which the goal is to refactor and build on top of an existing code base - the freshPicks recipe application - implementing best practices for accessibility, Sass, and Webpack. 
 
-## Instructions for cloning
-  You can view our deployed page here: 
+## Instructions
+  You can view our deployed page here: https://shaunamyers.github.io/Whats-Cookin-Refactor/
 
 ## Functionality
 
@@ -19,19 +19,29 @@ A Front-End Project by: [Beth Meeker](https://github.com/Meekb) and [Shauna Myer
      - User can add an ingredient to their Pantry 
 
 ### Filter recipes by selecting recipe tags
-<iframe src="https://giphy.com/embed/n2zmK45rocC0i5uVSl" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/n2zmK45rocC0i5uVSl">via GIPHY</a></p>
+
+
+![Whats-Cookin-Refactor-Tractor-gif](https://media.giphy.com/media/n2zmK45rocC0i5uVSl/giphy.gif)
+
+
    
 ### View the user Pantry
-<iframe src="https://giphy.com/embed/M8p11iwT0jT6al49Yz" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/M8p11iwT0jT6al49Yz">via GIPHY</a></p>
+
+![Whats-Cookin-Refactor-Tractor-gif](https://media.giphy.com/media/M8p11iwT0jT6al49Yz/giphy.gif)
+
+
 
 
 ### Search for recipes
-<iframe src="https://giphy.com/embed/MYmXvmLqrjpuT2nC1l" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/MYmXvmLqrjpuT2nC1l">via GIPHY</a></p>
+
+![Whats-Cookin-Refactor-Tractor-gif](https://media.giphy.com/media/MYmXvmLqrjpuT2nC1l/giphy.gif)
+
 
   
   * Architecture 
     * Five class files - Ingredient, Recipe, User, Pantry, and Cookbook
     * Five test files accompany each class using Mocha & Chai Should / Expect syntax
+    * ARIA roles and attributes for user accessibility 
     * Network requests made using .fetch() to API endpoints
     * Sass imports utilizing variables, @mixins and @media queries
 
@@ -43,7 +53,6 @@ A Front-End Project by: [Beth Meeker](https://github.com/Meekb) and [Shauna Myer
   4. Mocha, Chai
   5. ESLint
   6. GitHub
-  7. [gifcap](https://gifcap.dev/)
 
 ## Contributors
 
