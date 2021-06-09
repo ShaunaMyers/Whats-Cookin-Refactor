@@ -94,7 +94,6 @@ function addIngredientToPantry(event) {
     if (!pantryInfo.pantryIngredients.includes(foundIngredient)) {
       pantryInfo.pantryIngredients.push(foundIngredient);
     }
-    console.log('USER PANTRY', user.pantry)
     findPantryInfo();
   }
 }
@@ -105,7 +104,7 @@ function checkIngredientsData(ingredientAdded) {
     return { name: foundIngredient.name, count: ingredientAdded[1] }
   } else {
     ingredientsData.push(ingredientAdded)
-    apiCalls.fetchRequests.updateIngredientData(ingredientAdded);
+    apiCalls.fetchRequests.updateUserData({ userID: user.id, ingredientID: ingredientAdded.id, ingredientModification: ingredientAdded[1] });
     return { name: ingredientAdded[0].name, count: ingredientAdded[1] }
   }
 };
