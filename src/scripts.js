@@ -25,10 +25,10 @@ let allTags;
 
 
 // ARIA 
-let wrap = document.getElementById("wrap");
-wrap.addEventListener("change", domUpdates.changeARIAChkd);
-let dropArea = document.getElementById("pantryDrop");
-dropArea.addEventListener("change", domUpdates.changeARIAChkd); 
+// let wrap = document.getElementById("wrap");
+// wrap.addEventListener("change", domUpdates.changeARIAChkd);
+// let dropArea = document.getElementById("pantryDrop");
+// dropArea.addEventListener("change", domUpdates.changeARIAChkd); 
 
 
 
@@ -65,11 +65,12 @@ function onStartUp() {
     })
 }
 
-
 function generateAllInfo() {
   findPantryInfo();
   domUpdates.displayUserGreeting(user);
   domUpdates.createCards(cookbook);
+  findTags();
+  domUpdates.listTags(allTags);
 }
 
 function findPantryInfo() {
@@ -126,9 +127,10 @@ function findTags() {
         allTags.push(tag);
       }
     });
+    console.log(allTags.sort())
     return allTags.sort();
   });
-  domUpdates.listTags(allTags);
+  domUpdates.listTags(allTags)
 }
 
 function findCheckedBoxes() {
