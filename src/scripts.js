@@ -108,7 +108,7 @@ function checkIngredientsData(ingredientAdded) {
     return foundIngredient
   } else {
     ingredientsData.push(ingredientAdded)
-    apiCalls.updateIngredientData(ingredientAdded);
+    apiCalls.fetchRequests.updateIngredientData(ingredientAdded);
   }
 };
 

@@ -1,7 +1,7 @@
 
 const retrieveData = (path) => {
     return fetch(path)
-        .then(response => checkForError(response))
+        .then(response => response.json())
         .catch(err => console.log(`User API Error: ${err.message}`));
 }
 
@@ -41,6 +41,9 @@ const fetchRequests = {
     },
     // updateData functions will go here later...will invoke the updateData method (above)
     // and will pass in two args: the path and data
+    updateIngredientData: (data) => {
+        updateData('http://localhost:3001/api/v1/ingredients', data);
+    }
 }
 
 // Is this the correct place for promise.all?
