@@ -6,7 +6,7 @@ A Front-End Project by: [Beth Meeker](https://github.com/Meekb) and [Shauna Myer
   Refactor-Tractor is a paired project in which the goal is to refactor and build on top of an existing code base - the freshPicks recipe application - implementing best practices for accessibility, Sass, and Webpack. 
 
 ## Instructions for cloning
-  You can view our deployed page here: 
+  You can view our deployed page here: https://shaunamyers.github.io/Whats-Cookin-Refactor/
 
 ## Functionality
 
