@@ -41,6 +41,7 @@ A Front-End Project by: [Beth Meeker](https://github.com/Meekb) and [Shauna Myer
   * Architecture 
     * Five class files - Ingredient, Recipe, User, Pantry, and Cookbook
     * Five test files accompany each class using Mocha & Chai Should / Expect syntax
+    * ARIA roles and attributes for user accessibility 
     * Network requests made using .fetch() to API endpoints
     * Sass imports utilizing variables, @mixins and @media queries
 
@@ -52,7 +53,6 @@ A Front-End Project by: [Beth Meeker](https://github.com/Meekb) and [Shauna Myer
   4. Mocha, Chai
   5. ESLint
   6. GitHub
-  7. [gifcap](https://gifcap.dev/)
 
 ## Contributors
 
