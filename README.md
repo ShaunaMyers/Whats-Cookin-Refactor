@@ -14,12 +14,9 @@ A Front-End Project by: [Beth Meeker](https://github.com/Meekb) and [Shauna Myer
      - User can navigate between the main page showing all recipes, their favorite recipes, and their pantry
      - Recipe Type area displays all recipe tags in the database, allowing recipe filter by tag
      - Search Bar allows the user to search the recipe database by recipe name, or by ingredient (single word searches only at the time of deployment)
-     - User can favorite recipes by clicking the apple on the recipe card - the apple will turn green. Click again to remove the favorited status, and the apple will return to an outline  
+     - User can favorite recipes by clicking the apple on the recipe card - the apple will turn green. Click again to remove the favorited status, and the apple          will return to an outline  
      - User can view their Pantry by clicking the recipe-page icon and can input data to add an ingredient to the Pantry
-
-   - Future Enhancements  
-     - When user adds an ingredien to the Pantry, user will see the Pantry update with the new ingredient in their list of ingredients
-     - User can select ingredients in their Pantry, and click the What Can I Make? button to view all the recipes that they can make with the ingredients they have 
+     - User can add an ingredient to their Pantry 
 
 ### Filter recipes by selecting recipe tags
 <iframe src="https://giphy.com/embed/n2zmK45rocC0i5uVSl" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/n2zmK45rocC0i5uVSl">via GIPHY</a></p>
