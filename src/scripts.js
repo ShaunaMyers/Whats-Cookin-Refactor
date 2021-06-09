@@ -24,17 +24,10 @@ let user, cookbook, ingredientsData, pantryInfo;
 let allTags;
 
 
-// ARIA 
-// let wrap = document.getElementById("wrap");
-// wrap.addEventListener("change", domUpdates.changeARIAChkd);
-// let dropArea = document.getElementById("pantryDrop");
-// dropArea.addEventListener("change", domUpdates.changeARIAChkd); 
-
 
 
 window.addEventListener("load", findTags);
 addIngredientBtn.addEventListener("click", addIngredientToPantry)
-
 allRecipesBtn.addEventListener("click", function () {
   domUpdates.showAllRecipes(cookbook);
 });
@@ -69,8 +62,6 @@ function generateAllInfo() {
   findPantryInfo();
   domUpdates.displayUserGreeting(user);
   domUpdates.createCards(cookbook);
-  findTags();
-  domUpdates.listTags(allTags);
 }
 
 function findPantryInfo() {
@@ -89,6 +80,7 @@ function findPantryInfo() {
       pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
     }
   });
+  console.log('pantry info', pantryInfo.pantryIngredients);
   domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
@@ -115,7 +107,15 @@ function checkIngredientsData(ingredientAdded) {
     apiCalls.fetchRequests.updateUserData({ userID: user.id, ingredientID: ingredientAdded.id, ingredientModification: ingredientAdded[1] });
     return { name: ingredientAdded[0].name, count: ingredientAdded[1] }
   }
-}
+};
+
+// Look at ingredientsData
+// Does it list the ingredient name?
+// If it does, write a functiont that checks each ingredient in ingredientsData
+// for ingredient.name === ingredientAdded.name
+// if it does equal that name...
+// Look at ingredientsData ingredient and see if you can just pass in the whole ingredient object...
+// May need to structure your own object to include amount and correct id 
 
 // FILTER BY RECIPE TAGS
 function findTags() {
@@ -128,20 +128,25 @@ function findTags() {
     });
     return allTags.sort();
   });
+  // allTags.map(tag => (domUpdates.capitalize(tag));
   domUpdates.listTags(allTags);
 }
+
 
 function findCheckedBoxes() {
   let tagCheckboxes = Array.from(document.querySelectorAll(".checked-tag"));
   let selectedTags = tagCheckboxes.filter(box => {
     return box.checked
   }).map(tag => tag.id);
+  console.log("What do these tags look like?", selectedTags);
   let filteredResults = cookbook.filterByTags(selectedTags);
+
   displayAndHideRecipes(cookbook, filteredResults)
 }
 
 function displayAndHideRecipes(cookbook, filteredResults) {
   domUpdates.showAllRecipes(cookbook);
+
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
   }
@@ -189,6 +194,7 @@ function openRecipeModal(event) {
   fullRecipeInfo.style.display = "inline";
   let recipeId = event.path.find(e => e.id).id;
   let recipe = cookbook.recipes.find(recipe => recipe.id === Number(recipeId));
+  console.log(recipe.ingredients);
   domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
   domUpdates.addRecipeImage(recipe);
   domUpdates.generateInstructions(recipe);
