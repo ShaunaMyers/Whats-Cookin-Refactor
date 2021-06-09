@@ -51,9 +51,7 @@ function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
       user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
-      console.log("USER", user);
       ingredientsData = promise[1];
-      console.log("INGRED DATA", ingredientsData);
       cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
       generateAllInfo();
@@ -62,14 +60,12 @@ function onStartUp() {
 
 function generateAllInfo() {
   findPantryInfo();
-  console.log("USER", user);
   domUpdates.displayUserGreeting(user);
   domUpdates.createCards(cookbook);
 }
 
 function findPantryInfo() {
   user.pantry.forEach(item => {
-    console.log("USER PANTRY", user.pantry);
     let itemInfo = ingredientsData.find(ingredient => {
       return ingredient.id === item.ingredient;
     });
@@ -84,23 +80,22 @@ function findPantryInfo() {
       pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
     }
   });
+  console.log('pantry info', pantryInfo.pantryIngredients);
   domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
 function addIngredientToPantry(event) {
   event.preventDefault();
-  console.log(user);
   let ingredientAdded = domUpdates.captureInputValue();
-  console.log('INGRED ADDED', ingredientAdded);
   if (!ingredientAdded.length) {
     domUpdates.displayAddIngredientError(true);
   } else {
     let foundIngredient = checkIngredientsData(ingredientAdded);
-    if (!user.pantry.includes(foundIngredient)) {
-      user.pantry.push(foundIngredient);
+    if (!pantryInfo.pantryIngredients.includes(foundIngredient)) {
+      pantryInfo.pantryIngredients.push(foundIngredient);
     }
     console.log('USER PANTRY', user.pantry)
-    findPantryInfo(user.pantry);
+    findPantryInfo();
   }
 }
 
@@ -109,8 +104,9 @@ function checkIngredientsData(ingredientAdded) {
   if (foundIngredient) {
     return { name: foundIngredient.name, count: ingredientAdded[1] }
   } else {
-    ingredientsData.push([{ name: ingredientAdded[0].name, count: ingredientAdded[1] }])
+    ingredientsData.push(ingredientAdded)
     apiCalls.fetchRequests.updateIngredientData(ingredientAdded);
+    return { name: ingredientAdded[0].name, count: ingredientAdded[1] }
   }
 };
 
