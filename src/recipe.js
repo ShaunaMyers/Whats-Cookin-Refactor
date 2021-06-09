@@ -17,7 +17,6 @@ class Recipe {
     })
     console.log(this.ingredients);
     this.calculateIngredientsCost();
-    // console.log(this.ingredients);
     return this.ingredients;
   }
 
@@ -29,7 +28,7 @@ class Recipe {
       return ingredient.cost = match.estimatedCostInCents
     });
     let total = this.ingredients.reduce((acc, curIng) => {
-      return (acc += curIng.cost)/100;
+      return (acc += curIng.cost) / 100;
     }, 0);
     this.recipeTotal = Math.floor(total).toFixed(2);
     return this.recipeTotal;
