@@ -24,10 +24,17 @@ let user, cookbook, ingredientsData, pantryInfo;
 let allTags;
 
 
+// ARIA 
+let wrap = document.getElementById("wrap");
+wrap.addEventListener("change", domUpdates.changeARIAChkd);
+let dropArea = document.getElementById("pantryDrop");
+dropArea.addEventListener("change", domUpdates.changeARIAChkd); 
+
 
 
 window.addEventListener("load", findTags);
 addIngredientBtn.addEventListener("click", addIngredientToPantry)
+
 allRecipesBtn.addEventListener("click", function () {
   domUpdates.showAllRecipes(cookbook);
 });
@@ -57,6 +64,7 @@ function onStartUp() {
       generateAllInfo();
     })
 }
+
 
 function generateAllInfo() {
   findPantryInfo();
@@ -109,14 +117,6 @@ function checkIngredientsData(ingredientAdded) {
   }
 };
 
-// Look at ingredientsData
-// Does it list the ingredient name?
-// If it does, write a functiont that checks each ingredient in ingredientsData
-// for ingredient.name === ingredientAdded.name
-// if it does equal that name...
-// Look at ingredientsData ingredient and see if you can just pass in the whole ingredient object...
-// May need to structure your own object to include amount and correct id 
-
 // FILTER BY RECIPE TAGS
 function findTags() {
   allTags = [];
@@ -128,10 +128,8 @@ function findTags() {
     });
     return allTags.sort();
   });
-  // allTags.map(tag => (domUpdates.capitalize(tag));
   domUpdates.listTags(allTags);
 }
-
 
 function findCheckedBoxes() {
   let tagCheckboxes = Array.from(document.querySelectorAll(".checked-tag"));
@@ -194,7 +192,6 @@ function openRecipeModal(event) {
   fullRecipeInfo.style.display = "inline";
   let recipeId = event.path.find(e => e.id).id;
   let recipe = cookbook.recipes.find(recipe => recipe.id === Number(recipeId));
-  console.log(recipe.ingredients);
   domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
   domUpdates.addRecipeImage(recipe);
   domUpdates.generateInstructions(recipe);
