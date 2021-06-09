@@ -53,6 +53,7 @@ function onStartUp() {
       user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
       console.log("USER", user);
       ingredientsData = promise[1];
+      console.log("INGRED DATA", ingredientsData);
       cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
       generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
@@ -88,17 +89,36 @@ function addIngredientToPantry(event) {
   event.preventDefault();
   console.log(user);
   let ingredientAdded = domUpdates.captureInputValue();
-  if (!ingredientAdded) {
+  console.log('INGRED ADDED', ingredientAdded);
+  if (!ingredientAdded.length) {
     domUpdates.displayAddIngredientError(true);
   } else {
-    console.log("INGRED ADDED", ingredientAdded);
-    if (!user.pantry.includes(ingredientAdded)) {
-      user.pantry.push(ingredientAdded);
+    let foundIngredient = checkIngredientsData(ingredientAdded[0]);
+    if (!user.pantry.includes(foundIngredient)) {
+      user.pantry.push(foundIngredient);
     }
     console.log('USER PANTRY', user.pantry)
     domUpdates.displayPantryInfo(user.pantry);
   }
 }
+
+function checkIngredientsData(ingredientAdded) {
+  let foundIngredient = ingredientsData.find(ingredient => ingredient.name === ingredientAdded.name);
+  if (foundIngredient) {
+    return foundIngredient
+  } else {
+    ingredientsData.push(ingredientAdded)
+    apiCalls.updateIngredientData(ingredientAdded);
+  }
+};
+
+// Look at ingredientsData
+// Does it list the ingredient name?
+// If it does, write a functiont that checks each ingredient in ingredientsData
+// for ingredient.name === ingredientAdded.name
+// if it does equal that name...
+// Look at ingredientsData ingredient and see if you can just pass in the whole ingredient object...
+// May need to structure your own object to include amount and correct id 
 
 // FILTER BY RECIPE TAGS
 function findTags() {

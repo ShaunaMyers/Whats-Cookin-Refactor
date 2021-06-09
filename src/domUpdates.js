@@ -266,16 +266,16 @@ let domUpdates = {
 
 
     captureInputValue() {
-        let pantryIngName = document.getElementById("pantryIngName").value;
-        let pantryIngQuanity = parseInt(document.getElementById("pantryIngQuantity").value);
+        let pantryIngName = document.getElementById("pantryIngName").value.toLowerCase();
+        let pantryIngQuanity = parseInt(document.getElementById("pantryIngQuantity").value.toLowerCase());
         let ingredientId = Date.now();
 
         if (!pantryIngName || !pantryIngQuanity) {
             return;
         } else {
             this.displayAddIngredientError(false);
-            let pantryInput = { id: ingredientId, amount: pantryIngQuanity, name: pantryIngName };
-            return pantryInput;
+            let pantryInput = { estimatedCostInCents: 255, id: ingredientId, name: pantryIngName };
+            return [pantryInput, pantryIngQuanity];
         }
     },
 
