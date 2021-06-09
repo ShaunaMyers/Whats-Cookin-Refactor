@@ -127,10 +127,10 @@ function findTags() {
         allTags.push(tag);
       }
     });
-    console.log(allTags.sort())
+    console.log(allTags.sort());
     return allTags.sort();
   });
-  domUpdates.listTags(allTags)
+  domUpdates.listTags(allTags);
 }
 
 function findCheckedBoxes() {
