@@ -19,14 +19,23 @@ A Front-End Project by: [Beth Meeker](https://github.com/Meekb) and [Shauna Myer
      - User can add an ingredient to their Pantry 
 
 ### Filter recipes by selecting recipe tags
-<iframe src="https://giphy.com/embed/n2zmK45rocC0i5uVSl" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/n2zmK45rocC0i5uVSl">via GIPHY</a></p>
+
+
+![Whats-Cookin-Refactor-Tractor-gif](https://media.giphy.com/media/n2zmK45rocC0i5uVSl/giphy.gif)
+
+
    
 ### View the user Pantry
-<iframe src="https://giphy.com/embed/M8p11iwT0jT6al49Yz" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/M8p11iwT0jT6al49Yz">via GIPHY</a></p>
+
+![Whats-Cookin-Refactor-Tractor-gif](https://media.giphy.com/media/M8p11iwT0jT6al49Yz/giphy.gif)
+
+
 
 
 ### Search for recipes
-<iframe src="https://giphy.com/embed/MYmXvmLqrjpuT2nC1l" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/MYmXvmLqrjpuT2nC1l">via GIPHY</a></p>
+
+![Whats-Cookin-Refactor-Tractor-gif](https://media.giphy.com/media/MYmXvmLqrjpuT2nC1l/giphy.gif)
+
 
   
   * Architecture 
