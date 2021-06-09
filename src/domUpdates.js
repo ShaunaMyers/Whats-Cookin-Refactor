@@ -265,15 +265,16 @@ let domUpdates = {
     // },
 
 
-    captureInputValue(user) {
+    captureInputValue() {
         let pantryIngName = document.getElementById("pantryIngName").value;
-        let pantryIngQuanity = document.getElementById("pantryIngQuantity").value;
+        let pantryIngQuanity = parseInt(document.getElementById("pantryIngQuantity").value);
+        let ingredientId = Date.now();
 
         if (!pantryIngName || !pantryIngQuanity) {
             return;
         } else {
             this.displayAddIngredientError(false);
-            let pantryInput = { ingredient: pantryIngName, amount: pantryIngQuanity };
+            let pantryInput = { id: ingredientId, amount: pantryIngQuanity, name: pantryIngName };
             return pantryInput;
         }
     },

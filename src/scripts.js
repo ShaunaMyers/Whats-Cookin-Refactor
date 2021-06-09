@@ -87,7 +87,7 @@ function findPantryInfo(user, ingredientsData, pantryInfo) {
 function addIngredientToPantry(event) {
   event.preventDefault();
   console.log(user);
-  let ingredientAdded = domUpdates.captureInputValue(user);
+  let ingredientAdded = domUpdates.captureInputValue();
   if (!ingredientAdded) {
     domUpdates.displayAddIngredientError(true);
   } else {
