@@ -126,9 +126,19 @@ main {
   width: 250px;
 }
 
+.pantry-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+    .pantry-input {
+      margin-top: 4%;
+    }
+}
+
 .pantry-input {
-  width: 125px;
+  width: 130px;
   height: 20px;
+  // margin-top: 5%;
 }
 
 .add-ing-btn {
@@ -177,4 +187,8 @@ main {
   height: 100%;
   left: 0;
   top: 0;
+}
+
+.hidden {
+  display: none;
 }

@@ -93,9 +93,9 @@ let domUpdates = {
 
     capitalize(words) {
         return words.split(" ").map(word => {
-          return word.charAt(0).toUpperCase() + word.slice(1);
+            return word.charAt(0).toUpperCase() + word.slice(1);
         }).join(" ");
-      },
+    },
 
     filterRecipes(filtered) {
         let foundRecipes = recipes.filter(recipe => {
@@ -179,7 +179,7 @@ let domUpdates = {
             })
             return `${i.name} (${i.quantity.amount} ${i.quantity.unit})`
         }).join(", ");
-    },  
+    },
 
     generateInstructions(recipe) {
         let instructionsList = "";
@@ -258,22 +258,43 @@ let domUpdates = {
 
     // CREATE AND USE PANTRY
     displayPantryInfo(pantry) {
+        document.querySelector(".pantry-list").innerHTML = ' ';
         pantry.forEach(ingredient => {
             let ingredientHtml = `<li><input type="checkbox" role="checkbox" aria-checked="false" class="checked-tag pantry-checkbox" id="${ingredient.name}">
             <label for="${ingredient.name}">${domUpdates.capitalize(ingredient.name)}, ${ingredient.count}</label></li>`;
             document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
                 ingredientHtml);
         });
-        this.clearPantryInput();
+        // this.clearPantryInput();
     },
+
+    // captureInputValue() {
+    //     let pantryInput = document.getElementById("pantryInput").value;
+    //     return pantryInput = { ingredient: pantryInput, amount: 1 };
+    // },
+
 
     captureInputValue() {
-        let pantryInput = document.getElementById("pantryInput").value;
-        return pantryInput = { ingredient: pantryInput, amount: 1 };
+        let pantryIngName = document.getElementById("pantryIngName").value.toLowerCase();
+        let pantryIngQuanity = parseInt(document.getElementById("pantryIngQuantity").value.toLowerCase());
+        let ingredientId = Date.now();
+
+        if (!pantryIngName || !pantryIngQuanity) {
+            return;
+        } else {
+            this.displayAddIngredientError(false);
+            let pantryInput = { estimatedCostInCents: 255, id: ingredientId, name: pantryIngName };
+            return [pantryInput, pantryIngQuanity];
+        }
     },
 
-    clearPantryInput() {
-        document.getElementById("pantryInput").value = '';
+    displayAddIngredientError(inputFieldValues) {
+        let addIngredientError = document.getElementById('addIngError');
+        if (inputFieldValues) {
+            addIngredientError.classList.remove('hidden');
+        } else {
+            addIngredientError.classList.add('hidden');
+        }
     }
 }
 

@@ -31,7 +31,10 @@ let dropArea = document.getElementById("pantryDrop");
 dropArea.addEventListener("change", domUpdates.changeARIAChkd); 
 
 
-addIngredientBtn.addEventListener("click", addIngToPantry)
+
+window.addEventListener("load", findTags);
+addIngredientBtn.addEventListener("click", addIngredientToPantry)
+
 allRecipesBtn.addEventListener("click", function () {
   domUpdates.showAllRecipes(cookbook);
 });
@@ -54,26 +57,22 @@ window.onload = onStartUp()
 function onStartUp() {
   apiCalls.getData()
     .then((promise) => {
-      console.log("Promise", promise);
       user = new User(promise[0][(Math.floor(Math.random() * promise[0].length) + 1)]);
       ingredientsData = promise[1];
-      console.log('INGREDIENTS DATA', ingredientsData);
       cookbook = new Cookbook(promise[2], promise[1]);
       pantryInfo = new Pantry(user.pantry)
-      generateAllInfo(user, ingredientsData, pantryInfo, cookbook);
+      generateAllInfo();
     })
 }
 
-function generateAllInfo(user, ingredientsData, pantryInfo, cookbook) {
-  findPantryInfo(user, ingredientsData, pantryInfo);
-  findTags();
+
+function generateAllInfo() {
+  findPantryInfo();
   domUpdates.displayUserGreeting(user);
-  // domUpdates.displayPantryInfo();
   domUpdates.createCards(cookbook);
-  domUpdates.listTags(allTags);
 }
 
-function findPantryInfo(user, ingredientsData, pantryInfo) {
+function findPantryInfo() {
   user.pantry.forEach(item => {
     let itemInfo = ingredientsData.find(ingredient => {
       return ingredient.id === item.ingredient;
@@ -89,17 +88,34 @@ function findPantryInfo(user, ingredientsData, pantryInfo) {
       pantryInfo.pantryIngredients.push({ name: itemInfo.name, count: item.amount });
     }
   });
+  console.log('pantry info', pantryInfo.pantryIngredients);
   domUpdates.displayPantryInfo(pantryInfo.pantryIngredients.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
-function addIngToPantry(event) {
+function addIngredientToPantry(event) {
   event.preventDefault();
-  let ingToAdd = domUpdates.captureInputValue();
-  if (!user.pantry.includes(ingToAdd)) {
-    user.pantry.push(ingToAdd);
+  let ingredientAdded = domUpdates.captureInputValue();
+  if (!ingredientAdded.length) {
+    domUpdates.displayAddIngredientError(true);
+  } else {
+    let foundIngredient = checkIngredientsData(ingredientAdded);
+    if (!pantryInfo.pantryIngredients.includes(foundIngredient)) {
+      pantryInfo.pantryIngredients.push(foundIngredient);
+    }
+    findPantryInfo();
   }
-  domUpdates.displayPantryInfo();
 }
+
+function checkIngredientsData(ingredientAdded) {
+  let foundIngredient = ingredientsData.find(ingredient => ingredient.name === ingredientAdded[0].name);
+  if (foundIngredient) {
+    return { name: foundIngredient.name, count: ingredientAdded[1] }
+  } else {
+    ingredientsData.push(ingredientAdded)
+    apiCalls.fetchRequests.updateUserData({ userID: user.id, ingredientID: ingredientAdded.id, ingredientModification: ingredientAdded[1] });
+    return { name: ingredientAdded[0].name, count: ingredientAdded[1] }
+  }
+};
 
 // FILTER BY RECIPE TAGS
 function findTags() {
